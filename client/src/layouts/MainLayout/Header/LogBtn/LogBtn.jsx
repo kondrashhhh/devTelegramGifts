@@ -74,8 +74,7 @@ export default function LogBtn() {
   }, []);
 
   const handleAuthClick = () => {
-    // Попытка клика по кнопке виджета
-    const widgetBtn = document.querySelector('.telegram-login-button');
+    const widgetBtn = document.querySelector('.tgme_widget_login_button');
     if (widgetBtn) {
       widgetBtn.click();
       return;
@@ -105,7 +104,7 @@ export default function LogBtn() {
       aria-label="Login with Telegram"
     >
       <img src="/header/telegram.svg" alt="Telegram logo" />
-      <span>Login with Telegram</span>
+      <span>Авторизация</span>
     </button>
   );
 }
