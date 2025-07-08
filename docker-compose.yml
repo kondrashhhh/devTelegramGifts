@@ -8,7 +8,6 @@ services:
     environment:
       - NODE_ENV=production
     restart: unless-stopped
-    # Добавьте если используете тома
     volumes:
       - ./server:/app
       - /app/node_modules
@@ -17,5 +16,10 @@ services:
     build: ./client
     ports:
       - "80:80"
+      - "443:443"  # Добавляем HTTPS порт
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro  # Монтируем сертификаты
+      - ./client/dist:/usr/share/nginx/html
     depends_on:
       - server
+    restart: unless-stopped
