@@ -103,6 +103,7 @@ export default function LogBtn() {
       className={`${styles.login} button`} 
       onClick={handleAuthClick}
       aria-label="Login with Telegram"
+      style={{display: "none"}}
     >
       <img src="/header/telegram.svg" alt="Telegram logo" />
       <span>Авторизация</span>
