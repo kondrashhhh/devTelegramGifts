@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'Manrope';
+    src: url('./fonts/Manrope-Regular.ttf') format('opentype');
+    font-weight: lighter;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Manrope';
+    src: url('./fonts/Manrope-Bold.ttf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Manrope';
+    src: url('./fonts/Manrope-Medium.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Manrope", sans-serif;
+    font-weight: normal;
+    color: #fff;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container-fluid {
+    padding: 0 6rem 0 10rem;
+}
+
+.button {
+    height: 43px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    background: rgb(247, 73, 73);
+    transition: all 0.3s;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 5px;
+}
+
+.button:hover {
+    background: rgb(240, 51, 51)
+}
+
+.bonuses-icon:before {
+    mask-image: url(/header/topheader/bonus.svg);
+}
+
+.faq-icon:before {
+    mask-image: url(/header/topheader/faq.svg);
+}
+
+.vk:after {
+    mask-image: url(/socials/vk.svg);
+}
+
+.telegram:after {
+    mask-image: url(/socials/telegram.svg);
+}
+
+.tiktok:after {
+    mask-image: url(/socials/tiktok.svg);
+}
+
+.mobile {
+    position: absolute;
+    width: 100%;
+    max-width: 300px;
+    top: 100px;
+    right: 10px;
+    z-index: 2;
+    background: #0d0d20;
+    padding: 20px 0px;
+    border-radius: 30px;
+}
+
+.mobile ul {
+    flex-direction: column;
+    align-items: start;
+}
+
+.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.case-section:first-child {
+    margin-top: 0;
+}

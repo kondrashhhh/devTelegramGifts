@@ -1,0 +1,16 @@
+.login {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding: 14px 32px;
+    height: auto;
+    background-color: #24A1DE;
+    gap: 10px;
+}
+
+.login:hover {
+    box-shadow: 
+        0 0 8px rgba(36, 161, 222, 0.6),
+        0 0 16px rgba(36, 161, 222, 0.4);
+    background-color: #24A1DE;
+}

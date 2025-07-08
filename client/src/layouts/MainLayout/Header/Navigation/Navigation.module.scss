@@ -1,0 +1,47 @@
+.navigation {
+    width: 100%;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 0 30px;
+    gap: 30px;
+}
+
+.list a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px 5px 5px;
+    gap: 5px;
+    border-radius: 7px;
+    transition: all 0.5s;
+}
+
+.list a.active {
+}
+
+.list a.active span {
+    color: #fff;
+}
+
+.list a:hover {
+    transition: all 0.3s;
+}
+
+.list a:hover span {
+    color: #746986;
+    transition: all 0.3s;
+}
+
+.list span {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #FFFFFF;
+    transition: all 0.3s;
+}
+

@@ -1,0 +1,77 @@
+import React, { useEffect, useState } from 'react';
+import styles from './Slider.module.scss'
+import Slide from './Slide/Slide';
+
+export default function Slider() {
+  const [slidesData, setSlidesData] = useState([]);
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchAssets() {
+      try {
+        const response = await fetch('https://f224-45-87-212-41.ngrok-free.app/get-assets', {
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+  
+        if (!response.ok) {
+          throw new Error(`Сетевая ошибка: ${response.status}`);
+        }
+  
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder('utf-8');
+        let done = false;
+  
+        while (!done) {
+          const { value, done: doneReading } = await reader.read();
+          done = doneReading;
+          if (value) {
+            const chunk = decoder.decode(value, { stream: true });
+            const resJSON = JSON.parse(chunk)
+            console.log('Получен кусок:', resJSON);
+            setSlidesData(prev => {
+              const newSlidesData = [resJSON, ...prev];
+              
+              if (newSlidesData.length > 21) {
+                newSlidesData.pop();
+                setLoading(false);
+              }
+            
+              return newSlidesData;
+            });
+  
+          }
+        }
+      } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+      } finally {
+        console.log(slidesData);
+      }
+    }
+  
+    fetchAssets();
+  }, []);
+
+  
+  
+
+  if (loading) {
+    return <div>Загрузка...</div>;
+  }
+
+  return (
+    <div className={styles.wrapper}>
+      {slidesData.map((slideData, index) => (
+          <Slide
+           key={index}
+           src={slideData.imageURL} 
+           name={slideData.name} 
+           rarity={slideData.rarity}
+          />
+      ))}
+    </div>
+  );
+  
+}

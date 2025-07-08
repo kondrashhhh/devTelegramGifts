@@ -1,0 +1,18 @@
+.online {
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.online span {
+    margin-top: 1px;
+    min-width: 37px;
+}
+
+.circle {
+    width: 13px;
+    height: 13px;
+    border-radius: 100%;
+    background-color: #4A8949;
+}
