@@ -13,6 +13,7 @@ export default function LogBtn() {
       document.querySelectorAll('script[src*="telegram-widget"]').forEach(el => el.remove());
 
       const script = document.createElement('script');
+      const place = document.querySelector('.log-parent');
       script.src = 'https://telegram.org/js/telegram-widget.js?22';
       script.async = true;
       script.setAttribute('data-telegram-login', BOT_NAME);
@@ -22,7 +23,7 @@ export default function LogBtn() {
       script.setAttribute('data-request-access', 'write');
       script.setAttribute('data-auth-url', AUTH_ENDPOINT);
       
-      document.body.appendChild(script);
+      place.appendChild(script);
 
       window.onTelegramAuth = async (userData) => {
         try {

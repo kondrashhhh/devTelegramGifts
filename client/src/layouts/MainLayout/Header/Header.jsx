@@ -45,7 +45,7 @@ export default function Header() {
   return (
     <header>
       <div className={styles.wrapper}>
-        <div className={`container-fluid ${styles.flex}`}>
+        <div className={`container-fluid log-parent ${styles.flex}`}>
           <Logo />
           <Online />
           <Navigation isOpen={isOpen} />
