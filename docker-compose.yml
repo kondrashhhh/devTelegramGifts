@@ -1,18 +1,21 @@
 version: '3.8'
 
 services:
-  client:
-    build: ./client
-    ports:
-      - "80:80"  # Фронтенд будет доступен на 80 порту
-    depends_on:
-      - server
-    restart: unless-stopped
-
   server:
     build: ./server
     ports:
-      - "3000:3000"  # Бэкенд будет доступен на 3000 порту
+      - "3000:3000"
     environment:
       - NODE_ENV=production
     restart: unless-stopped
+    # Добавьте если используете тома
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  client:
+    build: ./client
+    ports:
+      - "80:80"
+    depends_on:
+      - server
