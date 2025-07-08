@@ -6,7 +6,7 @@ export const Home = () => {
   const [caseData, setCaseData] = useState([]);
 
   const caseAPI = async () => {
-    const response = await fetch("https://dev-telegram-gifts.ru/api/cases", {
+    const response = await fetch("/api/cases", {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'

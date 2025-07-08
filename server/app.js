@@ -65,7 +65,7 @@ app.post(
 
 const getItemPrice = require('./slider/slider');
 
-app.get('/get-assets', (req, res) => {
+app.get('/api/get-assets', (req, res) => {
     getItemPrice(API_KEY, 730, res);
 });
 

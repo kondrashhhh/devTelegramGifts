@@ -22,7 +22,7 @@ export default function Header() {
 
   const checkAuthStatus = async () => {
       try {
-          const response = await fetch('https://dev-telegram-gifts.ru/auth/check', {
+          const response = await fetch('/auth/check', {
               method: 'GET',
               credentials: 'include'
           });

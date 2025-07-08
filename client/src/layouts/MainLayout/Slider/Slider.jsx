@@ -9,7 +9,7 @@ export default function Slider() {
   useEffect(() => {
     async function fetchAssets() {
       try {
-        const response = await fetch('https://dev-telegram-gifts.ru', {
+        const response = await fetch('/api/get-assets', {
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
