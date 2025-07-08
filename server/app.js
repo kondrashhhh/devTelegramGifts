@@ -14,7 +14,7 @@ const API_KEY = process.env.API_KEY;
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://f224-45-87-212-41.ngrok-free.app'
+  'https://dev-telegram-gifts.ru'
 ];
 
 // Улучшенная CORS конфигурация

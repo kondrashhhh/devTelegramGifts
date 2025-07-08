@@ -5,7 +5,7 @@ import axios from 'axios';
 export default function LogBtn() {
   useEffect(() => {
     const BOT_NAME = 'devtelegramgiftsbot';
-    const SERVER_URL = 'https://f224-45-87-212-41.ngrok-free.app';
+    const SERVER_URL = 'https://dev-telegram-gifts.ru';
     const AUTH_ENDPOINT = `${SERVER_URL}/api/telegram-auth`;
 
     const initTelegramAuth = () => {
@@ -36,7 +36,6 @@ export default function LogBtn() {
             withCredentials: true,
             headers: {
               'Content-Type': 'application/json',
-              'ngrok-skip-browser-warning': 'true',
               'X-Requested-With': 'XMLHttpRequest'
             }
           });
@@ -89,7 +88,7 @@ export default function LogBtn() {
     }
 
     // Ultimate fallback - открытие в новом окне
-    const SERVER_URL = 'https://f224-45-87-212-41.ngrok-free.app';
+    const SERVER_URL = 'https://dev-telegram-gifts.ru';
     window.open(
       `https://oauth.telegram.org/auth?` +
       `bot_id=devtelegramgiftsbot&` +
