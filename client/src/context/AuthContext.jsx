@@ -7,8 +7,9 @@ const AuthProvider = ({ children }) => {
   const [userData] = useState(localStorage.getItem("userData"));
 
   const login = (userData) => {
+    const parsedData = typeof userData === 'string' ? JSON.parse(userData) : userData;
     localStorage.setItem("isAuthenticated", true);
-    localStorage.setItem("userData", userData);
+    localStorage.setItem("userData", parsedData);
   };
 
   const logout = () => {
