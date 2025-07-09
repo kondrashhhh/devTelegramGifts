@@ -128,7 +128,7 @@ useEffect(() => {
       console.log('[TelegramWidget] Interval check');
       if (document.querySelector('.tgme_widget_login_button')) {
         console.log('[TelegramWidget] Widget found via interval');
-        setTimeout(handleWidgetLoad, 500);
+        setTimeout(handleWidgetLoad, 1500);
         clearInterval(checkInterval);
       }
     }, 500);
