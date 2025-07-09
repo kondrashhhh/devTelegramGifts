@@ -11,6 +11,7 @@ export default function LogBtn() {
   // Логирование состояния авторизации
   useEffect(() => {
     console.log('Auth state changed:', { isAuthenticated, userData });
+    document.querySelectorAll('script[src*="telegram-widget"]').forEach(el => el.remove());
   }, [isAuthenticated, userData]);
 
   const handleWidgetLoad = useCallback(() => {
@@ -29,7 +30,6 @@ export default function LogBtn() {
   }, []);
 
   const initTelegramAuth = useCallback(() => {
-    document.querySelectorAll('script[src*="telegram-widget"]').forEach(el => el.remove());
 
     const script = document.createElement('script');
     const place = document.querySelector('.log-parent');
@@ -90,7 +90,7 @@ export default function LogBtn() {
   }, [login]);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!userData) {
       initWebAppAuth();
       initTelegramAuth();
     }
