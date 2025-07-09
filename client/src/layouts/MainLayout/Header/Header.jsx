@@ -19,7 +19,12 @@ export default function Header() {
     console.log("Данные пользователя:", userData);
   }, [isAuthenticated, userData]);
 
-  const activeComponent = userData ? <AccountInfo /> : <LogBtn />
+  const renderAuthComponent = () => {
+    if (userData) {
+      return <AccountInfo userData={userData} />;
+    }
+    return <LogBtn />;
+  };
 
   return (
     <header>
@@ -29,7 +34,7 @@ export default function Header() {
           <Online />
           <Navigation isOpen={isOpen} />
           <div className={styles.end}>
-            {activeComponent}
+            {renderAuthComponent()}
             {isSmallScreen && <Burger onClick={() => setIsOpen(prev => !prev)} />}
           </div>
         </div>
