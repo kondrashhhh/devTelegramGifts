@@ -1,18 +1,16 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import styles from './LogBtn.module.scss';
+import React, { useEffect, useCallback, useContext } from 'react';
+import { AuthContext } from '../../../../context/AuthContext';
 import axios from 'axios';
 
 export default function LogBtn() {
-  const [isAuth, setIsAuth] = useState(false);
+  const { login } = useContext(AuthContext);
   const BOT_NAME = 'devtelegramgiftsbot';
   const SERVER_URL = 'https://dev-telegram-gifts.ru';
   const AUTH_ENDPOINT = `${SERVER_URL}/api/telegram-auth`;
 
-  // Проверяем авторизацию при загрузке компонента
   useEffect(() => {
     const userData = localStorage.getItem('telegram_user');
     if (userData) {
-      setIsAuth(true);
       console.log('Текущий авторизованный пользователь:', JSON.parse(userData));
     } else {
       console.log('Пользователь не авторизован');
@@ -67,12 +65,7 @@ export default function LogBtn() {
         });
 
         if (response.data?.success) {
-          // Сохраняем данные пользователя
-          localStorage.setItem('telegram_user', JSON.stringify(response.data.user));
-          // Сохраняем статус авторизации
-          localStorage.setItem('is_authenticated', 'true');
-          setIsAuth(true);
-          
+          login(JSON.stringify(response.data.user))
           console.log('Успешная авторизация. Данные пользователя:', response.data.user);
           console.log('Статус авторизации:', true);
           
@@ -97,9 +90,7 @@ export default function LogBtn() {
         auth_date: Math.floor(Date.now() / 1000)
       };
       
-      localStorage.setItem('telegram_user', JSON.stringify(userData));
-      localStorage.setItem('is_authenticated', 'true');
-      setIsAuth(true);
+      login(JSON.stringify(userData))
       
       console.log('WebApp авторизация. Данные пользователя:', userData);
       console.log('Статус авторизации:', true);
@@ -126,33 +117,13 @@ export default function LogBtn() {
     };
   }, [initWebAppAuth, initTelegramAuth, handleWidgetLoad]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('telegram_user');
-    localStorage.removeItem('is_authenticated');
-    setIsAuth(false);
-    console.log('Пользователь вышел. Статус авторизации:', false);
-    window.location.reload();
-  };
+  // const handleLogout = () => {
+  //   logout()
+  //   console.log('Пользователь вышел. Статус авторизации:', false);
+  //   window.location.reload();
+  // };
 
   return (
-    <div className={styles.authContainer}>
-      {isAuth ? (
-        <button 
-          className={`${styles.logout} button`}
-          onClick={handleLogout}
-        >
-          Выйти
-        </button>
-      ) : (
-        <button 
-          className={`${styles.login} button`} 
-          onClick={() => document.querySelector('.tgme_widget_login_button')?.click()}
-          aria-label="Login with Telegram"
-        >
-          <img src="/header/telegram.svg" alt="Telegram logo" />
-          <span>Авторизация</span>
-        </button>
-      )}
-    </div>
+    <></>
   );
 }
