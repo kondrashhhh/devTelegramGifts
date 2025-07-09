@@ -1,100 +1,129 @@
 const cors = require('cors');
 const express = require('express');
 const session = require('express-session');
-const { validateTelegramAuth, getTelegramUserData } = require('./auth/auth.js');
+const { validateTelegramAuth } = require('./auth/auth.js');
 const caseData = require('./caseData.js');
 require('dotenv').config();
 
 const app = express();
 
-
+// Конфигурация
 const PORT = process.env.PORT || 3000;
-const SESSION_SECRET = process.env.SESSION_SECRET;
+const SESSION_SECRET = process.env.SESSION_SECRET || 'default-secret';
 const API_KEY = process.env.API_KEY;
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+
+if (!BOT_TOKEN) {
+  console.error('TELEGRAM_BOT_TOKEN is not set!');
+  process.exit(1);
+}
 
 const allowedOrigins = [
   'http://localhost:5173',
   'https://dev-telegram-gifts.ru'
 ];
 
-// Улучшенная CORS конфигурация
+// Улучшенная конфигурация CORS
 const corsOptions = {
-  origin: allowedOrigins,
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 200
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
-// Применяем CORS только к конкретным маршрутам
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors(corsOptions));
 
-app.use('*name', cors(corsOptions))
-
-// Настройка сессии
+// Сессия
 app.use(session({
   secret: SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    httpOnly: true
+    maxAge: 24 * 60 * 60 * 1000 // 1 день
   }
 }));
 
-app.post(
-  '/api/telegram-auth',
-  validateTelegramAuth(process.env.TELEGRAM_BOT_TOKEN),
+// Маршруты API
+app.post('/api/telegram-auth', 
+  validateTelegramAuth(BOT_TOKEN),
   (req, res) => {
-    const userData = getTelegramUserData(req);
-    res.json({ 
-      success: true,
-      user: userData
-    });
+    try {
+      // Сохраняем пользователя в сессии
+      req.session.telegramUser = req.telegramUser;
+      
+      res.json({
+        success: true,
+        user: {
+          id: req.telegramUser.id,
+          first_name: req.telegramUser.first_name,
+          username: req.telegramUser.username,
+          photo_url: req.telegramUser.photo_url,
+          auth_date: req.telegramUser.auth_date
+        }
+      });
+    } catch (error) {
+      console.error('Auth error:', error);
+      res.status(500).json({ 
+        success: false,
+        error: 'Internal server error' 
+      });
+    }
   }
 );
 
-const getItemPrice = require('./slider/slider');
-
-app.get('/api/get-assets', (req, res) => {
-    getItemPrice(API_KEY, 730, res);
-});
-
+// Маршруты для кейсов
 app.get('/api/cases', (req, res) => {
-    console.log(caseData);
+  try {
     res.json(caseData);
+  } catch (error) {
+    console.error('Cases error:', error);
+    res.status(500).json({ error: 'Failed to load cases' });
+  }
 });
 
 app.get('/api/case/:id', (req, res) => {
-  const caseId = req.params.id.toLowerCase();
-  console.log(caseId);
-  let foundCase = null;
+  try {
+    const caseId = req.params.id.toLowerCase();
+    let foundCase = null;
 
-  for (const category of caseData) {
-    foundCase = category.cases.find(item => item.id.toLowerCase() === caseId);
-    if (foundCase) break;
-  }
+    for (const category of caseData) {
+      foundCase = category.cases.find(c => c.id.toLowerCase() === caseId);
+      if (foundCase) break;
+    }
 
-  if (foundCase) {
-    res.json(foundCase);
-  } else {
-    res.status(404).json({ error: 'Кейс не найден' });
+    foundCase 
+      ? res.json(foundCase)
+      : res.status(404).json({ error: 'Case not found' });
+  } catch (error) {
+    console.error('Case error:', error);
+    res.status(500).json({ error: 'Failed to get case' });
   }
 });
 
+// Обработка ошибок
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something broke!' });
+});
+
+// Запуск сервера
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://0.0.0.0:${PORT}`);
+  console.log(`NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
 });
 
+// Graceful shutdown
 process.on('SIGTERM', () => {
   console.log('SIGTERM received. Shutting down gracefully');
   server.close(() => {
