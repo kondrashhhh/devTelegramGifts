@@ -1,11 +1,23 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import styles from './LogBtn.module.scss';
 import axios from 'axios';
 
 export default function LogBtn() {
+  const [isAuth, setIsAuth] = useState(false);
   const BOT_NAME = 'devtelegramgiftsbot';
   const SERVER_URL = 'https://dev-telegram-gifts.ru';
   const AUTH_ENDPOINT = `${SERVER_URL}/api/telegram-auth`;
+
+  // Проверяем авторизацию при загрузке компонента
+  useEffect(() => {
+    const userData = localStorage.getItem('telegram_user');
+    if (userData) {
+      setIsAuth(true);
+      console.log('Текущий авторизованный пользователь:', JSON.parse(userData));
+    } else {
+      console.log('Пользователь не авторизован');
+    }
+  }, []);
 
   const handleWidgetLoad = useCallback(() => {
     const widgetBtn = document.querySelector('.tgme_widget_login_button');
@@ -55,12 +67,20 @@ export default function LogBtn() {
         });
 
         if (response.data?.success) {
+          // Сохраняем данные пользователя
           localStorage.setItem('telegram_user', JSON.stringify(response.data.user));
+          // Сохраняем статус авторизации
+          localStorage.setItem('is_authenticated', 'true');
+          setIsAuth(true);
+          
+          console.log('Успешная авторизация. Данные пользователя:', response.data.user);
+          console.log('Статус авторизации:', true);
+          
           window.location.reload();
         }
       } catch (error) {
-        console.error('Auth error:', error);
-        alert(error.response?.data?.error || 'Authorization error');
+        console.error('Ошибка авторизации:', error);
+        alert(error.response?.data?.error || 'Ошибка авторизации');
       }
     };
   }, [AUTH_ENDPOINT]);
@@ -72,10 +92,17 @@ export default function LogBtn() {
     
     if (window.Telegram.WebApp.initDataUnsafe?.user) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
-      localStorage.setItem('telegram_user', JSON.stringify({
+      const userData = {
         ...user,
         auth_date: Math.floor(Date.now() / 1000)
-      }));
+      };
+      
+      localStorage.setItem('telegram_user', JSON.stringify(userData));
+      localStorage.setItem('is_authenticated', 'true');
+      setIsAuth(true);
+      
+      console.log('WebApp авторизация. Данные пользователя:', userData);
+      console.log('Статус авторизации:', true);
     }
   }, []);
 
@@ -83,7 +110,6 @@ export default function LogBtn() {
     initWebAppAuth();
     initTelegramAuth();
 
-    // Проверка виджета с задержкой
     const timer = setTimeout(handleWidgetLoad, 500);
     const interval = setInterval(() => {
       if (document.querySelector('.tgme_widget_login_button')) {
@@ -99,35 +125,33 @@ export default function LogBtn() {
     };
   }, [initWebAppAuth, initTelegramAuth, handleWidgetLoad]);
 
-  const handleAuthClick = () => {
-    const widgetBtn = document.querySelector('.tgme_widget_login_button');
-    if (widgetBtn) {
-      widgetBtn.click();
-      return;
-    }
-
-    if (window.Telegram?.WebApp) {
-      window.Telegram.WebApp.openTelegramLink(`https://t.me/${BOT_NAME}?start=auth`);
-      return;
-    }
-
-    window.open(
-      `https://oauth.telegram.org/auth?` +
-      `bot_id=${BOT_NAME}&` +
-      `origin=${encodeURIComponent(SERVER_URL)}&` +
-      `return_to=${encodeURIComponent(SERVER_URL + '/auth-callback')}`,
-      '_blank'
-    );
+  const handleLogout = () => {
+    localStorage.removeItem('telegram_user');
+    localStorage.removeItem('is_authenticated');
+    setIsAuth(false);
+    console.log('Пользователь вышел. Статус авторизации:', false);
+    window.location.reload();
   };
 
   return (
-    <button 
-      className={`${styles.login} button`} 
-      onClick={handleAuthClick}
-      aria-label="Login with Telegram"
-    >
-      <img src="/header/telegram.svg" alt="Telegram logo" />
-      <span>Авторизация</span>
-    </button>
+    <div className={styles.authContainer}>
+      {isAuth ? (
+        <button 
+          className={`${styles.logout} button`}
+          onClick={handleLogout}
+        >
+          Выйти
+        </button>
+      ) : (
+        <button 
+          className={`${styles.login} button`} 
+          onClick={() => document.querySelector('.tgme_widget_login_button')?.click()}
+          aria-label="Login with Telegram"
+        >
+          <img src="/header/telegram.svg" alt="Telegram logo" />
+          <span>Авторизация</span>
+        </button>
+      )}
+    </div>
   );
 }
