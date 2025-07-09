@@ -90,12 +90,11 @@ export default function LogBtn() {
         auth_date: Math.floor(Date.now() / 1000)
       };
       
-      login(JSON.stringify(userData))
-      
-      console.log('WebApp авторизация. Данные пользователя:', userData);
-      console.log('Статус авторизации:', true);
+      // Передаем объект напрямую
+      login(userData);
+      console.log('WebApp авторизация:', userData);
     }
-  }, []);
+  }, [login]);
 
   useEffect(() => {
     initWebAppAuth();
