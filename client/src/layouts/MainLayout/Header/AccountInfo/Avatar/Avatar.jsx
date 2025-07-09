@@ -5,7 +5,7 @@ import styles from './Avatar.module.scss'
 
 export default function Avatar() {
   const { userData } = useContext(AuthContext);
-  const userAvatar = userData.photos[2].value;
+  const userAvatar = userData.photo_url;
 
   return (
     <div className={styles.wrapper}>
