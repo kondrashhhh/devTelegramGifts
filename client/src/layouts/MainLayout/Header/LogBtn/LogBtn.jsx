@@ -3,19 +3,15 @@ import { AuthContext } from '../../../../context/AuthContext';
 import axios from 'axios';
 
 export default function LogBtn() {
-  const { login } = useContext(AuthContext);
+  const { isAuthenticated, userData, login } = useContext(AuthContext);
   const BOT_NAME = 'devtelegramgiftsbot';
   const SERVER_URL = 'https://dev-telegram-gifts.ru';
   const AUTH_ENDPOINT = `${SERVER_URL}/api/telegram-auth`;
 
+  // Логирование состояния авторизации
   useEffect(() => {
-    const userData = localStorage.getItem('telegram_user');
-    if (userData) {
-      console.log('Текущий авторизованный пользователь:', JSON.parse(userData));
-    } else {
-      console.log('Пользователь не авторизован');
-    }
-  }, []);
+    console.log('Auth state changed:', { isAuthenticated, userData });
+  }, [isAuthenticated, userData]);
 
   const handleWidgetLoad = useCallback(() => {
     const widgetBtn = document.querySelector('.tgme_widget_login_button');
@@ -65,18 +61,16 @@ export default function LogBtn() {
         });
 
         if (response.data?.success) {
-          login(JSON.stringify(response.data.user))
-          console.log('Успешная авторизация. Данные пользователя:', response.data.user);
-          console.log('Статус авторизации:', true);
-          
+          login(response.data.user); // Передаем объект напрямую
+          console.log('Auth success', response.data.user);
           window.location.reload();
         }
       } catch (error) {
-        console.error('Ошибка авторизации:', error);
+        console.error('Auth failed:', error);
         alert(error.response?.data?.error || 'Ошибка авторизации');
       }
     };
-  }, [AUTH_ENDPOINT]);
+  }, [AUTH_ENDPOINT, login]);
 
   const initWebAppAuth = useCallback(() => {
     if (!window.Telegram?.WebApp) return;
@@ -90,15 +84,16 @@ export default function LogBtn() {
         auth_date: Math.floor(Date.now() / 1000)
       };
       
-      // Передаем объект напрямую
       login(userData);
-      console.log('WebApp авторизация:', userData);
+      console.log('WebApp auth success', userData);
     }
   }, [login]);
 
   useEffect(() => {
-    initWebAppAuth();
-    initTelegramAuth();
+    if (!isAuthenticated) {
+      initWebAppAuth();
+      initTelegramAuth();
+    }
 
     const timer = setTimeout(handleWidgetLoad, 500);
     const interval = setInterval(() => {
@@ -113,13 +108,7 @@ export default function LogBtn() {
       clearInterval(interval);
       delete window.onTelegramAuth;
     };
-  }, [initWebAppAuth, initTelegramAuth, handleWidgetLoad]);
-
-  // const handleLogout = () => {
-  //   logout()
-  //   console.log('Пользователь вышел. Статус авторизации:', false);
-  //   window.location.reload();
-  // };
+  }, [isAuthenticated, initWebAppAuth, initTelegramAuth, handleWidgetLoad]);
 
   return (
     <></>
