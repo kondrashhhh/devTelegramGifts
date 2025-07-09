@@ -11,7 +11,6 @@ export default function LogBtn() {
   // Логирование состояния авторизации
   useEffect(() => {
     console.log('Auth state changed:', { isAuthenticated, userData });
-    document.querySelectorAll('script[src*="telegram-widget"]').forEach(el => el.remove());
   }, [isAuthenticated, userData]);
 
   const handleWidgetLoad = useCallback(() => {
@@ -31,20 +30,25 @@ export default function LogBtn() {
 
   const initTelegramAuth = useCallback(() => {
 
+    document.querySelectorAll('script[src*="telegram-widget"]').forEach(el => el.remove());
+
+
     console.log("СОЗДАЕМ АВТОРИЗАЦИЮ ТГ");
 
-    const script = document.createElement('script');
-    const place = document.querySelector('.log-parent');
-    script.src = 'https://telegram.org/js/telegram-widget.js?22';
-    script.async = true;
-    script.setAttribute('data-telegram-login', BOT_NAME);
-    script.setAttribute('data-size', 'large');
-    script.setAttribute('data-radius', '10');
-    script.setAttribute('data-onauth', 'onTelegramAuth(user)');
-    script.setAttribute('data-request-access', 'write');
-    script.setAttribute('data-auth-url', AUTH_ENDPOINT);
-    
-    place?.appendChild(script);
+    if (!userData) {
+      const script = document.createElement('script');
+      const place = document.querySelector('.log-parent');
+      script.src = 'https://telegram.org/js/telegram-widget.js?22';
+      script.async = true;
+      script.setAttribute('data-telegram-login', BOT_NAME);
+      script.setAttribute('data-size', 'large');
+      script.setAttribute('data-radius', '10');
+      script.setAttribute('data-onauth', 'onTelegramAuth(user)');
+      script.setAttribute('data-request-access', 'write');
+      script.setAttribute('data-auth-url', AUTH_ENDPOINT);
+      
+      place?.appendChild(script);
+    }
 
     window.onTelegramAuth = async (userData) => {
       try {
