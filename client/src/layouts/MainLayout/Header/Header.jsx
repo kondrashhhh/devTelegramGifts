@@ -19,25 +19,32 @@ export default function Header() {
     console.log("Данные пользователя:", userData);
   }, [isAuthenticated, userData]);
 
-  const renderAuthComponent = () => {
-    if (userData) {
-      return <AccountInfo userData={userData} />;
-    }
-    return <LogBtn />;
-  };
-
   return (
     <header>
       <div className={styles.wrapper}>
-        <div className={`container-fluid log-parent ${styles.flex}`}>
-          <Logo />
-          <Online />
-          <Navigation isOpen={isOpen} />
-          <div className={styles.end}>
-            {renderAuthComponent()}
-            {isSmallScreen && <Burger onClick={() => setIsOpen(prev => !prev)} />}
-          </div>
-        </div>
+        {
+          userData ? (
+            <div className={`container-fluid log-parent ${styles.flex}`}>
+              <Logo />
+              <Online />
+              <Navigation isOpen={isOpen} />
+              <div className={styles.end}>
+                <AccountInfo />
+                {isSmallScreen && <Burger onClick={() => setIsOpen(prev => !prev)} />}
+              </div>
+            </div>
+          )        : (
+            <div className={`container-fluid log-parent ${styles.flex}`}>
+              <Logo />
+              <Online />
+              <Navigation isOpen={isOpen} />
+              <div className={styles.end}>
+                <LogBtn />
+                {isSmallScreen && <Burger onClick={() => setIsOpen(prev => !prev)} />}
+              </div>
+            </div>
+          )
+        }
       </div>
     </header>
   );
