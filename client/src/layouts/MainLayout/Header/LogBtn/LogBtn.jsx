@@ -75,16 +75,26 @@ export default function LogBtn() {
   }, []);
 
   useEffect(() => {
-    window.addEventListener("DOMContentLoaded", () => {
+    const handleWidgetLoad = () => {
       const widgetBtn = document.querySelector('.tgme_widget_login_button');
       const avatar = document.querySelector('.tgme_widget_login_user_photo');
 
-      if (widgetBtn && avatar) {
-        widgetBtn.innerHTML = "Авторизация"
+      if (widgetBtn) {
+        widgetBtn.innerHTML = "Авторизация";
+      }
+      if (avatar) {
         avatar.style.display = "none";
       }
-    })
-  }, [])
+    };
+
+    handleWidgetLoad();
+    
+    document.addEventListener('telegram-widget-ready', handleWidgetLoad);
+
+    return () => {
+      document.removeEventListener('telegram-widget-ready', handleWidgetLoad);
+    };
+  }, []);
 
   const handleAuthClick = () => {
     const widgetBtn = document.querySelector('.tgme_widget_login_button');
