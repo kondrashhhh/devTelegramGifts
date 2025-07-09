@@ -20,7 +20,7 @@ export default function Header() {
   }, [isAuthenticated, userData]);
 
   const renderAuthComponent = () => {
-    if (isAuthenticated) {
+    if (userData) {
       return <AccountInfo userData={userData} />;
     }
     return <LogBtn />;
