@@ -12,6 +12,7 @@ export default function LogBtn() {
   useEffect(() => {
     console.log('Auth state changed:', { isAuthenticated, userData });
     document.querySelectorAll('script[src*="telegram-widget"]').forEach(el => el.remove());
+    document.querySelector('#telegram-login-devtelegramgiftsbot').remove();
   }, [isAuthenticated, userData]);
 
   const handleWidgetLoad = useCallback(() => {
