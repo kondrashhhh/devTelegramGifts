@@ -31,6 +31,8 @@ export default function LogBtn() {
 
   const initTelegramAuth = useCallback(() => {
 
+    console.log("СОЗДАЕМ АВТОРИЗАЦИЮ ТГ");
+
     const script = document.createElement('script');
     const place = document.querySelector('.log-parent');
     script.src = 'https://telegram.org/js/telegram-widget.js?22';
