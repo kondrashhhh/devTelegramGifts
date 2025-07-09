@@ -56,7 +56,7 @@ app.use(session({
 
 // Маршруты API
 app.post('/api/telegram-auth', 
-  validateTelegramAuth(BOT_TOKEN),
+  validateTelegramAuth(process.env.TELEGRAM_BOT_TOKEN),
   (req, res) => {
     try {
       // Сохраняем пользователя в сессии
@@ -64,16 +64,10 @@ app.post('/api/telegram-auth',
       
       res.json({
         success: true,
-        user: {
-          id: req.telegramUser.id,
-          first_name: req.telegramUser.first_name,
-          username: req.telegramUser.username,
-          photo_url: req.telegramUser.photo_url,
-          auth_date: req.telegramUser.auth_date
-        }
+        user: req.telegramUser
       });
     } catch (error) {
-      console.error('Auth error:', error);
+      console.error('Auth endpoint error:', error);
       res.status(500).json({ 
         success: false,
         error: 'Internal server error' 
