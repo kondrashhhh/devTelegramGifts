@@ -74,7 +74,7 @@ export default function LogBtn() {
     };
   }, []);
 
-  useEffect(() => {
+useEffect(() => {
     console.log('[TelegramWidget] Effect started'); // Отладка инициализации
     
     const handleWidgetLoad = () => {
@@ -110,20 +110,25 @@ export default function LogBtn() {
       }
     };
 
-    // Первоначальная проверка
-    console.log('[TelegramWidget] Running initial check');
-    handleWidgetLoad();
+    // Задержка выполнения на 500ms
+    const initialDelay = setTimeout(() => {
+      console.log('[TelegramWidget] Running initial check after delay');
+      handleWidgetLoad();
+    }, 500);
     
     // Обработчик для динамической загрузки
     console.log('[TelegramWidget] Adding event listener');
-    document.addEventListener('telegram-widget-ready', handleWidgetLoad);
+    const eventListener = () => {
+      setTimeout(handleWidgetLoad, 500);
+    };
+    document.addEventListener('telegram-widget-ready', eventListener);
 
     // Проверка через интервал на случай, если событие не сработает
     const checkInterval = setInterval(() => {
       console.log('[TelegramWidget] Interval check');
       if (document.querySelector('.tgme_widget_login_button')) {
         console.log('[TelegramWidget] Widget found via interval');
-        handleWidgetLoad();
+        setTimeout(handleWidgetLoad, 500);
         clearInterval(checkInterval);
       }
     }, 500);
@@ -131,7 +136,8 @@ export default function LogBtn() {
     // Очистка
     return () => {
       console.log('[TelegramWidget] Cleaning up');
-      document.removeEventListener('telegram-widget-ready', handleWidgetLoad);
+      clearTimeout(initialDelay);
+      document.removeEventListener('telegram-widget-ready', eventListener);
       clearInterval(checkInterval);
       
       // Восстановление оригинального состояния (опционально)
