@@ -11,7 +11,7 @@ import LogBtn from './LogBtn/LogBtn'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, login } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const isSmallScreen = useMediaQuery('(max-width:992px)');
 
   const activeComponent = isAuthenticated ? <AccountInfo /> : <LogBtn />;
@@ -20,25 +20,8 @@ export default function Header() {
     setIsOpen(prev => !prev);
   };
 
-  const checkAuthStatus = async () => {
-      try {
-          const response = await fetch('/auth/check', {
-              method: 'GET',
-              credentials: 'include'
-          });
-          const result = await response.json();
-          if (result.success) {
-              login(result.user);
-          } else {
-              console.log('Пользователь не авторизован');
-          }
-      } catch (error) {
-          console.error('Ошибка при проверке авторизации:', error);
-      }
-  };
-
   useEffect(() => {
-      checkAuthStatus();
+      console.log("Авторизован ли пользователь: ", isAuthenticated)
   }, []);
 
 
