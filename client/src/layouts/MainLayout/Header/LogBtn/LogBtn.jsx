@@ -75,24 +75,71 @@ export default function LogBtn() {
   }, []);
 
   useEffect(() => {
+    console.log('[TelegramWidget] Effect started'); // Отладка инициализации
+    
     const handleWidgetLoad = () => {
+      console.log('[TelegramWidget] Handling widget load'); // Отладка вызова обработчика
+      
+      // 1. Поиск элементов
       const widgetBtn = document.querySelector('.tgme_widget_login_button');
       const avatar = document.querySelector('.tgme_widget_login_user_photo');
+      
+      console.log('[TelegramWidget] Found elements:', { widgetBtn, avatar }); // Отладка найденных элементов
 
+      // 2. Модификация кнопки
       if (widgetBtn) {
+        console.log('[TelegramWidget] Modifying button text');
         widgetBtn.innerHTML = "Авторизация";
+        
+        // Добавляем класс для дополнительного стилирования
+        widgetBtn.classList.add('custom-tg-btn');
+        console.log('[TelegramWidget] Button classes:', widgetBtn.classList);
+      } else {
+        console.warn('[TelegramWidget] Button element not found!');
       }
+
+      // 3. Модификация аватара
       if (avatar) {
+        console.log('[TelegramWidget] Hiding avatar');
         avatar.style.display = "none";
+        
+        // Альтернативный способ через классы
+        avatar.classList.add('hidden-tg-avatar');
+      } else {
+        console.warn('[TelegramWidget] Avatar element not found!');
       }
     };
 
+    // Первоначальная проверка
+    console.log('[TelegramWidget] Running initial check');
     handleWidgetLoad();
     
+    // Обработчик для динамической загрузки
+    console.log('[TelegramWidget] Adding event listener');
     document.addEventListener('telegram-widget-ready', handleWidgetLoad);
 
+    // Проверка через интервал на случай, если событие не сработает
+    const checkInterval = setInterval(() => {
+      console.log('[TelegramWidget] Interval check');
+      if (document.querySelector('.tgme_widget_login_button')) {
+        console.log('[TelegramWidget] Widget found via interval');
+        handleWidgetLoad();
+        clearInterval(checkInterval);
+      }
+    }, 500);
+
+    // Очистка
     return () => {
+      console.log('[TelegramWidget] Cleaning up');
       document.removeEventListener('telegram-widget-ready', handleWidgetLoad);
+      clearInterval(checkInterval);
+      
+      // Восстановление оригинального состояния (опционально)
+      const originalBtn = document.querySelector('.tgme_widget_login_button');
+      if (originalBtn) {
+        originalBtn.innerHTML = ''; // Вернет оригинальное содержимое
+        originalBtn.classList.remove('custom-tg-btn');
+      }
     };
   }, []);
 
