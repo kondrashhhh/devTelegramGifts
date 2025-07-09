@@ -5,7 +5,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
     isAuthenticated: false,
-    userData: null
+    userData: localStorage.getItem("userData") || null,
   });
 
   // Инициализация из localStorage при загрузке

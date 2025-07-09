@@ -19,7 +19,7 @@ export default function Header() {
     console.log("Данные пользователя:", userData);
   }, [isAuthenticated, userData]);
 
-  const activeComponent = <AccountInfo /> 
+  const activeComponent = userData ? <AccountInfo /> : <LogBtn />
 
   return (
     <header>
