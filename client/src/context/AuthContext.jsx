@@ -5,7 +5,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
     isAuthenticated: false,
-    userData: localStorage.getItem("userData") || null,
+    userData: localStorage.getItem("telegram_auth") || null,
   });
 
   // Инициализация из localStorage при загрузке
