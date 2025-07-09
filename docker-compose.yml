@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   server:
-    build: ./server
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -11,15 +13,25 @@ services:
     volumes:
       - ./server:/app
       - /app/node_modules
+    networks:
+      - app-network
 
   client:
-    build: ./client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     ports:
       - "80:80"
-      - "443:443"  # Добавляем HTTPS порт
+      - "443:443"
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt:ro  # Монтируем сертификаты
-      - ./client/dist:/usr/share/nginx/html
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./client/dist:/usr/share/nginx/html  # Только для разработки!
     depends_on:
       - server
     restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
