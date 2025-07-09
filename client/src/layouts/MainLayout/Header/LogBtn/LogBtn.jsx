@@ -109,6 +109,7 @@ export default function LogBtn() {
   useEffect(() => {
     initWebAppAuth();
     initTelegramAuth();
+    console.log(localStorage.getItem('telegram_user'));
 
     const timer = setTimeout(handleWidgetLoad, 500);
     const interval = setInterval(() => {
