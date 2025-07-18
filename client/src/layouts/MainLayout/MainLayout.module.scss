@@ -1,10 +1,22 @@
 .layout {
+    overflow: hidden;
+    padding-top: 30px;
     position: relative;
     background-color: #0B090D;
     background-size: 100% auto;
+
+    @include vp--1024 {
+        padding: 0;
+    }
 }
 
-
-.content {
-    padding: 20px 6rem;
+.shadow {
+    position: fixed;
+    width: 854px;
+    height: 854px;
+    top: -800px;
+    left: 25%;
+    border-radius: 90%;
+    filter: blur(200px);
+    background-color: #840A0A;
 }

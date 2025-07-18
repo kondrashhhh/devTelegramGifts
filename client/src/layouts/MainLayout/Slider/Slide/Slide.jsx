@@ -7,7 +7,7 @@ export default function Slide({ src, name, rarity }) {
     <a href="/user/5433520" className={`box ${rarityClass}`}>
         <div className="inner">
             <div className="wrapperImg">
-                <img src={src} alt={name} className="img" loading="lazy" />
+                <img src={src} alt={name} className="img" loading="lazy" width={69} height={69}/>
             </div>
             <div className="name">{name}</div>
         </div>

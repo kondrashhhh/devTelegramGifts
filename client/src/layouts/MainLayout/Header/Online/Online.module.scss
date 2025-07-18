@@ -3,6 +3,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    
+    @include vp--1024 {
+        margin-left: 20px;
+    }
 }
 
 .online span {

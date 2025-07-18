@@ -1,20 +1,23 @@
+@use './variables.scss' as *;
+@use './mixins.scss' as *;
+
 @font-face {
     font-family: 'Manrope';
-    src: url('./fonts/Manrope-Regular.ttf') format('opentype');
+    src: url('../fonts/Manrope-Regular.ttf') format('opentype');
     font-weight: lighter;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Manrope';
-    src: url('./fonts/Manrope-Bold.ttf') format('opentype');
+    src: url('../fonts/Manrope-Bold.ttf') format('opentype');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Manrope';
-    src: url('./fonts/Manrope-Medium.ttf') format('opentype');
+    src: url('../fonts/Manrope-Medium.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -36,29 +39,15 @@ a {
     color: inherit;
 }
 
-.container-fluid {
-    padding: 0 6rem 0 10rem;
-}
-
 .button {
-    height: 43px;
-    border: none;
-    border-radius: 10px;
-    font-size: 14px;
-    text-transform: uppercase;
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
     cursor: pointer;
-    font-weight: bold;
-    background: rgb(247, 73, 73);
-    transition: all 0.3s;
-    justify-content: center;
-    align-items: center;
+    color: #FFFFFF;
+    padding: 12px 20px;
     display: flex;
-    gap: 5px;
-}
-
-.button:hover {
-    background: rgb(240, 51, 51)
+    white-space: nowrap;
 }
 
 .bonuses-icon:before {

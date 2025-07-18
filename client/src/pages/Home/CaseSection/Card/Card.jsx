@@ -4,7 +4,7 @@ import { Typography } from '../../../../components/Typography/Typography'
 import styles from './Card.module.scss'
 
 export const Card = (props) => {
-  const { title, price, image, id } = props;
+  const { name, price, image, id } = props;
 
   return (
     <div className={styles.card}>
@@ -15,15 +15,16 @@ export const Card = (props) => {
             <div>
                 <img
                  src={image} 
-                 alt={title} 
+                 alt={name} 
                  className={styles.image}
                 />
             </div>
             <div className={styles.title}>
-                <Typography tag='h3' variant='span'>{title}</Typography>
+                <Typography tag='span' variant='pre-title'>Кейс</Typography>
+                <Typography tag='h3' variant='h4'>{name}</Typography>
             </div>
-            <div className={styles.price}>
-                <span className={styles.price}>{price} ₽</span>
+            <div className={styles.priceBlock}>
+                <span className={styles.price}>{price}</span>
             </div>
         </Link>
     </div>

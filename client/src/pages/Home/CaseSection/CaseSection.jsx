@@ -1,27 +1,33 @@
 import React, { useEffect } from 'react'
 import { Card } from './Card/Card'
-import { Typography } from '../../../components/Typography/Typography'
+import { TitleSection } from './TitleSection/TitleSection'
 import styles from './CaseSection.module.scss'
 
-export const CaseSection = ({ title, cases }) => {
+export const CaseSection = ({ categories = [], name, cases }) => {
 
   useEffect(() => {
-    console.log(title, cases);
+    console.log(name, cases);
   }, [])
   
   return (
     <div className={`${styles.wrapper} case-section`}>
-        <Typography tag='h2' variant='h4'>{title}</Typography>
-        <div className={styles.cases}>
-            {
-            cases.map((caseItem, index) => (
-                <Card 
-                  key={index}
-                  {...caseItem}
-                />      
-            ))
-            }
-        </div>
+      <div className={styles.cases}>
+        <TitleSection
+         items={categories}
+        >
+          {name}
+        </TitleSection>
+        {
+          cases.map((caseItem, index) => {
+            return (
+              <Card 
+                key={index}
+                {...caseItem}
+              />
+            );
+          })
+        }
+      </div>
     </div>
   )
 }

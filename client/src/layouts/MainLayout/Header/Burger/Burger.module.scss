@@ -1,8 +1,15 @@
-.login {
-    padding: 0px 13px;
-    background: hsla(0, 0%, 100%, .07);
-}
-
 .login:hover {
     background-color: #222039;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    padding: 0 10px;
+
+    @include vp--680 {
+        justify-content: start;
+        padding: 0;
+    }
 }

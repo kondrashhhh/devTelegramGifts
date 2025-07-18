@@ -1,12 +1,14 @@
 .link {
     position: relative;
+    padding: 0 10px 10px 10px;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     padding-bottom: 10px;
     transition: .3s ease-in-out;
-    border-bottom: 1px solid #3e395f;
+    border-radius: 12px;
+    border: 1px solid #1F1B26;
 }
 
 .link:hover:before {
@@ -19,23 +21,8 @@
     transform: scale(105%);
 }
 
-.link:before {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    bottom: -1px;
-    right: 0;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: .3s ease-in-out;
-    border-color: transparent #ff3b3b transparent transparent;
-    border-style: solid;
-    border-width: 0 10px 10px 0;
-    transform: translateZ(0) rotate(90deg);
-}
-
 .link:hover {
+    background-color: rgba($color: #625873, $alpha: 0.2);
     border-color: #fd4848;
 }
 
@@ -45,25 +32,40 @@
 
 .card {
     margin-top: 20px;
-    padding: 10px;
+    padding: 5px;
+}
 
-    @media screen and (max-width: 992px) {
-        width: 40%;
-    }
+.priceBlock {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.priceBlock::before {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: #FFC400;
+    mask-repeat: no-repeat;
+    mask-image: url(/star.svg);    
 }
 
 .price {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
-    word-spacing: -4px;
-    color: rgb(247, 73, 73);
+    color: #FFC400;
 }
 
 .image {
-    width: 290px;
+    max-width: 170px;
+    max-height: 170px;
+    transform: scale(1.15);
     transition: .3s ease-in-out;
 
     @media screen and (max-width: 992px) {
+        max-width: 130px;
+        max-height: 130px;
         width: 100%;
     }
 }

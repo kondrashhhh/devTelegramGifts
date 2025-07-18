@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery } from 'react-responsive';
 import styles from './Navigation.module.scss';
 
-export default function Navigation({ isOpen }) {
-  const classname = isOpen ? 'open' : 'hidden';
-  const isMobile = useMediaQuery('(max-width:992px)');
-
+export default function Navigation() {
   const [isActive, setIsActive] = useState(() => {
     const savedIndex = localStorage.getItem('activeIndex');
     return savedIndex !== null ? Number(savedIndex) : 0;
   });
+
+  const isMobile = useMediaQuery({ query: `(max-width: 1280px)` });
 
   const items = [
     { title: "Кейсы", image: "", url: "/" },
@@ -36,7 +35,7 @@ export default function Navigation({ isOpen }) {
   ));
 
   return (
-    <nav className={`${styles.navigation} ${isMobile ? classname + ' mobile' : ''}`}>
+    <nav className={`${styles.navigation} ${isMobile ? styles.collapse : ''}`}>
       <ul className={styles.list}>
         {showItems}
       </ul>

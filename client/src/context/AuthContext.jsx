@@ -8,7 +8,6 @@ const AuthProvider = ({ children }) => {
     userData: localStorage.getItem("telegram_auth") || null,
   });
 
-  // Инициализация из localStorage при загрузке
   useEffect(() => {
     const storedAuth = localStorage.getItem('telegram_auth');
     if (storedAuth) {
@@ -35,7 +34,6 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     setAuthState({ isAuthenticated: false, userData: null });
     localStorage.removeItem('telegram_auth');
-    // Дополнительные очистки при выходе
     document.querySelectorAll('script[src*="telegram-widget"]').forEach(el => el.remove());
     delete window.onTelegramAuth;
   };

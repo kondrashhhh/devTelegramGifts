@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: end;
-    padding: 0 30px;
+    padding: 0 40px;
     gap: 30px;
 }
 
@@ -43,5 +43,9 @@
     font-size: 14px;
     color: #FFFFFF;
     transition: all 0.3s;
+}
+
+.collapse {
+    opacity: 0;
 }
 
