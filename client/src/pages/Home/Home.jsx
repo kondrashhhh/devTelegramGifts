@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useFilter } from '@/context/FilterContext';
+import { Information } from './Information/Information';
 import { CaseSection } from './CaseSection/CaseSection';
 
 export const Home = () => {
@@ -31,6 +32,7 @@ export const Home = () => {
 
   return (
     <>
+      <Information />
       {sectionsToShow.map((caseSection, index) => (
         <CaseSection
           categories={index === 0 ? categoryNames : null}

@@ -2,6 +2,13 @@
 @use './mixins.scss' as *;
 
 @font-face {
+    font-family: 'Dela Gothic One';
+    src: url('../fonts/DelaGothicOne-Regular.ttf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'Manrope';
     src: url('../fonts/Manrope-Regular.ttf') format('opentype');
     font-weight: lighter;
