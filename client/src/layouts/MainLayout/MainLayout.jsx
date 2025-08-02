@@ -8,12 +8,14 @@ import styles from './MainLayout.module.scss'
 export default function MainLayout({ children }) {
   return (
     <div className={styles.layout}>
-        <div className={styles.shadow}></div>
+        <div className={styles.topShadow}></div>
+        <div className={styles.bottomShadow}></div>
         <Slider />
         <Header />
         <ContainerFluid>
           { children }
         </ContainerFluid>
+        <Footer />
     </div>
   )
 }

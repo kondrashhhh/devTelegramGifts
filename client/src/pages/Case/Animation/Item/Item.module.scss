@@ -1,0 +1,26 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    position: relative;
+    width: calcVW(163, 1440);
+    height: calcVW(163, 1440);
+    z-index: 2;
+
+    @include vp--1600 {
+        width: 163px;
+        height: 163px;
+    }
+}
+
+.image, .image img {
+    width: calcVW(90, 1440);
+    height: calcVW(90, 1440);
+
+    @include vp--1600 {
+        width: 96px;
+        height: 96px;
+    } 
+}

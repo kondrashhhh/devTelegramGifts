@@ -1,38 +1,132 @@
 .balance {
-    font-size: 16px;
-    line-height: 28px;
+    position: absolute;
+    right: calcVW(275, 1440);
+    width: calcVW(196.19, 1440);
+    max-height: calcVW(50, 1440);
+    max-width: calcVW(196.19, 1440);
+    font-size: calcVW(16, 1440);
     font-weight: 500;
-    transition: .2s;
+    line-height: calcVW(28, 1440);
+    overflow: hidden;
+    z-index: 100;
+
+    @include vp--1600 {
+        right: 285px;
+        width: 196.19px;
+        max-height: 56px;
+        max-width: 196.19px;
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    @include vp--1024 {
+        right: 200px;
+    }
+
+    @include vp--680 {
+        right: 16px;
+    }
+
+    @media screen and (max-width: 460px) {
+        width: 160px;
+    }   
 }
 
-.balance a {
+.icon {
+    width: calcVW(16, 1440);
+
+    @include vp--1600 {
+        width: 16px;
+    }
+}
+
+.icon img {
+    width: calcVW(16, 1440);
+
+    @include vp--1600 {
+        width: 16px;
+    }
+}
+
+.dropdown {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: calcVW(20, 1440);
+
+    @include vp--1600 {
+        gap: 10px;
+    }
+}
+
+.balance .dropItem {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: calcVW(20, 1440);
+
+    @include vp--1600 {
+        gap: 20px;
+    }
+}
+
+.dropItem:hover span,
+.dropItem:hover .icon {
+    color: rgba($color: #FFFFFF, $alpha: 0.4);
+}
+
+.dropItem:hover .dropdownIcon {
+
 }
 
 .dropdownIcon {
-    width: 20px;
-    height: 20px;
+    position: absolute;
+    right: 0;
+    width: calcVW(20, 1440);
+    height: calcVW(20, 1440);
     mask-image: url(/dropdown.svg);
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: 60%;
-    background-color: rgba($color: #FFFFFF, $alpha: 0.4);
+    background-color: #FFFFFF;
     transition: all 0.3s ease;
     cursor: pointer;
+
+    @include vp--1600 {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 .open {
+    max-height: calcVW(200, 1440);
+    top: calcVW(13, 1440);
     background-color: #0B090D;
-    transition: .2s;
+    transition: all .2s;
+
+    @include vp--1600 {
+        max-height: 200px;
+        top: 17px;
+    }
+
+    @include vp--1280 {
+        top: 20px;
+    }
+
+    @include vp--680 {
+        top: 17px;
+    }
 }
 
 .open .dropdownIcon {
     transform: rotate(180deg);
-    background-color: #FFFFFF;
+    background-color: rgba($color: #FFFFFF, $alpha: 0.4);
 }
 
-.balance a img {
-    margin-bottom: 3px;
+.balance .dropItem img {
+    margin-bottom: calcVW(3, 1440);
+
+    @include vp--1600 {
+        margin-bottom: 3px;
+    }
 }

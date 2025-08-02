@@ -1,6 +1,11 @@
 .logo {
-    max-width: 130px;
-    margin-bottom: 5px;
+    max-width: calcVW(130, 1440);
+    margin-bottom: calcVW(5, 1440);
+
+    @include vp--1600 {
+        max-width: 130px;
+        margin-bottom: 5px;
+    }
 
     @media screen and (max-width: 576px) {
         max-width: 100px;
@@ -9,12 +14,26 @@
 
 .logo a {
     display: block;
-    max-height: 28px;
+    max-height: calcVW(28, 1440);
     height: 100%;
+
+    @include vp--1600 {
+        max-height: 28px;
+    }
 }
 
 .image {
     @media screen and (max-width: 576px) {
         max-width: 100px;
+    }
+}
+
+.smallImage {
+    width: calcVW(130, 1440);
+    height: calcVW(28, 1440);
+
+    @include vp--1600 {
+        width: 130px;
+        height: 28px;
     }
 }

@@ -1,0 +1,35 @@
+.priceBlock {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.priceBlock::before {
+    content: "";
+    display: block;
+    width: calcVW(15, 1440);
+    height: calcVW(15, 1440);
+    background-color: #FFC400;
+    mask-repeat: no-repeat;
+    mask-image: url(/star.svg);
+    mask-size: 100%;
+
+    @include vp--1600 {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+.price {
+    font-size: calcVW(18, 1440);
+    font-weight: bold;
+    color: #FFC400;
+
+    @include vp--1600 {
+        font-size: 18px;
+    }
+}
+
+.disabled {
+    opacity: 0.4;
+}

@@ -1,23 +1,36 @@
 .button {
     cursor: pointer;
-    padding: 8px 16px;
-    border-radius: 18px;
+    padding: calcVW(8, 1440) calcVW(16, 1440);
+    border-radius: calcVW(18, 1440);
     border: 1px solid #2A2533;
     background-color: #000000;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: calcVW(16, 1440);
+    line-height: calcVW(20, 1440);
     white-space: nowrap;
     color: #FFFFFF;
     transition: all .2s;
+
+    @include vp--1600 {
+        padding: 8px 16px;
+        border-radius: 18px;
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
 
 .button:hover {
     box-shadow: 
-        0 0 8px rgba(199, 16, 16, 0.6),
-        0 0 16px rgba(199, 16, 16, 0.4);
+        0 0 calcVW(8, 1440) rgba(199, 16, 16, 0.6),
+        0 0 calcVW(16, 1440) rgba(199, 16, 16, 0.4);
     border: 1px solid #840A0A;
     transition: all .2s;
+
+    @include vp--1600 {
+        box-shadow: 
+            0 0 8 rgba(199, 16, 16, 0.6),
+            0 0 16 rgba(199, 16, 16, 0.4);
+    }
 }
 
 .active {

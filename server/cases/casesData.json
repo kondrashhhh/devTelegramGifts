@@ -1,9 +1,9 @@
-const caseData = [
+[
     {
         "translit_name": "Besplatnyi_za_promokod",
         "name": "Бесплатный за промокод",
         "name_eng": "Free with promo code",
-        "price": 245.67474099991173,
+        "price": 245,
         "tickets_price": 0,
         "case_free": true,
         "case_for_tickets": false,
@@ -469,26 +469,6 @@ const caseData = [
                 "image": "https://images.giftsbattle.com/item/TON.tgs",
                 "rarity_category": null,
                 "percent": 0.07181758795374918
-            },
-            {
-                "item_id": "Xd80tDWA6",
-                "name": "Vintage Cigar (Random)",
-                "type": "nftgift",
-                "price": 8800.0,
-                "price_ton": 44.0,
-                "image": "https://images.giftsbattle.com/item/Blue_Hue.tgs",
-                "rarity_category": null,
-                "percent": 0.24483268620596313
-            },
-            {
-                "item_id": "Mj7KLwMHZ",
-                "name": "Toy Bear (Random)",
-                "type": "nftgift",
-                "price": 5280.0,
-                "price_ton": 26.4,
-                "image": "https://images.giftsbattle.com/item/Cotton.tgs",
-                "rarity_category": null,
-                "percent": 0.4080544770099386
             },
             {
                 "item_id": "Az9yPEpNT",
@@ -1183,6 +1163,6 @@ const caseData = [
                 "percent": 13.543238169578926
             }
         ]
-    },
+    }
     
 ]

@@ -1,0 +1,39 @@
+.parallaxBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  transition: all .3s;
+
+  @include vp--680 {
+    display: none;
+  }
+}
+
+.parallaxLayer {
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
+.parallaxLayer > div {
+    height: auto;
+}
+.parallaxLayer:nth-child(1) { top: 20%; left: 10%; }
+.parallaxLayer:nth-child(1) > div { width: calcVW(118, 1440); }
+
+.parallaxLayer:nth-child(2) { top: 25%; left: 25%; }
+.parallaxLayer:nth-child(2) > div { width: calcVW(92, 1440); transform: rotate(10deg); opacity: .3; }
+
+.parallaxLayer:nth-child(3) { top: 55%; left: 14%; }
+.parallaxLayer:nth-child(3) > div { width: calcVW(156, 1440); opacity: 0.23; }
+
+.parallaxLayer:nth-child(4) { top: 20%; right: 10%; }
+.parallaxLayer:nth-child(4) > div { width: calcVW(120, 1440); }
+
+.parallaxLayer:nth-child(5) { top: 25%; right: 25%; }
+.parallaxLayer:nth-child(5) > div { width: calcVW(121, 1440); opacity: .5; }
+
+.parallaxLayer:nth-child(6) { top: 55%; right: 14%; }
+.parallaxLayer:nth-child(6) > div { width: calcVW(97, 1440); opacity: .23; }

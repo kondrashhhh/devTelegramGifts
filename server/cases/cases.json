@@ -1,4 +1,4 @@
-const categoryAndCases = {
+{
     "count": 7,
     "next": null,
     "previous": null,
@@ -6,13 +6,14 @@ const categoryAndCases = {
         {
             "category_id": "Fi2qyoOjP",
             "name": "Бесплатные Кейсы",
+            "filter": "Бесплатные",
             "name_eng": "Free Cases",
             "cases": [
                 {
                     "translit_name": "Besplatnyi_za_promokod",
-                    "name": "Бесплатный за промокод",
+                    "name": "Venom",
                     "name_eng": "Free with promo code",
-                    "price": 245.76767294339413,
+                    "price": 245,
                     "tickets_price": 0,
                     "case_free": true,
                     "case_for_tickets": false,
@@ -22,7 +23,7 @@ const categoryAndCases = {
                 },
                 {
                     "translit_name": "Besplatnyi_za_popolnenie_ot_1000",
-                    "name": "Бесплатный за пополнение от 1000",
+                    "name": "Телеграм",
                     "name_eng": "Free for 1000+ Top-Up",
                     "price": 179.0,
                     "tickets_price": 0,
@@ -34,7 +35,7 @@ const categoryAndCases = {
                 },
                 {
                     "translit_name": "Besplatnyi_za_popolnenie_ot_2000",
-                    "name": "Бесплатный за пополнение от 2000",
+                    "name": "Swiss Watch",
                     "name_eng": "Free for 2000+ Top-Up",
                     "price": 497.0,
                     "tickets_price": 0,
@@ -46,7 +47,7 @@ const categoryAndCases = {
                 },
                 {
                     "translit_name": "Besplatnyi_za_popolnenie_ot_5000",
-                    "name": "Бесплатный за пополнение от 5000",
+                    "name": "Neko шлем",
                     "name_eng": "Free for 5000+ Top-Up",
                     "price": 696.0,
                     "tickets_price": 0,
@@ -58,7 +59,19 @@ const categoryAndCases = {
                 },
                 {
                     "translit_name": "Besplatnyi_za_popolnenie_ot_10000",
-                    "name": "Бесплатный за пополнение от 10000",
+                    "name": "Кольца",
+                    "name_eng": "Free for 10000+ Top-Up",
+                    "price": 1569.0,
+                    "tickets_price": 0,
+                    "case_free": true,
+                    "case_for_tickets": false,
+                    "case_for_promo": false,
+                    "image": "https://images.giftsbattle.com/case/ot-10k-popolnenii_.webp",
+                    "category": "Fi2qyoOjP"
+                },
+                {
+                    "translit_name": "Besplatnyi_za_popolnenie_ot_10000",
+                    "name": "Дуров",
                     "name_eng": "Free for 10000+ Top-Up",
                     "price": 1569.0,
                     "tickets_price": 0,
@@ -86,6 +99,7 @@ const categoryAndCases = {
             "category_id": "No5F34LaK",
             "name": "Микс Кейсы",
             "name_eng": "Mix Cases",
+            "filter": "Микс",
             "cases": [
                 {
                     "translit_name": "Bomzh",
@@ -146,6 +160,18 @@ const categoryAndCases = {
                     "case_for_promo": false,
                     "image": "https://images.giftsbattle.com/case/oligarh.webp",
                     "category": "No5F34LaK"
+                },
+                {
+                    "translit_name": "Oligarh",
+                    "name": "Олигарх",
+                    "name_eng": "Oligarch",
+                    "price": 1775.0,
+                    "tickets_price": 0,
+                    "case_free": false,
+                    "case_for_tickets": false,
+                    "case_for_promo": false,
+                    "image": "https://images.giftsbattle.com/case/oligarh.webp",
+                    "category": "No5F34LaK"
                 }
             ]
         },
@@ -153,6 +179,7 @@ const categoryAndCases = {
             "category_id": "Jr9jQbSYq",
             "name": "Только NFT Кейсы",
             "name_eng": "NFT-Only Cases",
+            "filter": "NFT",
             "cases": [
                 {
                     "translit_name": "Skuf",
@@ -232,6 +259,7 @@ const categoryAndCases = {
             "category_id": "Ju2e5dVmS",
             "name": "ALL IN Кейсы",
             "name_eng": "ALL IN Cases",
+            "filter": "ALL IN",
             "cases": [
                 {
                     "translit_name": "Vintage_Cigar_All_in",
@@ -311,12 +339,13 @@ const categoryAndCases = {
             "category_id": "Oq1B6mrTC",
             "name": "Кейсы за Билеты",
             "name_eng": "Cases for Tickets",
+            "filter": "За билеты",
             "cases": [
                 {
                     "translit_name": "Startovyi",
                     "name": "Стартовый",
                     "name_eng": "Starter",
-                    "price": 40.539785946952065,
+                    "price": 40,
                     "tickets_price": 15,
                     "case_free": false,
                     "case_for_tickets": true,
@@ -328,7 +357,7 @@ const categoryAndCases = {
                     "translit_name": "SHans",
                     "name": "Шанс",
                     "name_eng": "Chance",
-                    "price": 62.03696945509544,
+                    "price": 62,
                     "tickets_price": 30,
                     "case_free": false,
                     "case_for_tickets": true,

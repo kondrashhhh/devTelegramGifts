@@ -55,17 +55,17 @@ export default function Slider() {
   // }, []);
 
   const items = [
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
-    {name: "Diamond Ring", image: 'test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
+    {name: "Diamond Ring", image: '/test.png'},
   ]
 
   return (

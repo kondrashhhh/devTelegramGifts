@@ -3,26 +3,47 @@
 
 .link { 
     display: flex;
-    gap: 15px;
+    gap: calcVW(15, 1440);
     align-items: center;
+
+    @include vp--1600 {
+        gap: 15px;
+    }
 }
 
 .name {
     white-space: nowrap;
+    font-size: calcVW(14, 1440);
+
+    @include vp--1600 {
+        font-size: 16px;
+    }
 }
 
 .avatar {
-    width: 50px;
-    height: 50px;
+    width: calcVW(45, 1440);
+    height: calcVW(45, 1440);
     border-radius: 100%;
-    border: 2px solid #24A1DE;
+    border: calcVW(2, 1440) solid #24A1DE;
     transition: all 0.25s;
+
+    @include vp--1600 {
+        width: 50px;
+        height: 50px;
+        border: 2px solid #24A1DE;
+    }
 }
 
 .avatar:hover {
     box-shadow: 
-        0 0 8px rgba(36, 161, 222, 0.6),
-        0 0 16px rgba(36, 161, 222, 0.4);
+        0 0 calcVW(8, 1440) rgba(36, 161, 222, 0.6),
+        0 0 calcVW(16, 1440) rgba(36, 161, 222, 0.4);
     background-color: #24A1DE;
     transition: all 0.25s;
+
+    @include vp--1600 {
+        box-shadow: 
+            0 0 8 rgba(36, 161, 222, 0.6),
+            0 0 16 rgba(36, 161, 222, 0.4);
+    }
 }

@@ -1,0 +1,36 @@
+.counter {
+    background-color: #1F1B26;
+    border-radius: calcVW(9, 1440);
+    display: flex;
+    padding: calcVW(3, 1440);
+    gap: calcVW(3, 1440);
+    position: relative;
+
+    @include vp--1600 {
+        border-radius: 9px;
+        padding: 3px;
+        gap: 3px;
+    }
+}
+
+.active-indicator {
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 0;
+    background-color: transparent;
+    border: 1px solid rgba($color: #FFFFFF, $alpha: 0.12);
+    border-radius: calcVW(7, 1440);
+    z-index: 0;
+    transition: all 0.3s ease;
+    pointer-events: none; 
+
+    @include vp--1600 {
+        border-radius: 7px;
+    }
+}
+
+.disabled {
+    transition: all .3s;
+    opacity: 0.4;
+}

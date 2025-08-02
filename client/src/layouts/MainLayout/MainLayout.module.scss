@@ -1,7 +1,8 @@
 .layout {
+    position: relative;
+    min-height: 100vh;
     overflow: hidden;
     padding-top: 30px;
-    position: relative;
     background-color: #0B090D;
     background-size: 100% auto;
 
@@ -10,8 +11,8 @@
     }
 }
 
-.shadow {
-    position: fixed;
+.topShadow {
+    position: absolute;
     width: 854px;
     height: 854px;
     top: -800px;
@@ -19,4 +20,23 @@
     border-radius: 90%;
     filter: blur(200px);
     background-color: #840A0A;
+
+    @include vp--680 {
+        top: -600px;
+    }
+}
+
+.bottomShadow {
+    position: absolute;
+    width: 854px;
+    height: 854px;
+    bottom: -700px;
+    left: 25%;
+    border-radius: 90%;
+    filter: blur(200px);
+    background-color: #840A0A;
+
+    @include vp--680 {
+        bottom: -600px;
+    }
 }

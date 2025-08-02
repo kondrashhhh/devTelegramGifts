@@ -1,0 +1,20 @@
+.button {
+    background-color: transparent;
+    border: none;
+    border-radius: 7px;
+    padding: calcVW(5, 1440) calcVW(25, 1440);
+    font-size: calcVW(16, 1440);
+    color: #FFFFFF;
+    position: relative;
+    z-index: 1;
+    transition: color 0.2s ease;
+    
+    &:hover {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    @include vp--1600 {
+        padding: 5px 25px;
+        font-size: 16px;
+    }
+}

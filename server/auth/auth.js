@@ -5,7 +5,6 @@ function validateTelegramAuth(botToken) {
     try {
       const authData = req.body;
       
-      // 1. Проверяем наличие обязательных полей
       if (!authData || !authData.id || !authData.auth_date) {
         return res.status(400).json({ 
           success: false,
@@ -13,7 +12,6 @@ function validateTelegramAuth(botToken) {
         });
       }
 
-      // 2. Если есть hash - проверяем подпись, если нет - пропускаем (для WebApp)
       if (authData.hash) {
         const dataToCheck = [];
         for (const [key, value] of Object.entries(authData)) {
@@ -41,7 +39,6 @@ function validateTelegramAuth(botToken) {
         }
       }
 
-      // 3. Проверяем время (не старше 1 дня)
       const authDate = parseInt(authData.auth_date, 10);
       if (Date.now() / 1000 - authDate > 86400) {
         return res.status(401).json({ 
@@ -50,7 +47,6 @@ function validateTelegramAuth(botToken) {
         });
       }
       
-      // 4. Добавляем пользователя в запрос
       req.telegramUser = {
         id: authData.id,
         first_name: authData.first_name || '',

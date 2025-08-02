@@ -1,0 +1,40 @@
+.gap {
+    margin: calcVW(20, 1440) 0;
+    gap: calcVW(10, 1440);
+
+    @include vp--1600 {
+        margin: 20px 0;
+        gap: 10px;
+    }
+}
+
+svg {
+    width: calcVW(14, 1440);
+    height: auto;
+
+    @include vp--1600 {
+        width: 14px;
+    }
+}
+
+.text {
+    background: linear-gradient(#FEDB2B, #FCB408);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
+    font-size: calcVW(16, 1440);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    @include vp--1600 {
+        font-size: 16px;
+    }
+}
+
+.disabled svg, .disabled .text {
+    transition: all .3s;
+    opacity: 0.4;
+}

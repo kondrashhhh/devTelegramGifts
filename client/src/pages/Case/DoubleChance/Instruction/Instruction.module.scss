@@ -1,0 +1,12 @@
+.faq {
+    cursor: pointer;
+}
+
+.faq img {
+    width: calcVW(22, 1440);
+    height: auto;
+
+    @include vp--1600 {
+        width: 22px;
+    }
+}

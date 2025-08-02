@@ -4,16 +4,26 @@
 
 .category {
     font-weight: 400;
-    font-size: 18px;
+    font-size: calcVW(18, 1440);
     color: #840A0A;
-    line-height: 24px;
+    line-height: calcVW(24, 1440);
+
+    @include vp--1600 {
+        font-size: 18px;
+        line-height: 24px;
+    }
 }
 
 .title {
     font-weight: 600;
-    font-size: 30px;
-    line-height: 40px;
+    font-size: calcVW(30, 1440);
+    line-height: calcVW(40, 1440);
     color: #FFFFFF;
+
+    @include vp--1600 {
+        font-size: 30px;
+        line-height: 40px;
+    }
 }
 
 .secondContainer {

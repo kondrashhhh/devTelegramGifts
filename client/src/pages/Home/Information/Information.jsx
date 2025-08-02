@@ -47,7 +47,12 @@ export const Information = () => {
             Применить
           </button>
         </div>
-        <div className={styles.infoItem}></div>
+        <div className={styles.infoItem}>
+          <Flex className={styles.flexText}>
+            <span>ПРИВЕДИ <br /> ДРУГА!</span>
+            <span>И ПОЛУЧИ <br /> ПОДАРОК</span>
+          </Flex>
+        </div>
       </div>
     </Flex>
   )

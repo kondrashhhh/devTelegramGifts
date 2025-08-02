@@ -1,5 +1,9 @@
 .container {
-    padding: 0 6rem 0 10rem;
+    padding: 0 calcVW(96, 1440) 0 calcVW(160, 1440);
+    
+    @include vp--1600 {
+        padding: 0 6rem 0 10rem;
+    }
 
     @include vp--1024 {
         padding: 0 1rem;

@@ -5,17 +5,60 @@
 
 .pre-title {
     font-weight: 400;
-    font-size: 12px;
+    font-size: calcVW(12, 1440);
     color: #625873;
+
+    @include vp--1600 {
+        font-size: 12px;
+    }
+}
+
+.type {
+    font-weight: 400;
+    font-size: calcVW(14, 1440);
+    color: #625873;
+
+    @include vp--1600 {
+        font-size: 14px;
+    }
+}
+
+.standart {
+    font-size: calcVW(16, 1440);
+    font-weight: 600;
+    line-height: calcVW(40, 1440);
+    text-align: center;
+
+    @include vp--1600 {
+        font-size: 16px;
+        line-height: 40px;
+    }
+}
+
+.h2 {
+    font-weight: 600;
+    font-size: calcVW(40, 1440);
+
+    @include vp--1280 {
+        font-size: 40px;
+    }
 }
 
 .h4 {
     font-weight: 500;
     line-height: 110%;
-    font-size: 18px;
+    font-size: calcVW(18, 1440);
+
+    @include vp--1600 {
+        font-size: 18px;
+    }
 }
 
 .span {
     font-weight: lighter;
-    font-size: 14px;
+    font-size: calcVW(14, 1440);
+
+    @include vp--1600 {
+        font-size: 14px;
+    }
 }

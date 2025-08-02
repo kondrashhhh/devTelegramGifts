@@ -1,13 +1,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
-// Получаем __dirname эквивалент в ES модулях
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    svgr({
+      include: '**/*.svg',
+    })
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

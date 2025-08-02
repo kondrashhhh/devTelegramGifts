@@ -1,6 +1,10 @@
 .gap {
     justify-content: start;
-    gap: 12px;
+    gap: calcVW(12, 1440);
+    
+    @include vp--1600 {
+        gap: 12px;
+    }
 
     @include vp--1024 {
         flex-wrap: wrap;

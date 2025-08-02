@@ -1,8 +1,13 @@
 .online {
-    margin-left: 30px;
+    margin-left: calcVW(30, 1440);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: calcVW(10, 1440);
+
+    @include vp--1600 {
+        margin-left: 30px;
+        gap: 10px;
+    }
     
     @include vp--1024 {
         margin-left: 20px;
@@ -10,13 +15,25 @@
 }
 
 .online span {
-    margin-top: 1px;
-    min-width: 37px;
+    font-size: calcVW(16, 1440);
+    margin-top: calcVW(1, 1440);
+    min-width: calcVW(37, 1440);
+
+    @include vp--1600 {
+        font-size: 16px;
+        margin-top: 1px;
+        min-width: 37px;
+    }
 }
 
 .circle {
-    width: 13px;
-    height: 13px;
+    width: calcVW(13, 1440);
+    height: calcVW(13, 1440);
     border-radius: 100%;
     background-color: #4A8949;
+
+    @include vp--1600 {
+        width: 13px;
+        height: 13px;
+    }
 }

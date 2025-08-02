@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useFilter } from '@/context/FilterContext';
 import { Information } from './Information/Information';
 import { CaseSection } from './CaseSection/CaseSection';
+import { Loading } from '@/components/Loading/Loading';
 
 export const Home = () => {
   const [caseData, setCaseData] = useState({ results: [] });
+  const [loading, setLoading] = useState(false)
   const { activeFilter } = useFilter();  
 
   const caseAPI = async () => {
+    setLoading(true);
     const response = await fetch("http://localhost:3000/api/cases", {
       credentials: 'include',
       headers: {
@@ -16,6 +19,7 @@ export const Home = () => {
     });
     const result = await response.json();
     setCaseData(result);
+    setLoading(false)
   };
 
   useEffect(() => {
@@ -29,6 +33,10 @@ export const Home = () => {
   const sectionsToShow = activeFilter === "all" 
   ? caseData.results.filter(section => section.cases?.length > 0)
   : caseData.results.filter(section => section.category_id === activeFilter && section.cases?.length > 0);
+
+  if (loading) {
+    return (<Loading />)
+  }
 
   return (
     <>

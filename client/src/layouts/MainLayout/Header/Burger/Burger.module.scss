@@ -2,6 +2,14 @@
     background-color: #222039;
 }
 
+.login {
+    margin-right: 218px;
+
+    @include vp--680 {
+        margin: 0;
+    }
+}
+
 .wrapper {
     display: flex;
     justify-content: end;

@@ -1,0 +1,9 @@
+button svg {
+    width: calcVW(24, 1440);
+    height: calcVW(24, 1440);
+
+    @include vp--1600 {
+        width: 24px;
+        height: 24px;
+    }
+}

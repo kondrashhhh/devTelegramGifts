@@ -1,14 +1,20 @@
 .link {
     position: relative;
-    padding: 0 10px 10px 10px;
+    padding: 0 calcVW(10, 1440) calcVW(10, 1440) calcVW(10, 1440);
     z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding-bottom: 10px;
+    padding-bottom: calcVW(10, 1440);
     transition: .3s ease-in-out;
-    border-radius: 12px;
+    border-radius: calcVW(12, 1440);
     border: 1px solid #1F1B26;
+
+    @include vp--1600 {
+        padding: 0 10px 10px 10px;
+        padding-bottom: 10px;
+        border-radius: 12px;
+    }
 }
 
 .link:hover:before {
@@ -23,45 +29,36 @@
 
 .link:hover {
     background-color: rgba($color: #625873, $alpha: 0.2);
-    border-color: #fd4848;
 }
 
 .title {
-    margin-top: 10px;
+    margin-top: calcVW(10, 1440);
+
+    @include vp--1600 {
+        margin-top: 10px;
+    }
 }
 
 .card {
-    margin-top: 20px;
-    padding: 5px;
-}
+    margin-top: calcVW(20, 1440);
+    padding: calcVW(5, 1440);
 
-.priceBlock {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.priceBlock::before {
-    content: "";
-    display: block;
-    width: 15px;
-    height: 15px;
-    background-color: #FFC400;
-    mask-repeat: no-repeat;
-    mask-image: url(/star.svg);    
-}
-
-.price {
-    font-size: 18px;
-    font-weight: bold;
-    color: #FFC400;
+    @include vp--1600 {
+        margin-top: 20px;
+        padding: 5px;
+    }
 }
 
 .image {
-    max-width: 170px;
-    max-height: 170px;
+    max-width: calcVW(163, 1440);
+    max-height: calcVW(163, 1440);
     transform: scale(1.15);
     transition: .3s ease-in-out;
+
+    // @include vp--1280 {
+    //     max-width: calcVW(200);
+    //     max-height: calcVW(200);
+    // }
 
     @media screen and (max-width: 992px) {
         max-width: 130px;
