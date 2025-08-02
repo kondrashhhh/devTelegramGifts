@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useFilter } from '@/context/FilterContext';
+import { useCaseSetOpening } from '@/stores/useCaseStore';
 import { Information } from './Information/Information';
 import { CaseSection } from './CaseSection/CaseSection';
 import { Loading } from '@/components/Loading/Loading';
 
 export const Home = () => {
+  const setOpening = useCaseSetOpening();
   const [caseData, setCaseData] = useState({ results: [] });
   const [loading, setLoading] = useState(false)
   const { activeFilter } = useFilter();  
@@ -23,6 +25,7 @@ export const Home = () => {
   };
 
   useEffect(() => {
+    setOpening(false);
     caseAPI();
   }, []);
 
