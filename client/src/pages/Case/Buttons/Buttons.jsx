@@ -4,19 +4,19 @@ import { Flex } from '@/components/Flex/Flex'
 import { OpenButton } from './OpenButton/OpenButton'
 import { SkipButton } from './SkipButton/SkipButton'
 import styles from "./Buttons.module.scss"
-import { useCaseOpening } from '@/stores/useCaseStore'
+import { useCaseDisabled } from '@/stores/useCaseStore'
 
 export const Buttons = ({ info }) => {
-  const isOpening = useCaseOpening();
+  const isDisabled = useCaseDisabled();
 
   return (
     <Flex className={styles.gap}>
        <OpenButton
         info={info}
-        className={cn(styles.button, isOpening && styles.disabled)}
-        isOpening={isOpening}
+        className={cn(styles.button, isDisabled && styles.disabled)}
+        isOpening={isDisabled}
        />
-       <SkipButton className={cn(styles.button, isOpening && styles.disabled)} />
+       <SkipButton className={cn(styles.button, isDisabled && styles.disabled)} />
     </Flex>
   )
 }

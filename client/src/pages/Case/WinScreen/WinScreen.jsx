@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Flex } from '@/components/Flex/Flex'
+import { Item } from './Item/Item'
+import { useCaseWinItem } from '@/stores/useCaseStore'
 import styles from "./WinScreen.module.scss"
 
-export const WinScreen = ({ item }) => {
+export const WinScreen = () => {
+  const itemData = useCaseWinItem();
+
+  useEffect(() => {
+    console.log("Выпавшие предметы: ", itemData);
+  }, [itemData]);
+
   return (
-    <div className={styles}>{item}</div>
-  )
-}
+    <div className={styles.screen}>
+      <Flex className={styles.gap}>
+        {Array.isArray(itemData) ? (
+          itemData.map((item) => (
+            <Item item={item} key={item.id} />
+          ))
+        ) : (
+          <Item item={itemData} />
+        )}
+      </Flex>
+    </div>
+  );
+};

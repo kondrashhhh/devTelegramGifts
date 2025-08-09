@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 import Boost from "./boost.svg"
-import { useCaseOpening, useCasePrice } from '@/stores/useCaseStore'
+import { useCaseDisabled, useCasePrice } from '@/stores/useCaseStore'
 import { Flex } from '@/components/Flex/Flex'
 import { Price } from '@/components/Price/Price'
 import { Switch } from './Switch/Switch'
@@ -11,9 +11,9 @@ import styles from "./DoubleChance.module.scss"
 
 export const DoubleChance = () => {
   const price = useCasePrice();
-  const isOpening = useCaseOpening();
+  const isDisabled = useCaseDisabled();
   return (
-    <Flex className={cn(styles.gap, isOpening ? styles.disabled : "")}>
+    <Flex className={cn(styles.gap, isDisabled ? styles.disabled : "")}>
         <Boost />
         <Typography tag="span" className={styles.text}>X2 шанс</Typography>
         <Price value={price * 1.2}/>

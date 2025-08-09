@@ -2,6 +2,8 @@ import { create } from 'zustand';
 
 export const useCaseStore = create((set) => ({
   isOpening: false,
+  showWinScreen: false,
+  isDisabled: false,
   caseData: null,
   itemData: {},
   loading: true,
@@ -31,13 +33,20 @@ export const useCaseStore = create((set) => ({
     }
   },
 
-  openCase: async (category, translit_name, isOpening) => {
-    if (isOpening) return;
+  openCase: async (category, translit_name, isDisabled, count) => {
+    if (isDisabled) return;
+
+    const fetchBody = JSON.stringify({
+      "count": count
+    })
+
     try {
       const response = await fetch(
         `http://localhost:3000/api/cases/${category}/${translit_name}/open`,
         {
+          method: "POST",
           credentials: 'include',
+          body: fetchBody,
           headers: {
             'Content-Type': 'application/json',
           },
@@ -45,8 +54,9 @@ export const useCaseStore = create((set) => ({
       );
 
       const itemData = await response.json();
-      set({ itemData });
-      set({ isOpening: true });
+      Array.isArray(itemData) 
+        ? set({ itemData, showWinScreen: true, isDisabled: true })
+        : set({ itemData, isOpening: true, isDisabled: true })  
     } catch (error) {
       console.error('Ошибка открытия:', error);
     }
@@ -55,7 +65,16 @@ export const useCaseStore = create((set) => ({
   setDoubleChance: (value) => set({ doubleChance: value }),
   setOpening: (value) => set({ isOpening: value }),
   setCount: (value) => set({ count: value }),
+  setWinScreen: (value) => set({ showWinScreen: value, isDisabled: value })
 }));
+
+export const useWinScreen = () => ({
+  showWinScreen: useCaseStore((state) => state.showWinScreen),
+  setWinScreen: useCaseStore((state) => state.setWinScreen)
+});
+
+export const useCaseDisabled = () => 
+  useCaseStore((state) => state.isDisabled);
 
 export const useCaseOpen = () => 
   useCaseStore((state) => state.openCase);

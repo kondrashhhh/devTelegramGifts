@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { WinScreen } from './WinScreen/WinScreen';
 import { Loading } from '@/components/Loading/Loading';
 import { Flex } from '@/components/Flex/Flex';
 import { Animation } from './Animation/Animation';
@@ -18,7 +19,9 @@ export const Case = () => {
   const {
     caseData,
     loading,
+    isDisabled,
     isOpening,
+    showWinScreen,
     fetchCase,
   } = useCaseStore();
   
@@ -28,7 +31,7 @@ export const Case = () => {
     if (category && translit_name) {
       fetchCase(category, translit_name);
     }
-  }, [category, translit_name]);
+  }, [category, translit_name, fetchCase]);
 
   const parallaxItems = caseData?.items?.slice(0, 6);
   const caseInfo = { "category": category, "name": translit_name };
@@ -41,13 +44,16 @@ export const Case = () => {
 
   return (
     <div className={styles.caseDetail} ref={parallaxRef}>
-      <Parallax parallaxItems={parallaxItems} isOpening={isOpening} />
+      <Parallax parallaxItems={parallaxItems} isDisabled={isDisabled} />
       
       <Typography tag="h3" variant="type">Кейс</Typography>
       <Typography tag="h2" variant="h2">{caseData?.name}</Typography>
       
-      {isOpening ? (
-        <Animation />
+      {isDisabled ? (
+        <>
+          {isOpening && <Animation />}
+          {showWinScreen && <WinScreen />}
+        </>
       ) : (
         <div className={styles.image}>
           <img src={caseData?.image} alt={caseData?.name} />

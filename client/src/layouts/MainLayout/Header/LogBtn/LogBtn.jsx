@@ -8,11 +8,6 @@ export default function LogBtn() {
   const SERVER_URL = 'https://dev-telegram-gifts.ru';
   const AUTH_ENDPOINT = `${SERVER_URL}/api/telegram-auth`;
 
-  // Логирование состояния авторизации
-  useEffect(() => {
-    console.log('Auth state changed:', { isAuthenticated, userData });
-  }, [isAuthenticated, userData]);
-
   const handleWidgetLoad = useCallback(() => {
     const widgetBtn = document.querySelector('.tgme_widget_login_button');
     const avatar = document.querySelector('.tgme_widget_login_user_photo');
@@ -29,11 +24,7 @@ export default function LogBtn() {
   }, []);
 
   const initTelegramAuth = useCallback(() => {
-
     document.querySelectorAll('script[src*="telegram-widget"]').forEach(el => el.remove());
-
-
-    console.log("СОЗДАЕМ АВТОРИЗАЦИЮ ТГ");
 
     if (!userData) {
       const script = document.createElement('script');
@@ -67,16 +58,14 @@ export default function LogBtn() {
         });
 
         if (response.data?.success) {
-          login(response.data.user); // Передаем объект напрямую
-          console.log('Auth success', response.data.user);
+          login(response.data.user); 
           window.location.reload();
         }
       } catch (error) {
-        console.error('Auth failed:', error);
         alert(error.response?.data?.error || 'Ошибка авторизации');
       }
     };
-  }, [AUTH_ENDPOINT, login]);
+  }, [AUTH_ENDPOINT, login, userData]);
 
   const initWebAppAuth = useCallback(() => {
     if (!window.Telegram?.WebApp) return;
@@ -114,7 +103,7 @@ export default function LogBtn() {
       clearInterval(interval);
       delete window.onTelegramAuth;
     };
-  }, [isAuthenticated, initWebAppAuth, initTelegramAuth, handleWidgetLoad]);
+  }, [isAuthenticated, initWebAppAuth, initTelegramAuth, handleWidgetLoad, userData]);
 
   return (
     <></>

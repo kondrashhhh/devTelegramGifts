@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useCaseItems, useCaseSetOpening, useCaseWinItem } from '@/stores/useCaseStore'
+import { useCaseItems, useCaseSetOpening, useCaseWinItem, useWinScreen } from '@/stores/useCaseStore'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Item } from './Item/Item'
 import { Flex } from '@/components/Flex/Flex'
@@ -9,6 +9,7 @@ export const Animation = () => {
   const items = useCaseItems();
   const winItem = useCaseWinItem();
   const setOpening = useCaseSetOpening();
+  const { setWinScreen } = useWinScreen();
   const [isReady, setIsReady] = useState(false)
   
   
@@ -18,7 +19,6 @@ export const Animation = () => {
           baseItems[(baseItems.length - 1) / 2] = winItem;
     return baseItems
   }, [items, winItem])
-  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,7 +39,12 @@ export const Animation = () => {
           animate={isReady ? { x: "0%" } : { x: "49.35%" }}
           transition={{ duration: 11, ease: [0.12, 0, 0, 0.99] }}
           style={{ display: 'flex', willChange: 'transform' }}
-          onAnimationComplete={() => isReady && setTimeout(() => setOpening(false), 1000)}
+          onAnimationComplete={() => isReady &&
+            setTimeout(() => {
+              setOpening(false);
+              setWinScreen(true);
+            }, 1000)
+          }
         >
           {scrollItems.map((item, index) => (
             <Item item={item} key={`${index}-${item.id}`}/>

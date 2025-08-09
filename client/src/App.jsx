@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
+import { useGlobalGetCurrency } from "./stores/useGlobalStore";
 import { FilterProvider } from "./context/FilterContext";
 import MainLayout from './layouts/MainLayout/MainLayout'
 import { Home } from "./pages/Home/Home";
@@ -16,6 +17,14 @@ const loadTgsPlayer = async () => {
 };
 
 function App() {
+    const { updateTonRate } = useGlobalGetCurrency();
+
+  useEffect(() => {
+    updateTonRate(); 
+    const interval = setInterval(updateTonRate, 60000);
+    return () => clearInterval(interval);
+  }, [updateTonRate]);
+
   useEffect(() => {
     loadTgsPlayer();
   }, []);
@@ -24,9 +33,8 @@ function App() {
     <BrowserRouter>
       <MainLayout>
         <Routes>
-          <Route
-           path='/'
-           element={
+          <Route path='/' element=
+           {
             <FilterProvider>
               <Home />
             </FilterProvider>

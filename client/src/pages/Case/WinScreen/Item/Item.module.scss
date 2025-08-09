@@ -1,0 +1,24 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.itemImage tgs-player, .itemImage img{
+    max-width: calcVW(150, 1440);
+    max-height: calcVW(150, 1440);
+    min-height: calcVW(150, 1440);
+
+    @include vp--1600 {
+        max-width: 150px;
+        max-height: 150px;
+        min-height: 150px;
+    }
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}

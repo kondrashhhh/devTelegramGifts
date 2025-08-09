@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { useGlobalGetCurrency, useGlobalSetCurrency } from '@/stores/useGlobalStore';
 import { useMediaQuery } from 'react-responsive';
 import { values } from './values';
 import styles from './BalanceButton.module.scss';
 
 export default function BalanceButton() {
+  const setGlobalCurrency = useGlobalSetCurrency();
+  const { calculate } = useGlobalGetCurrency();
+
   const [isOpen, setIsOpen] = useState(false);
   const [currencies, setCurrencies] = useState(values);
   const isCollapse = useMediaQuery({ query: `(max-width: 460px)` });
 
-  const handleClickChange = (clickedItem, clickedIndex) => {
+  const handleClickChange = (clickedItem, currency, clickedIndex) => {
     const updatedCurrencies = currencies.map((item, index) => ({
       ...item,
       active: index === clickedIndex
@@ -20,6 +24,7 @@ export default function BalanceButton() {
     
     setCurrencies(sorted);
     setIsOpen(!isOpen);
+    setGlobalCurrency(currency);
   };
 
   return (
@@ -29,7 +34,7 @@ export default function BalanceButton() {
           <div
             className={styles.dropItem}
             key={index}
-            onClick={() => handleClickChange(item, index)}
+            onClick={() => handleClickChange(item, item.title, index)}
           >
             <div className={styles.icon}>
               <img 
@@ -37,7 +42,7 @@ export default function BalanceButton() {
                 alt={item.title}
               />
             </div>
-            <span>2 300 {!isCollapse && item.title}</span>
+            <span>{calculate(item.title, true)} {!isCollapse && item.title}</span>
             {item.active && (
               <div 
                 className={styles.dropdownIcon}

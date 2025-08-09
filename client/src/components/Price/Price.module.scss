@@ -11,13 +11,22 @@
     height: calcVW(15, 1440);
     background-color: #FFC400;
     mask-repeat: no-repeat;
-    mask-image: url(/star.svg);
+    mask-image: url(/currencies/star.svg);
     mask-size: 100%;
 
     @include vp--1600 {
         width: 15px;
         height: 15px;
     }
+}
+
+.priceBlock.RUB::before {
+    mask-image: url(/currencies/ruble.svg);
+    mask-size: 90%;
+}
+
+.priceBlock.TON::before {
+    mask-image: url(/currencies/ton.svg);
 }
 
 .price {
