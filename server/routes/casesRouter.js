@@ -4,6 +4,6 @@ const casesRouter = express.Router();
 
 casesRouter.get('/', casesController.getCases);
 casesRouter.get('/:category/:translit_name', casesController.getCase)
-casesRouter.get('/:category/:translit_name/open', casesController.caseOpen)
+casesRouter.post('/:category/:translit_name/open', casesController.caseOpen)
 
 module.exports = casesRouter;

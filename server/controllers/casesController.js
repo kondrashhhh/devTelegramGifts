@@ -26,6 +26,16 @@ exports.getCase = (req, res) => {
 
 exports.caseOpen = (req, res) => {
   const box = findCase(caseData, req);
+  const count = req.body.count;
+
+  if (count > 1) {
+    const resultArray = [];
+    for (i = 0; i < count; i++) {
+      resultArray.push(box.case.open());
+    }
+    res.json(resultArray);
+  }
+
   const result = box.case.open()
   res.json({ ...result, "win": true });
 };
