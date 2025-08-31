@@ -1,12 +1,7 @@
 import { create } from 'zustand';
-import Ruble from "./currencies/ruble.svg";
-import Star from "./currencies/star.svg";
-import Ton from "./currencies/ton.svg";
 
-export const useGlobalStore = create((set, get) => ({
-  isAuthorized: false,
-  userData: {},
-  currency: "RUB",
+export const useCurrencyStore = create((set, get) => ({
+  currency: "STR",
   balanceRub: 1000,
   currentTonRate: 1000,
 
@@ -38,13 +33,13 @@ export const useGlobalStore = create((set, get) => ({
   },
 }));
 
-export const useGlobalGetCurrency = () => {
+export const useGetCurrency = () => {
   return {
-    currency: useGlobalStore((state) => state.currency),
-    calculate: useGlobalStore((state) => state.calculate),
-    updateTonRate: useGlobalStore((state) => state.updateTonRate)
+    currency: useCurrencyStore((state) => state.currency),
+    calculate: useCurrencyStore((state) => state.calculate),
+    updateTonRate: useCurrencyStore((state) => state.updateTonRate)
   };
 };
 
-export const useGlobalSetCurrency = () =>
-  useGlobalStore((state) => state.setCurrency);
+export const useSetCurrency = () =>
+  useCurrencyStore((state) => state.setCurrency);

@@ -1,0 +1,31 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: calcVW(5, 1440);
+    min-height: calcVW(44, 1440);
+    color: #FFFFFF;
+    font-size: calcVW(12, 1440);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background-color: #000000;
+    border-radius: calcVW(9, 1440);
+    border: 2px solid rgba($color: #FFFFFF, $alpha: 0.12);
+    padding: calcVW(7, 1440) calcVW(16, 1440);
+    transition: all .2s;
+
+    @include vp--1600 {
+        gap: 10px;
+        min-height: 59px;
+        font-size: 14px;
+        border-radius: 9px;
+        padding: 14px 32px;
+    }
+
+    @include vp--680 {
+        min-height: 20px;
+        padding: 15px;
+    }
+}

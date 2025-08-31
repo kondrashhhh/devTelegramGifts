@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export const useCaseStore = create((set) => ({
+export const useCaseStore = create((set, get) => ({
   isOpening: false,
   showWinScreen: false,
   isDisabled: false,
@@ -62,6 +62,40 @@ export const useCaseStore = create((set) => ({
     }
   },
 
+  sellItem: (itemIndex) => {
+    const { itemData, setWinScreen } = get();
+    
+    if (Array.isArray(itemData) && itemData.length > 1) {
+      const newItemData = [...itemData];
+      newItemData.splice(itemIndex, 1);
+      set({ itemData: newItemData });
+    } else {
+      setWinScreen(false);
+    }
+  },
+
+  saveItem: (itemIndex) => {
+    const { itemData, setWinScreen } = get();
+    
+    if (Array.isArray(itemData) && itemData.length > 1) {
+      const newItemData = [...itemData];
+      newItemData.splice(itemIndex, 1);
+      set({ itemData: newItemData });
+    } else {
+      setWinScreen(false);
+    }
+  },
+
+  saveAllItems: () => {
+    const { itemData } = get();
+    if (Array.isArray(itemData)) {
+      itemData.forEach((_, index) => {
+        get().saveItem(index); 
+      });
+    }
+    set({ itemData: {} });
+  },
+
   setDoubleChance: (value) => set({ doubleChance: value }),
   setOpening: (value) => set({ isOpening: value }),
   setCount: (value) => set({ count: value }),
@@ -72,6 +106,15 @@ export const useWinScreen = () => ({
   showWinScreen: useCaseStore((state) => state.showWinScreen),
   setWinScreen: useCaseStore((state) => state.setWinScreen)
 });
+
+export const useItemSell = () => 
+  useCaseStore((state) => state.sellItem);
+
+export const useItemSave = () => 
+  useCaseStore((state) => state.saveItem);
+
+export const useCaseSaveAll = () => 
+  useCaseStore((state) => state.saveAllItems);
 
 export const useCaseDisabled = () => 
   useCaseStore((state) => state.isDisabled);

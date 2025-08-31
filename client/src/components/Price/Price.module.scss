@@ -2,43 +2,69 @@
     display: flex;
     align-items: center;
     gap: 5px;
-}
 
-.priceBlock::before {
-    content: "";
-    display: block;
-    width: calcVW(15, 1440);
-    height: calcVW(15, 1440);
-    background-color: #FFC400;
-    mask-repeat: no-repeat;
-    mask-image: url(/currencies/star.svg);
-    mask-size: 100%;
+    &::before {
+        content: "";
+        display: block;
+        width: calcVW(15, 1440);
+        height: calcVW(15, 1440);
+        background-color: #FFC400;
+        mask-repeat: no-repeat;
+        mask-image: url(/currencies/star.svg);
+        mask-size: 100%;
 
-    @include vp--1600 {
-        width: 15px;
-        height: 15px;
+        @include vp--1600 {
+            width: 15px;
+            height: 15px;
+        }
     }
-}
 
-.priceBlock.RUB::before {
-    mask-image: url(/currencies/ruble.svg);
-    mask-size: 90%;
-}
-
-.priceBlock.TON::before {
-    mask-image: url(/currencies/ton.svg);
-}
-
-.price {
-    font-size: calcVW(18, 1440);
-    font-weight: bold;
-    color: #FFC400;
-
-    @include vp--1600 {
-        font-size: 18px;
+    &.RUB::before {
+        mask-image: url(/currencies/ruble.svg);
+        mask-size: 90%;
     }
-}
 
-.disabled {
-    opacity: 0.4;
+    &.TON::before {
+        mask-image: url(/currencies/ton.svg);
+    }
+
+    &.disabled {
+        opacity: 0.4;
+    }
+
+    &.itemPrice {
+        gap: calcVW(7, 1440);
+
+        @include vp--1600 {
+            gap: 7px;
+        }
+
+        .price {
+            color: #000000;
+            font-size: calcVW(14, 1440);
+
+            @include vp--1280 {
+                font-size: 16px;
+            }
+        }
+
+        &::before {
+            background-color: #000000;
+        }
+
+        &.RUB::before {
+            mask-size: 70%;
+            mask-position: center;
+        }
+    }
+
+    .price {
+        font-size: calcVW(18, 1440);
+        font-weight: bold;
+        color: #FFC400;
+
+        @include vp--1600 {
+            font-size: 18px;
+        }
+    }
 }

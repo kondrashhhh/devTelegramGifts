@@ -3,22 +3,59 @@
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    margin-top: 50px;
 }
 
-.itemImage tgs-player, .itemImage img{
-    max-width: calcVW(150, 1440);
-    max-height: calcVW(150, 1440);
-    min-height: calcVW(150, 1440);
+.itemImage {
+    position: relative;
+
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all .3s;
+        width: calcVW(53, 1440);
+        height: calcVW(53, 1440);
+        background-color: #0098EA;
+        filter: blur(35.5px);
+        z-index: -1;
+    }
+
+    &:hover {
+        &::before {
+            transform: translate(-50%, -50%) scale(1.15);
+            transition: all .2s;
+        }
+    }
+
+    tgs-player, img {
+        max-width: calcVW(93, 1440);
+        max-height: calcVW(93, 1440);
+        min-height: calcVW(93, 1440);
+
+        @include vp--1600 {
+            max-width: 93px;
+            max-height: 93px;
+            min-height: 93px;
+        }
+    }
+}
+
+.name {
+    font-size: calcVW(16, 1440);
+    font-weight: bold;
 
     @include vp--1600 {
-        max-width: 150px;
-        max-height: 150px;
-        min-height: 150px;
+        font-size: 16px;
     }
 }
 
 .buttons {
     display: flex;
     align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    gap: 5px;
 }

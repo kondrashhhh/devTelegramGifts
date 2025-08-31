@@ -21,7 +21,7 @@ exports.getCase = (req, res) => {
     });
   }
 
-  res.json(result.case);
+  return res.json(result.case);
 };
 
 exports.caseOpen = (req, res) => {
@@ -33,9 +33,9 @@ exports.caseOpen = (req, res) => {
     for (i = 0; i < count; i++) {
       resultArray.push(box.case.open());
     }
-    res.json(resultArray);
+    return res.json(resultArray);
   }
 
   const result = box.case.open()
-  res.json({ ...result, "win": true });
+  return res.json({ ...result, "win": true });
 };

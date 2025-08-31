@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useGlobalGetCurrency } from "./stores/useGlobalStore";
+import { useGetCurrency } from "./stores/useCurrencyStore";
 import { FilterProvider } from "./context/FilterContext";
 import MainLayout from './layouts/MainLayout/MainLayout'
 import { Home } from "./pages/Home/Home";
@@ -17,7 +17,7 @@ const loadTgsPlayer = async () => {
 };
 
 function App() {
-    const { updateTonRate } = useGlobalGetCurrency();
+    const { updateTonRate } = useGetCurrency();
 
   useEffect(() => {
     updateTonRate(); 

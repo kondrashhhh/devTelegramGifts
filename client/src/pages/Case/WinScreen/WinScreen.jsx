@@ -15,8 +15,8 @@ export const WinScreen = () => {
     <div className={styles.screen}>
       <Flex className={styles.gap}>
         {Array.isArray(itemData) ? (
-          itemData.map((item) => (
-            <Item item={item} key={item.id} />
+          itemData.map((item, index) => (
+            <Item item={item} key={item.id} index={index} />
           ))
         ) : (
           <Item item={itemData} />

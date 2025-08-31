@@ -1,10 +1,16 @@
-import React from 'react'
-import { Price } from '@/components/Price/Price';
-import { useWinScreen } from '@/stores/useCaseStore';
+import React, { useEffect } from 'react'
+import { useItemSave, useItemSell } from '@/stores/useCaseStore';
+import { SellButton } from '../../Buttons/SellButton/SellButton';
+import { InventoryButton } from '../../Buttons/InventoryButton/InventoryButton';
 import styles from "./Item.module.scss"
 
-export const Item = ({ item }) => {
-  const { setWinScreen } = useWinScreen();
+export const Item = ({ item, index }) => {
+  const sell = useItemSell();
+  const save = useItemSave();
+
+  useEffect(() => {
+    console.log(item);
+  }, [])
 
   return (
     <div className={styles.item}>
@@ -21,10 +27,12 @@ export const Item = ({ item }) => {
                 <img src={item.image} alt={item.name} />
             )}
         </div>
-        <Price value={item.price} disabled={false}/>
+        <div className={styles.name}>
+            <span>{item.name}</span>
+        </div>
         <div className={styles.buttons}>
-            <button onClick={() => setWinScreen(false)}>Продать</button>
-            <button onClick={() => setWinScreen(false)}>В инвентарь</button>
+            <SellButton price={item.price} onClick={() => sell(index)}/>
+            <InventoryButton onClick={() => save(index)}/>
         </div>
     </div>
   )

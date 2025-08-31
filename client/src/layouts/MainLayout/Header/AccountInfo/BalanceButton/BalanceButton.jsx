@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useGlobalGetCurrency, useGlobalSetCurrency } from '@/stores/useGlobalStore';
+import { useGetCurrency, useSetCurrency } from '@/stores/useCurrencyStore';
 import { useMediaQuery } from 'react-responsive';
 import { values } from './values';
 import styles from './BalanceButton.module.scss';
 
 export default function BalanceButton() {
-  const setGlobalCurrency = useGlobalSetCurrency();
-  const { calculate } = useGlobalGetCurrency();
+  const setGlobalCurrency = useSetCurrency();
+  const { calculate } = useGetCurrency();
 
   const [isOpen, setIsOpen] = useState(false);
   const [currencies, setCurrencies] = useState(values);
