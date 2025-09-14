@@ -4,4 +4,6 @@ export const useUserStore = create(() => ({
   isAuthorized: false,
   userData: {},
   userInventory: [],
+
+  
 }));
