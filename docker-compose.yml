@@ -32,20 +32,20 @@ services:
     networks:
       - app-network
 
-    server:
-      build: 
-        context: ./proxy
-        dockerfile: Dockerfile
-      ports:
-        - "8080:8080"
-      environment:
-        - NODE_ENV=production
-      restart: unless-stopped
-      volumes:
-        - ./proxy:/app
-        - /app/node_modules
-      networks:
-        - app-network
+  proxy: 
+    build: 
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    volumes:
+      - ./proxy:/app
+      - /app/node_modules
+    networks:
+      - app-network
 
 networks:
   app-network:
