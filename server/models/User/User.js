@@ -7,10 +7,6 @@ class User {
   addItem(item) {
     this.itemsData.unshift(item);
   }
-
-  addItem(item) {
-    this.itemsData.unshift(item);
-  }
 }
 
 module.exports = User;
