@@ -1,5 +1,6 @@
 const allowedOrigins = [
   'http://localhost:5173',
+  'https://waffenstars.ru',
   'https://dev-telegram-gifts.ru',
   'https://images.giftsbattle.com'
 ];
