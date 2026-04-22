@@ -25,7 +25,7 @@ services:
       - "443:443"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
-      - ./client/dist:/usr/share/nginx/html  # Только для разработки!
+      # - ./client/dist:/usr/share/nginx/html  # Только для разработки!
     depends_on:
       - server
     restart: unless-stopped
