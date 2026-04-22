@@ -14,7 +14,7 @@ export const useCaseStore = create((set, get) => ({
     set({ loading: true });
     try {
       const response = await fetch(
-        `http://localhost:3000/api/cases/${category}/${translit_name}`,
+        `https://waffenstars.ru/api/cases/${category}/${translit_name}`,
         {
           credentials: 'include',
           headers: {
@@ -42,7 +42,7 @@ export const useCaseStore = create((set, get) => ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/cases/${category}/${translit_name}/open`,
+        `https://waffenstars.ru/api/cases/${category}/${translit_name}/open`,
         {
           method: "POST",
           credentials: 'include',
