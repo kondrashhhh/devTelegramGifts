@@ -56,7 +56,7 @@ export default function Header() {
           ))  :  (
             <>
               <ContainerFluid className={`log-parent ${styles.flex}`}>
-                {!userData ? (
+                {userData ? (
                   <AccountInfo />
                 )          : (
                   <LogBtn />
