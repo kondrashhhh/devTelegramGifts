@@ -27,7 +27,7 @@ export default function Header() {
     <header>
       <div className={styles.wrapper}>
         {!isSmallScreen ? (
-          !userData ? (
+          userData ? (
             <ContainerFluid className={`log-parent ${styles.flex}`}>
               <Logo />
               <Online />
