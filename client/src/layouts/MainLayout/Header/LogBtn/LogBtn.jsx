@@ -5,7 +5,7 @@ import axios from 'axios';
 export default function LogBtn() {
   const { isAuthenticated, userData, login } = useContext(AuthContext);
   const BOT_NAME = 'devtelegramgiftsbot';
-  const SERVER_URL = 'https://dev-telegram-gifts.ru';
+  const SERVER_URL = 'https://waffenstars.ru';
   const AUTH_ENDPOINT = `${SERVER_URL}/api/telegram-auth`;
 
   const handleWidgetLoad = useCallback(() => {
