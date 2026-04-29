@@ -9,12 +9,10 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - NODE_OPTIONS="--max-old-space-size=2048"
     restart: unless-stopped
-    # Только для разработки - закомментируйте в production
-    # volumes:
-    #   - ./server:/app
-    #   - /app/node_modules
+    volumes:
+      - ./server:/app
+      - /app/node_modules
     networks:
       - app-network
 
@@ -22,25 +20,22 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-      args:
-        BUILDKIT_INLINE_CACHE: 1
     ports:
-      - "8081:80"   # Меняем на другой порт, чтобы не было конфликта
-      # - "443:443"  # Комментируем, если нет SSL
-    # Убираем volume монтирование в production - это замедляет сборку!
-    # volumes:
-    #   - /etc/letsencrypt:/etc/letsencrypt:ro  # Оставить только если есть SSL
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - server
     restart: unless-stopped
     networks:
       - app-network
-    # Добавляем ресурсы для сборки
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 4G
+    # УДАЛИТЕ или закомментируйте эту секцию:
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '2'
+    #       memory: 4G
 
   proxy: 
     build: 
@@ -51,14 +46,11 @@ services:
     environment:
       - NODE_ENV=production
     restart: unless-stopped
-    # Только для разработки
-    # volumes:
-    #   - ./proxy:/app
-    #   - /app/node_modules
+    volumes:
+      - ./proxy:/app
+      - /app/node_modules
     networks:
       - app-network
-    depends_on:
-      - server
 
 networks:
   app-network:
