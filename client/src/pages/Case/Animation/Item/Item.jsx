@@ -13,7 +13,7 @@ export const Item = ({ item }) => {
             { item.image.slice(-3) === "tgs" ? (
                 <tgs-player
                     mode="normal"
-                    src={`http://localhost:8080/${item.image}`}
+                    src={`${item.image}`}
                     style={{
                         width: '100%',
                         height: '100%',
