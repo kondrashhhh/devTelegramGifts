@@ -1,27 +1,14 @@
 FROM node:20-alpine AS builder
-
-WORKDIR /app
-
+WORKDIR /app 
 COPY package*.json ./
-COPY . .
-
 RUN npm install
+COPY . .
 RUN npm run build
 
-# Используем Node.js сервер вместо Nginx
-FROM node:20-alpine
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-WORKDIR /app
-
-# Копируем собранные файлы и зависимости
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
-
-# Устанавливаем простой сервер для статики
-RUN npm install -g serve
-
+HEALTHCHECK --interval=30s --timeout=3s CMD curl -f https://waffenstars.ru/ || exit 1
 EXPOSE 5173
-
-# Запускаем serve на 5173 порту
-CMD ["serve", "-s", "dist", "-l", "5173"]
+CMD ["nginx", "-g", "daemon off;"]
