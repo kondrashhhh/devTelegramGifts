@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   server:
     build: 
@@ -21,21 +19,18 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - "5173:5173"  # Порт клиента, а не 80/443
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URL=http://server:3000  # Связь с сервером
     depends_on:
       - server
     restart: unless-stopped
     networks:
       - app-network
-    # УДАЛИТЕ или закомментируйте эту секцию:
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpus: '2'
-    #       memory: 4G
+    # Убираем volumes для production
+    # volumes:
+    #   - /etc/letsencrypt:/etc/letsencrypt:ro
 
   proxy: 
     build: 
