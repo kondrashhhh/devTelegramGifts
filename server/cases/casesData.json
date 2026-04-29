@@ -1,17 +1,23 @@
 [
     {
-        "translit_name": "Besplatnyi_za_promokod",
-        "name": "Бесплатный за промокод",
-        "name_eng": "Free with promo code",
-        "price": 245,
+        "translit_name": "Besplatnyi_keis",
+        "name": "Бесплатный кейс",
+        "name_eng": "Free case",
+        "price": 74.0,
         "tickets_price": 0,
         "case_free": true,
         "case_for_tickets": false,
-        "case_for_promo": true,
+        "case_for_promo": false,
+        "case_bp": false,
+        "is_special_bp": false,
+        "percent_special_bp": 0,
+        "is_new_case": false,
+        "is_limit_case": false,
+        "open_limit": -1,
         "user_activeted_promo": null,
-        "image": "https://images.giftsbattle.com/case/%D0%B7%D0%B0_%D0%BF%D1%80%D0%BE%D0%BC%D0%BE%D0%BA%D0%BE%D0%B4%D1%8B_2.png",
-        "conditions_desc": "<p>Пополните баланс на 500 звезд</p>",
-        "conditions_desc_eng": "<p>Top up your balance with 500 stars</p>",
+        "image": "https://images.giftsbattle.com/case/giftsbattle_za_zadanie_500x500.png",
+        "conditions_desc": "Пригласите 5 друзей <p>\r\n  Подпишитесь на:\r\n  <a href=\"https://t.me/GiftsBattles\"\r\n     target=\"_blank\"\r\n     rel=\"noopener noreferrer\"\r\n     onclick=\"\r\n       if (Telegram.WebApp && Telegram.WebApp.initData) {\r\n         Telegram.WebApp.openTelegramLink('https://t.me/GiftsBattles');\r\n         return false;\r\n       }\r\n     \">\r\n    @GiftsBattles\r\n  </a>\r\n</p>",
+        "conditions_desc_eng": "Invite 5 friends <p>\r\n  Subscribe:\r\n  <a href=\"https://t.me/GiftsBattles\"\r\n     target=\"_blank\"\r\n     rel=\"noopener noreferrer\"\r\n     onclick=\"\r\n       if (Telegram.WebApp && Telegram.WebApp.initData) {\r\n         Telegram.WebApp.openTelegramLink('https://t.me/GiftsBattles');\r\n         return false;\r\n       }\r\n     \">\r\n    @GiftsBattles\r\n  </a>\r\n</p>",
         "category": {
             "category_id": "Fi2qyoOjP",
             "name": "Бесплатные Кейсы",
@@ -19,186 +25,746 @@
         },
         "items": [
             {
-                "item_id": "Wo3AZPG9q",
-                "name": "Durov's Cap Dipper",
+                "item_id": "Oc0qINo9m",
+                "name": "Durov's Cap Autumn",
                 "type": "nftgift",
-                "price": 187000.0,
-                "price_ton": 935.0,
-                "image": "https://images.giftsbattle.com/item/Dipper.tgs",
-                "rarity_category": null,
-                "percent": 0.006635195295195586
+                "duration": 0,
+                "price": 75000.0,
+                "price_ton": 750.0,
+                "image": "https://images.giftsbattle.com/item/Autumn.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.004212236625928875,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "On5vrOk6b",
-                "name": "Vintage Cigar The Gentleman",
+                "item_id": "Vp0zHYFHx",
+                "name": "Precious Peach Cold Iron",
                 "type": "nftgift",
-                "price": 19800.0,
+                "duration": 0,
+                "price": 50000.0,
+                "price_ton": 500.0,
+                "image": "https://images.giftsbattle.com/item/b883a64f9811479691f9d6701e25920f_Precious_Peach_Cold_Iron.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.006318354938893312,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "To5tvOiOm",
+                "name": "Loot Bag (Random)",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 13189.0,
+                "price_ton": 131.89,
+                "image": "https://images.giftsbattle.com/item/Menthol.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.023953123583642856,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Bi7XCc3eS",
+                "name": "Desk Calendar Payday",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 10500.0,
+                "price_ton": 105.0,
+                "image": "https://images.giftsbattle.com/item/10eb14785129487ab16bbf540319bdc9_Desk_Calendar_Payday.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.030087404470920537,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Rm8N7EV3h",
+                "name": "Mood Pack Pepe Unleashed",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 9900.0,
                 "price_ton": 99.0,
-                "image": "https://images.giftsbattle.com/item/The_Gentleman.tgs",
-                "rarity_category": null,
-                "percent": 0.06266573334351387
+                "image": "https://images.giftsbattle.com/item/bc0dc4be01a94ea8b8bbb29fa55b5bcd_Mood_Pack_Pepe_Unleashed.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.031910883529764206,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Lr7MGmXeI",
-                "name": "Record Player Emocore",
+                "item_id": "Jq3UUvJKV",
+                "name": "Swiss Watch The Original",
                 "type": "nftgift",
-                "price": 7920.0,
-                "price_ton": 39.6,
-                "image": "https://images.giftsbattle.com/item/Emocore.tgs",
-                "rarity_category": null,
-                "percent": 0.15666433335878466
+                "duration": 0,
+                "price": 9249.0,
+                "price_ton": 92.49,
+                "image": "https://images.giftsbattle.com/item/6549bacc2adf48deb72f681bf36d8056_Swiss_Watch_The_Original.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.03415696258456759,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Dl7tP5C3h",
-                "name": "Diamond Ring Nocturne",
+                "item_id": "Og9hcvSWN",
+                "name": "Victory Medal High Roller",
                 "type": "nftgift",
-                "price": 7480.0,
-                "price_ton": 37.4,
-                "image": "https://images.giftsbattle.com/item/Nocturne.tgs",
-                "rarity_category": null,
-                "percent": 0.16587988237988965
+                "duration": 0,
+                "price": 7000.0,
+                "price_ton": 70.0,
+                "image": "https://images.giftsbattle.com/item/41ee92465d36462cbabed2850df447a1_Victory_Medal_High_Roller.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.0451311067063808,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Gy2EoDMca",
-                "name": "Jester Hat Hellscape",
+                "item_id": "Id0JvZxNZ",
+                "name": "Gem Signet (Random)",
                 "type": "nftgift",
-                "price": 5390.0,
-                "price_ton": 26.95,
-                "image": "https://images.giftsbattle.com/item/Hellscape_1.tgs",
-                "rarity_category": null,
-                "percent": 0.2302006530986224
+                "duration": 0,
+                "price": 5902.0,
+                "price_ton": 59.02,
+                "image": "https://images.giftsbattle.com/item/Feral_Rage.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.053527236012312025,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Ee70JtyQJ",
-                "name": "Easter Egg Boiled Pepe",
+                "item_id": "Ow9gMZLwX",
+                "name": "Pool Float Pool Pepe",
                 "type": "nftgift",
-                "price": 5236.0,
-                "price_ton": 26.18,
-                "image": "https://images.giftsbattle.com/item/Boiled_Pepe.tgs",
-                "rarity_category": null,
-                "percent": 0.23697126054269949
+                "duration": 0,
+                "price": 5000.0,
+                "price_ton": 50.0,
+                "image": "https://images.giftsbattle.com/item/656c613aa19745fbb4193ad1cddfc888_Pool_Float_Pool_Pepe.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.06318354938893311,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Mi4gxu6xs",
-                "name": "Sakura Flower Snowdrop",
+                "item_id": "Uk1jxYL0e",
+                "name": "Toy Bear Cowboy",
                 "type": "nftgift",
-                "price": 2200.0,
-                "price_ton": 11.0,
-                "image": "https://images.giftsbattle.com/item/Snowdrop.tgs",
-                "rarity_category": null,
-                "percent": 0.5639916000916249
+                "duration": 0,
+                "price": 4147.0,
+                "price_ton": 41.47,
+                "image": "https://images.giftsbattle.com/item/Cowboy.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.07617982805514,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Xn2K8Sc6R",
-                "name": "Lol Pop Mortal Sin",
+                "item_id": "Jc2ujQfvo",
+                "name": "Voodoo Doll Terminator",
                 "type": "nftgift",
-                "price": 1592.8,
-                "price_ton": 7.96,
-                "image": "https://images.giftsbattle.com/item/Mortal_Sin.tgs",
-                "rarity_category": null,
-                "percent": 0.7793853770110392
+                "duration": 0,
+                "price": 3700.0,
+                "price_ton": 37.0,
+                "image": "https://images.giftsbattle.com/item/71ee94f9889f4fb3b9009e7acecb1d99_Voodoo_Doll_Terminator.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.08538317484990962,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Pf80gB7z4",
-                "name": "Evil Eye Deep Purple",
+                "item_id": "Bx7riiJ3x",
+                "name": "Mood Pack Net Worth",
                 "type": "nftgift",
-                "price": 1353.0,
-                "price_ton": 6.77,
-                "image": "https://images.giftsbattle.com/item/Deep_Purple.tgs",
-                "rarity_category": null,
-                "percent": 0.9163822158061852
+                "duration": 0,
+                "price": 3600.0,
+                "price_ton": 36.0,
+                "image": "https://images.giftsbattle.com/item/74be0fec056d4d70aa2c7db201079954_Mood_Pack_Net_Worth.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.08775492970685156,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Le0LRzDIe",
-                "name": "Tama Gadget (Random)",
+                "item_id": "Dc8k2DmZb",
+                "name": "Jolly Chimp La Baboon",
                 "type": "nftgift",
-                "price": 792.0,
-                "price_ton": 3.96,
-                "image": "https://images.giftsbattle.com/item/Lime_Shock.tgs",
-                "rarity_category": null,
-                "percent": 1.5666433335878467
+                "duration": 0,
+                "price": 3500.0,
+                "price_ton": 35.0,
+                "image": "https://images.giftsbattle.com/item/LaBaboon_new.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.0902622134127616,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Tp01OzrJ9",
+                "name": "Happy Brownie Cat Scat",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 1900.0,
+                "price_ton": 19.0,
+                "image": "https://images.giftsbattle.com/item/2d4428f8d77a443e80e26e1f47eba75c_Happy_Brownie_Cat_Scat.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.16627249839192926,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Fo6oQLXcQ",
+                "name": "Pool Float Baywatch",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 1699.0,
+                "price_ton": 16.99,
+                "image": "https://images.giftsbattle.com/item/8dedecd0174e48b8b50855478c736a8b_Pool_Float_Baywatch.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.18594334723052716,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Py0znvOeB",
+                "name": "Mood Pack Battle Royale",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 1650.0,
+                "price_ton": 16.5,
+                "image": "https://images.giftsbattle.com/item/3e3300ee607c47d8a2f7f408c35bfc5d_Mood_Pack_Battle_Royale.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.1914653011785852,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Wm454GW9e",
+                "name": "Input Key Money Printer",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 1326.0,
+                "price_ton": 13.26,
+                "image": "https://images.giftsbattle.com/item/cea841c4127645b79edc9449d7c62017_Input_Key_Money_Printer.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.2382486779371535,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Tr2CFtuLb",
+                "name": "Desk Calendar Helios",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 799.0,
+                "price_ton": 7.99,
+                "image": "https://images.giftsbattle.com/item/321a0dfa01d142f297bbe527360e272a_Desk_Calendar_Helios.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.39539142295953145,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Vc9LAFvrY",
+                "name": "Ice Cream Kraken",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 600.0,
+                "price_ton": 6.0,
+                "image": "https://images.giftsbattle.com/item/c067e0811c8746afae79ad2949e3d6d0_Ice_Cream_Kraken.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.5265295782411092,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Eo5rU6jjq",
+                "name": "Clover Pin Matrix",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 515.0,
+                "price_ton": 5.15,
+                "image": "https://images.giftsbattle.com/item/f919dee692c8450abae352b9063828e1_Clover_Pin_Matrix.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.6134325183391565,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Qx9ueB4dp",
+                "name": "Faith Amulet (Random)",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 457.0,
+                "price_ton": 4.57,
+                "image": "https://images.giftsbattle.com/item/9b50323ecf2f4df784ddfbf1a7188947_Faith_Amulet_Sunset_Gem.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.6912860983471895,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Uy6xmdZtW",
+                "name": "Spring Basket (Random)",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 444.0,
+                "price_ton": 4.44,
+                "image": "https://images.giftsbattle.com/item/698af1233624454a85d977464614305f_Spring_Basket_Litter_Box.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.7115264570825801,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Bs40MY5AZ",
+                "name": "Pool Float Stretching",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 405.0,
+                "price_ton": 4.05,
+                "image": "https://images.giftsbattle.com/item/b00dd631c2154ed9bba2696355d4f2f1_Pool_Float_Stretching.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.7800438196164583,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Mq5vSxoP7",
+                "name": "Money Pot Super Pixel",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 400.0,
+                "price_ton": 4.0,
+                "image": "https://images.giftsbattle.com/item/cac47098bb4c4762b61124e508b677f4_Money_Pot_Super_Pixel.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.7897943673616639,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Tl8H0hq44",
+                "name": "Mood Pack Turtle Shell",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 400.0,
+                "price_ton": 4.0,
+                "image": "https://images.giftsbattle.com/item/723f85b7a4e34d09a49b8aadb5b05fad_Mood_Pack_Turtle_Shell.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.7897943673616639,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
                 "item_id": "Yd0uD34SQ",
                 "name": "Lol Pop (Random)",
                 "type": "nftgift",
-                "price": 440.0,
-                "price_ton": 2.2,
+                "duration": 0,
+                "price": 379.0,
+                "price_ton": 3.79,
                 "image": "https://images.giftsbattle.com/item/Sugar_Free.tgs",
-                "rarity_category": null,
-                "percent": 2.819958000458124
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.8335560605400147,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Fx2ovzTTD",
+                "name": "Mood Pack (Random)",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 375.0,
+                "price_ton": 3.75,
+                "image": "https://images.giftsbattle.com/item/3e345f6dd679430ba2d846963ed46982_Mood_Pack_VIP_Pass.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.842447325185775,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Dl80AulTb",
+                "name": "Victory Medal Inventor",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 355.0,
+                "price_ton": 3.55,
+                "image": "https://images.giftsbattle.com/item/3fb68475c61a412e8a9007c3b040f604_Victory_Medal_Inventor.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 0.8899091463230018,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Rq8Vqv4FB",
+                "name": "Instant Ramen (Random)",
+                "type": "nftgift",
+                "duration": 0,
+                "price": 272.0,
+                "price_ton": 2.72,
+                "image": "https://images.giftsbattle.com/item/276ba2a02c5a4ab2b3baa6d1bf828b79_Instant_Ramen_Ramen_Snack.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 1.1614623049436235,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
                 "item_id": "Ft0qX0zu1",
                 "name": "Candy Cane (Random)",
                 "type": "nftgift",
-                "price": 440.0,
-                "price_ton": 2.2,
+                "duration": 0,
+                "price": 263.0,
+                "price_ton": 2.63,
                 "image": "https://images.giftsbattle.com/item/Pink_Mango.tgs",
-                "rarity_category": null,
-                "percent": 2.819958000458124
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 1.2012081632877019,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Qo16KEh8X",
-                "name": "Desk Calendar Eco Friendly",
-                "type": "nftgift",
-                "price": 440.0,
-                "price_ton": 2.2,
-                "image": "https://images.giftsbattle.com/item/Eco_Friendly.tgs",
-                "rarity_category": null,
-                "percent": 2.819958000458124
+                "item_id": "Yr7I3MCAr",
+                "name": "Plush Pepe (1 day)",
+                "type": "rentnft",
+                "duration": 1,
+                "price": 170.0,
+                "price_ton": 1.7,
+                "image": "https://images.giftsbattle.com/item/bf1956c22b34479597fbc00b00a33c5b_Plush_Pepe_Sunset.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 1.8583396879097978,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Cb0n9xlbt",
-                "name": "Cup",
-                "type": "gift",
-                "price": 100.0,
-                "price_ton": 0.5,
-                "image": "https://images.giftsbattle.com/item/kubok.png",
-                "rarity_category": null,
-                "percent": 12.407815202015746
+                "item_id": "Ve7aLU7qB",
+                "name": "Durov’s Cap (3 days)",
+                "type": "rentnft",
+                "duration": 3,
+                "price": 150.0,
+                "price_ton": 1.5,
+                "image": "https://images.giftsbattle.com/item/bfb53783183a496e9f79e95d6508f217_Durovs_Cap_Redrum.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 2.106118312964437,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Yn9uXBPZl",
-                "name": "Ring",
-                "type": "gift",
-                "price": 100.0,
-                "price_ton": 0.5,
-                "image": "https://images.giftsbattle.com/item/ring.png",
-                "rarity_category": null,
-                "percent": 12.407815202015746
+                "item_id": "Jf23w90g0",
+                "name": "Heart Locket (3 day)",
+                "type": "rentnft",
+                "duration": 3,
+                "price": 150.0,
+                "price_ton": 1.5,
+                "image": "https://images.giftsbattle.com/item/86456e5671bf43a38e225f9d637febc4_Heart_Locket_Comic_Book.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 2.106118312964437,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Mr1tUisfH",
-                "name": "Diamond",
-                "type": "gift",
-                "price": 100.0,
-                "price_ton": 0.5,
-                "image": "https://images.giftsbattle.com/item/diamond.png",
-                "rarity_category": null,
-                "percent": 12.407815202015746
+                "item_id": "Cr9PIbnDU",
+                "name": "Precious Peach (7 days)",
+                "type": "rentnft",
+                "duration": 7,
+                "price": 140.0,
+                "price_ton": 1.4,
+                "image": "https://images.giftsbattle.com/item/c65ca07b7c794277a527c64959f1a400_Precious_Peach_Pure_Peach.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 2.2565553353190397,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
                 "item_id": "Bl7QdahUM",
                 "name": "Flowers",
                 "type": "gift",
+                "duration": 0,
                 "price": 50.0,
-                "price_ton": 0.25,
+                "price_ton": 0.5,
                 "image": "https://images.giftsbattle.com/item/flowers.png",
-                "rarity_category": null,
-                "percent": 24.81563040403149
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 6.318354938893311,
+                "is_manual_processing": false,
+                "is_garant": false
             },
             {
-                "item_id": "Kz2yjVqI1",
-                "name": "Rocket",
-                "type": "gift",
+                "item_id": "Pr27Kqq8d",
+                "name": "Heart Locket (1 day)",
+                "type": "rentnft",
+                "duration": 1,
                 "price": 50.0,
+                "price_ton": 0.5,
+                "image": "https://images.giftsbattle.com/item/89eb583cd4944359b64f2f9aed476a04_Heart_Locket_Stone_Flower.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 6.318354938893311,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Ds1AjQXh6",
+                "name": "Precious Peach (2 days)",
+                "type": "rentnft",
+                "duration": 2,
+                "price": 50.0,
+                "price_ton": 0.5,
+                "image": "https://images.giftsbattle.com/item/ef19079ea6b343cbad2255d137cce21e_Precious_Peach_Yin_Yang.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 6.318354938893311,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Ts5LbXKLW",
+                "name": "Durov’s Cap (1 day)",
+                "type": "rentnft",
+                "duration": 1,
+                "price": 50.0,
+                "price_ton": 0.5,
+                "image": "https://images.giftsbattle.com/item/7ffdf456448d49f18cdf5bc4b1ca4cd1_Durovs_Cap_Mossy.tgs",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 6.318354938893311,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Il4uMb9Da",
+                "name": "Gift",
+                "type": "gift",
+                "duration": 0,
+                "price": 25.0,
                 "price_ton": 0.25,
-                "image": "https://images.giftsbattle.com/item/rocket.png",
-                "rarity_category": null,
-                "percent": 24.81563040403149
+                "image": "https://images.giftsbattle.com/item/000_1.png",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 12.636709877786622,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "Sp4LMq6Hl",
+                "name": "Bear",
+                "type": "gift",
+                "duration": 0,
+                "price": 15.0,
+                "price_ton": 0.15,
+                "image": "https://images.giftsbattle.com/item/000_2.png",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 21.061183129644377,
+                "is_manual_processing": false,
+                "is_garant": false
+            },
+            {
+                "item_id": "At5L4OYD2",
+                "name": "Heart",
+                "type": "gift",
+                "duration": 0,
+                "price": 15.0,
+                "price_ton": 0.15,
+                "image": "https://images.giftsbattle.com/item/000_bZT487T.png",
+                "rarity_category": {
+                    "rarity_id": null,
+                    "name": null,
+                    "rarity_color": null,
+                    "sequence": null
+                },
+                "percent": 21.061183129644377,
+                "is_manual_processing": false,
+                "is_garant": false
             }
-        ]
+        ],
+        "garant_attempts": null,
+        "garant_every": null
     },
     {
         "translit_name": "Besplatnyi_za_popolnenie_ot_1000",
