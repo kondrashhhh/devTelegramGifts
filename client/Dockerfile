@@ -1,31 +1,27 @@
-# Стадия 1: Установка зависимостей
-FROM node:20-alpine AS deps
-
-WORKDIR /app
-COPY package*.json ./
-
-# Устанавливаем все зависимости
-RUN npm ci || npm install
-
-# Стадия 2: Сборка
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Копируем node_modules из стадии deps
-COPY --from=deps /app/node_modules ./node_modules
+COPY package*.json ./
 COPY . .
 
-# Сборка
+RUN npm install
 RUN npm run build
 
-# Стадия 3: Production
-FROM nginx:alpine
+# Используем Node.js сервер вместо Nginx
+FROM node:20-alpine
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-# Копируем nginx конфиг если есть
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Копируем собранные файлы и зависимости
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Устанавливаем простой сервер для статики
+RUN npm install -g serve
+
+EXPOSE 5173
+
+# Запускаем serve на 5173 порту
+CMD ["serve", "-s", "dist", "-l", "5173"]
