@@ -21,10 +21,10 @@ export const Item = ({ item, index }) => {
                     loop
                     className={styles.itemImage}
                     mode="normal"
-                    src={`/proxy/${item.image}`}
+                    src={`${item.image}`}
                 />
             )                                : (
-                <img src={`/proxy/${item.image}`} alt={item.name} />
+                <img src={`${item.image}`} alt={item.name} />
             )}
         </div>
         <div className={styles.name}>
