@@ -50,7 +50,7 @@ export default function Header() {
                 <Burger onClick={() => setIsOpen(prev => !prev)} />
               )}
               <div className={styles.end}>
-                <LogBtn />
+                <AccountInfo />
               </div>
             </ContainerFluid>
           ))  :  (
