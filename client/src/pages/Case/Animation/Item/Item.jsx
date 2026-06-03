@@ -20,7 +20,7 @@ export const Item = ({ item }) => {
                     }}
                 />
             )                                : (
-                <img src={`http://localhost:8080/${item.image}`} alt={item.name} />
+                <img src={`/proxy/${item.image}`} alt={item.name} />
             )}
         </div>
         <div className={styles.title}>
