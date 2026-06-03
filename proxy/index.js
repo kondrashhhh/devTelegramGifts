@@ -1,11 +1,16 @@
-var host = process.env.HOST || '0.0.0.0';
-var port = process.env.PORT || 8080;
+const cors_proxy = require('cors-anywhere');
 
-var cors_proxy = require('cors-anywhere');
+const host = '0.0.0.0';
+const port = 8080;
+
 cors_proxy.createServer({
-    originWhitelist: [],
-    requireHeader: ['origin', 'x-requested-with'],
-    removeHeaders: ['cookie', 'cookie2']
-}).listen(port, host, function() {
-    console.log('Running CORS Anywhere on ' + host + ':' + port);
+    originWhitelist: ['https://waffenstars.ru'],
+    requireHeader: [],
+    removeHeaders: ['cookie', 'cookie2'],
+    setHeaders: {
+        'Access-Control-Allow-Origin': 'https://waffenstars.ru',
+        'Access-Control-Allow-Credentials': 'true'
+    }
+}).listen(port, host, () => {
+    console.log(`CORS proxy running on ${host}:${port}`);
 });
