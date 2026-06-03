@@ -41,7 +41,7 @@ const ParallaxItem = ({
       }}>
         <tgs-player
           mode="normal"
-          src={`/cors/${item.image}`}
+          src={`${item.image}`}
           style={{
             width: '100%',
             height: '100%',
