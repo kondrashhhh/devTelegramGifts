@@ -13,14 +13,14 @@ export const Item = ({ item }) => {
             { item.image.slice(-3) === "tgs" ? (
                 <tgs-player
                     mode="normal"
-                    src={`/cors/${item.image}`}
+                    src={`${item.image}`}
                     style={{
                         width: '100%',
                         height: '100%',
                     }}
                 />
             )                                : (
-                <img src={`/cors/${item.image}`} alt={item.name} />
+                <img src={`${item.image}`} alt={item.name} />
             )}
         </div>
         <div className={styles.title}>
