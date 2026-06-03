@@ -5,8 +5,8 @@ import styles from './Avatar.module.scss'
 
 export default function Avatar() {
   const { userData } = useContext(AuthContext);
-  const userAvatar = userData.photo_url;
-  const userName = userData.first_name + userData.last_name;
+  // const userAvatar = userData.photo_url;
+  // const userName = userData.first_name + userData.last_name;
 
   useEffect(() => {
     console.log("Пользователь: ", userData);
