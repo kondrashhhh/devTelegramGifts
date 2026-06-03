@@ -14,7 +14,7 @@ export const useCaseStore = create((set, get) => ({
     set({ loading: true });
     try {
       const response = await fetch(
-        `http://localhost:8080/api/cases/${category}/${translit_name}`,
+        `/api/cases/${category}/${translit_name}`,
         {
           credentials: 'include',
           headers: {
