@@ -41,7 +41,7 @@ const ParallaxItem = ({
       }}>
         <tgs-player
           mode="normal"
-          src={`http://localhost:8080/${item.image}`}
+          src={`/proxy/${item.image}`}
           style={{
             width: '100%',
             height: '100%',
