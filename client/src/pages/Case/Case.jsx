@@ -56,7 +56,7 @@ export const Case = () => {
         </>
       ) : (
         <div className={styles.image}>
-          <img src={`/proxy/${caseData?.image}`} alt={caseData?.name} />
+          <img src={`${caseData?.image}`} alt={caseData?.name} />
         </div>
       )}
       
