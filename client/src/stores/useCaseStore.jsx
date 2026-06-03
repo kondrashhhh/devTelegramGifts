@@ -42,7 +42,7 @@ export const useCaseStore = create((set, get) => ({
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/cases/${category}/${translit_name}/open`,
+        `/api/cases/${category}/${translit_name}/open`,
         {
           method: "POST",
           credentials: 'include',
