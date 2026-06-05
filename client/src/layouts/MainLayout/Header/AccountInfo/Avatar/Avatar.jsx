@@ -8,10 +8,10 @@ export default function Avatar() {
   // const userAvatar = userData.photo_url;
   // const userName = userData.first_name + userData.last_name;
 
-  useEffect(() => {
-    console.log("Пользователь: ", userData);
-    console.log("Аватарка: ", userAvatar);
-  })
+  // useEffect(() => {
+  //   console.log("Пользователь: ", userData);
+  //   console.log("Аватарка: ", userAvatar);
+  // })
 
   return (
     <div className={styles.wrapper}>
