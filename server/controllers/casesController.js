@@ -30,7 +30,7 @@ exports.caseOpen = (req, res) => {
 
   if (count > 1) {
     const resultArray = [];
-    for (i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
       resultArray.push(box.case.open());
     }
     return res.json(resultArray);
