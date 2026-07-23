@@ -10,6 +10,7 @@ import { Buttons } from './Buttons/Buttons';
 import { Counter } from './Counter/Counter';
 import { DoubleChance } from './DoubleChance/DoubleChance';
 import { useCaseStore } from '@/stores/useCaseStore';
+import { ItemList } from './ItemList/ItemList';
 import styles from './Case.module.scss';
 
 export const Case = () => {
@@ -43,33 +44,37 @@ export const Case = () => {
   }
 
   return (
-    <div className={styles.caseDetail} ref={parallaxRef}>
-      <Parallax parallaxItems={parallaxItems} isDisabled={isDisabled} />
-      
-      <Typography tag="h3" variant="type">Кейс</Typography>
-      <Typography tag="h2" variant="h2">{caseData?.name}</Typography>
-      
-      {isDisabled ? (
-        <>
-          {isOpening && <Animation />}
-          {showWinScreen && <WinScreen />}
-        </>
-      ) : (
-        <div className={styles.image}>
-          <img src={`${caseData?.image}`} alt={caseData?.name} />
-        </div>
-      )}
-      
-      <Flex className={styles.count}>
-        <Typography tag="span" variant="standart">
-          Сколько кейсов открыть?
-        </Typography>
-        <Counter />
-        <DoubleChance />
-        <MemoButtons
-          info={caseInfo}
-        />
-      </Flex>
+    <div className={styles.caseDetail} >
+      <div className={styles.parallaxWrapper} ref={parallaxRef}>
+        <Parallax parallaxItems={parallaxItems} isDisabled={isDisabled} />
+        
+        <Typography tag="h3" variant="type">Кейс</Typography>
+        <Typography tag="h2" variant="h2">{caseData?.name}</Typography>
+        
+        {isDisabled ? (
+          <>
+            {isOpening && <Animation />}
+            {showWinScreen && <WinScreen />}
+          </>
+        ) : (
+          <div className={styles.image}>
+            <img src={`${caseData?.image}`} alt={caseData?.name} />
+          </div>
+        )}
+        
+        <Flex className={styles.count}>
+          <Typography tag="span" variant="standart">
+            Сколько кейсов открыть?
+          </Typography>
+          <Counter />
+          <DoubleChance />
+          <MemoButtons
+            info={caseInfo}
+          />
+        </Flex>
+      </div>
+
+      <ItemList />
     </div>
   );
 };

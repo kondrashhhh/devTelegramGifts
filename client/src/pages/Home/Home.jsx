@@ -13,7 +13,7 @@ export const Home = () => {
 
   const caseAPI = async () => {
     setLoading(true);
-    const response = await fetch("/api/cases", {
+    const response = await fetch("http://localhost:3000/api/cases", {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'

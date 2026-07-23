@@ -16,7 +16,12 @@ export const Buttons = ({ info }) => {
         className={cn(styles.button, isDisabled && styles.disabled)}
         isOpening={isDisabled}
        />
-       <SkipButton className={cn(styles.button, isDisabled && styles.disabled)} />
+       
+       <SkipButton
+        info={info}
+        className={cn(styles.button, isDisabled && styles.disabled)}
+        isOpening={isDisabled}
+       />
     </Flex>
   )
 }

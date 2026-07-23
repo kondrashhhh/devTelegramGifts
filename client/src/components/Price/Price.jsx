@@ -4,7 +4,7 @@ import styles from "./Price.module.scss"
 import { useCaseDisabled } from '@/stores/useCaseStore'
 import { useGetCurrency } from '@/stores/useCurrencyStore'
 
-export const Price = ({ value, disabled = true, isItem = false }) => {
+export const Price = ({ value, disabled = true, isItem = false, className }) => {
   const { currency, calculate } = useGetCurrency();
   const isDisabled = useCaseDisabled()
   const disable = disabled ? isDisabled : disabled;
@@ -15,8 +15,9 @@ export const Price = ({ value, disabled = true, isItem = false }) => {
       (disable && !isItem) && styles.disabled,
       isItem && styles.itemPrice,
       styles[currency],
+      className
     )}>
-      <span className={styles.price}>{calculate(currency, false, value)}</span>
+      <span className={cn(styles.price, className)}>{calculate(currency, false, value)}</span>
     </div>
   )
 }

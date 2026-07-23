@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: calcVW(100, 1920);
+    padding: 0;
+    width: 100%;
+    gap: 20px;
+
+    @include vp--1600 {
+        margin-top: 150px;
+    }
+}

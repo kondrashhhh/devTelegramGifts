@@ -14,7 +14,7 @@ export const useCaseStore = create((set, get) => ({
     set({ loading: true });
     try {
       const response = await fetch(
-        `/api/cases/${category}/${translit_name}`,
+        `http://localhost:3000/api/cases/${category}/${translit_name}`,
         {
           credentials: 'include',
           headers: {
@@ -33,7 +33,7 @@ export const useCaseStore = create((set, get) => ({
     }
   },
 
-  openCase: async (category, translit_name, isDisabled, count) => {
+  openCase: async (category, translit_name, isDisabled, count, isSkipButton = false) => {
     if (isDisabled) return;
 
     const fetchBody = JSON.stringify({
@@ -42,7 +42,7 @@ export const useCaseStore = create((set, get) => ({
 
     try {
       const response = await fetch(
-        `/api/cases/${category}/${translit_name}/open`,
+        `http://localhost:3000/api/cases/${category}/${translit_name}/open`,
         {
           method: "POST",
           credentials: 'include',
@@ -54,9 +54,11 @@ export const useCaseStore = create((set, get) => ({
       );
 
       const itemData = await response.json();
-      Array.isArray(itemData) 
+      Array.isArray(itemData) || isSkipButton
         ? set({ itemData, showWinScreen: true, isDisabled: true })
-        : set({ itemData, isOpening: true, isDisabled: true })  
+        : set({ itemData, isOpening: true, isDisabled: true })
+        
+      
     } catch (error) {
       console.error('Ошибка открытия:', error);
     }
