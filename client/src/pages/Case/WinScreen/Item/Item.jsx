@@ -21,7 +21,7 @@ export const Item = ({ item, index }) => {
                     loop
                     className={styles.itemImage}
                     mode="normal"
-                    src={`/cors/${item.image}`}
+                    src={`${item.image}`}
                 />
             )                                : (
                 <img src={`${item.image}`} alt={item.name} />

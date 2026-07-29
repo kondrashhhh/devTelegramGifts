@@ -49,7 +49,7 @@ export const Case = () => {
         <Parallax parallaxItems={parallaxItems} isDisabled={isDisabled} />
         
         <Typography tag="h3" variant="type">Кейс</Typography>
-        <Typography tag="h2" variant="h2">{caseData?.name}</Typography>
+        <Typography tag="h2" variant="gothic">{caseData?.name}</Typography>
         
         {isDisabled ? (
           <>

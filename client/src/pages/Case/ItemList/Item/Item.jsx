@@ -11,9 +11,8 @@ export const Item = ({ item }) => {
         <div className={styles.image}>
             { image.slice(-3) === "tgs" ? (
                 <tgs-player
-                    autoPlay
                     mode="normal"
-                    src={`${item.image}`}
+                    src={`${image}`}
                     style={{
                         width: '100%',
                         height: '100%',

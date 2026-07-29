@@ -10,7 +10,7 @@ export const links = [
     {
       title: "Аккаунт",
       items: [
-        { title: "Профиль", url: "/"},
+        { title: "Профиль", url: "/profile"},
         { title: "Политика конфиденциальности", url: "/"}
       ]
     },

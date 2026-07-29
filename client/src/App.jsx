@@ -5,6 +5,7 @@ import { FilterProvider } from "./context/FilterContext";
 import MainLayout from './layouts/MainLayout/MainLayout'
 import { Home } from "./pages/Home/Home";
 import { Case } from "./pages/Case/Case";
+import { Profile } from "./pages/Profile/Profile";
 
 
 const loadTgsPlayer = async () => {
@@ -38,6 +39,11 @@ function App() {
             <FilterProvider>
               <Home />
             </FilterProvider>
+           } 
+          />
+          <Route path='/profile' element=
+           {
+            <Profile />
            } 
           />
           <Route path="/cases/:category/:translit_name" element={<Case />} />

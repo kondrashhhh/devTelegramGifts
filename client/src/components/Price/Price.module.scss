@@ -43,7 +43,7 @@
             color: #000000;
             font-size: calcVW(14, 1440);
 
-            @include vp--1280 {
+            @include vp--1600 {
                 font-size: 16px;
             }
         }

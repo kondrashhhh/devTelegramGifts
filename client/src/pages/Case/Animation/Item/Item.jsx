@@ -7,6 +7,11 @@ import styles from './Item.module.scss'
 export const Item = ({ item }) => {
   const name = [...item.name].slice(0, 15).join("") + " ...";
 
+//   useEffect(() => {
+//     console.log("Выигрышный предмет картинка: ", item.image)
+//   }, [])
+  
+
   return (
     <div className={styles.box}>
         <div className={styles.image}>
@@ -20,7 +25,7 @@ export const Item = ({ item }) => {
                     }}
                 />
             )                                : (
-                <img src={`${item.image}`} alt={item.name} />
+                <img src={`${item.image}`} alt={name} />
             )}
         </div>
         <div className={styles.title}>

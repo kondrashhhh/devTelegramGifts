@@ -1,0 +1,52 @@
+.bonus {
+    cursor: pointer;
+    background-color: transparent;
+    max-width: calcVW(170, 1440);
+    border-radius: calcVW(12, 1440);
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: calcVW(11, 1440) calcVW(14, 1440);
+    gap: calcVW(9, 1440);
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: calcVW(14, 1440);
+    line-height: 100%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: .2s ease-in-out;
+
+    @include vp--1600 {
+        max-width: 170px;
+        border-radius: 12px;
+        padding: 11px 14px;
+        gap: 9px;
+        font-size: 14px;
+    }
+
+    &:hover {
+        background-color: #840A0A;
+        color: #FFFFFF;
+    }
+
+    &:hover::before {
+        background-color: #FFFFFF;
+    }
+}
+
+.bonus::before {
+    content: "";
+    width: calcVW(15, 1440);
+    height: calcVW(15, 1440);
+    mask-image: url(/procent.svg);
+    mask-repeat: no-repeat;
+    mask-size: 95%;
+    background-color: #000000;
+    transition: .2s ease-in-out;
+
+    @include vp--1600 {
+        width: 15px;
+        height: 15px;
+    }
+}

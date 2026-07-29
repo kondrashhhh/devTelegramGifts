@@ -7,7 +7,7 @@ export default function AccountInfo() {
   return (
     <div className={styles.wrapper}>
         <BalanceButton />
-        <Avatar />
+        <Avatar showName={true}/>
     </div>
   )
 }
