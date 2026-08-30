@@ -1,0 +1,36 @@
+.wrapper {
+    width: 100%;
+    font-family: "Manrope", sans-serif;
+    margin-top: calcVW(100, 1600);
+
+    @include vp--1600 {
+        margin-top: 100px;
+    }
+}
+
+.tabs {
+    padding-bottom: calcVW(20, 1600);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    @include vp--1600 {
+        padding-bottom: 20px;
+    }
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: calcVW(10, 1600);
+
+    span {
+        font-size: calcVW(20, 1600);
+        line-height: calcVW(20, 1600);
+        font-weight: 600;
+        color: #FFFFFF;
+
+        @include vp--1600 {
+            font-size: 20px;
+            line-height: 20px;
+        }
+    }
+}

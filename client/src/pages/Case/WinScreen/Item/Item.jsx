@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useItemSave, useItemSell } from '@/stores/useCaseStore';
+import { useAddInventoryItem } from '@/stores/useUserStore';
 import { SellButton } from '../../Buttons/SellButton/SellButton';
 import { InventoryButton } from '../../Buttons/InventoryButton/InventoryButton';
 import styles from "./Item.module.scss"
@@ -7,10 +8,12 @@ import styles from "./Item.module.scss"
 export const Item = ({ item, index }) => {
   const sell = useItemSell();
   const save = useItemSave();
+  const addInventoryItem = useAddInventoryItem();
 
-  useEffect(() => {
-    console.log(item);
-  }, [])
+  const handleSave = () => {
+      save(index);
+      addInventoryItem(item);
+  };
 
   return (
     <div className={styles.item}>
@@ -32,7 +35,7 @@ export const Item = ({ item, index }) => {
         </div>
         <div className={styles.buttons}>
             <SellButton price={item.price} onClick={() => sell(index)}/>
-            <InventoryButton onClick={() => save(index)}/>
+            <InventoryButton onClick={() => handleSave()}/>
         </div>
     </div>
   )

@@ -12,6 +12,7 @@ export const AccountInfo = () => {
   return (
     <div className={styles.box}>
         { isMobile && <Avatar className={styles.avatar}/>}
+        { isTab && !isMobile && <Avatar className={styles.avatar}/>}
         <div className={styles.infoItem}>
             <span>ЕЖЕДНЕВНЫЙ <br />БОНУС</span>
             <BonusButton content="Получить"/>
@@ -21,7 +22,6 @@ export const AccountInfo = () => {
             <span>ДЕПОЗИТОВ ЗА  <br /> ВСЕ ВРЕМЯ</span>
             <span>100 000</span>
         </div>
-        { isTab && !isMobile && <Avatar className={styles.avatar}/>}
     </div>
   )
 }

@@ -1,0 +1,43 @@
+.box {
+    width: calcVW(200, 1920);
+    // height: calcVW(200, 1920);
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: calcVW(10, 1920);
+    gap: calcVW(3, 1920);
+
+    @include vp--1600 {
+        width: 175px;
+        // height: 175px;
+        border-radius: 10px;
+        gap: 5px;
+    } 
+}
+
+.image, .image img {
+    width: calcVW(90, 1440);
+    height: calcVW(90, 1440);
+
+    @include vp--1600 {
+        width: 96px;
+        height: 96px;
+    } 
+}
+
+.priceColor {
+    color: #FFFFFF !important;
+    font-size: calcVW(14, 1440) !important;
+
+    &::before {
+        background-color: #FFFFFF !important; 
+    }
+
+
+    @include vp--1600 {
+        font-size: 16px !important;
+    }
+}

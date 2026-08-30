@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin-top: calcVW(30, 1920);
+    padding: 0;
+    width: 100%;
+    gap: 20px;
+
+    @include vp--1600 {
+        margin-top: 30px;
+    }
+
+    @include vp--1280 {
+        justify-content: center;
+    }
+}

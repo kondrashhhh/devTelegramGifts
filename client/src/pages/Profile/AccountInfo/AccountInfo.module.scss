@@ -6,7 +6,7 @@
     width: 100%;
     flex-wrap: wrap;
 
-    @include vp--680 {
+    @include vp--1024 {
         flex-direction: column;
         align-items: center;
         justify-content: center;
