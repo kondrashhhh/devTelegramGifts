@@ -11,6 +11,17 @@ export const useUserStore = create(
       AddInventoryItem: (value) => {
         set({ userInventory: [...get().userInventory, value] });
       },
+
+      SellInventoryItem: (uniqueId) => {
+        const currentInventory = get().userInventory;
+        const updatedInventory = currentInventory.filter(
+          (item) => item.uniqueId !== uniqueId
+        );
+
+        set({ userInventory: updatedInventory });
+        
+        return true;
+      },
     }),
     {
       name: 'user-storage',
@@ -21,6 +32,9 @@ export const useUserStore = create(
 
 export const useAddInventoryItem = () =>
   useUserStore((state) => state.AddInventoryItem);
+
+export const useSellInventoryItem = () =>
+  useUserStore((state) => state.SellInventoryItem);
 
 export const useGetInventory = () => {
   return useUserStore((state) => state.userInventory);

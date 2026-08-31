@@ -1,8 +1,10 @@
 import React from 'react'
 import styles from './SellButton.module.scss'
 
-export const SellButton = () => {
+export const SellButton = ({ onClick }) => {
   return (
-    <div className={styles.button}>Продать</div>
+    <button className={styles.button} onClick={onClick}>
+      Продать
+    </button>
   )
 }

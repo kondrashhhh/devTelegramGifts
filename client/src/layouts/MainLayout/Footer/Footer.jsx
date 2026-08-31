@@ -14,7 +14,12 @@ export default function Footer() {
           <div className={styles.info}>
             <Logo type="big" />
             <div className={styles.description}>
-              <span>Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit.Lorem ipsum dolor sit amet, <br /> consectetur adipiscing elit.</span>
+              <span>
+                    ОсОО «Транстрейд» <br />
+                    ОГРН: 310961-3301-ООО <br />
+                    ИНН: 9909710251 <br />
+                    Кыргызская Республика, г. Бишкек, Ленинский район, ул. Калык Акиева, 66
+              </span>
             </div>
             <Messangers type="big" />
           </div>

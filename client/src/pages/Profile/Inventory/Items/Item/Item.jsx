@@ -1,4 +1,5 @@
 import React from 'react'
+import {useSellInventoryItem} from '@/stores/useUserStore'
 import { Typography } from '@/components/Typography/Typography';
 import { Price } from '@/components/Price/Price';
 import { SellButton } from './SellButton/SellButton';
@@ -7,6 +8,8 @@ import styles from './Item.module.scss'
 export const Item = ({ item }) => {
   const { name, image, price } = item;
   const formatName = [...name].slice(0, 15).join("") + " ...";
+  const sellItem = useSellInventoryItem();
+
   return (
     <div className={styles.box}>
         <div className={styles.image}>
@@ -27,7 +30,7 @@ export const Item = ({ item }) => {
             {formatName}
         </Typography>
         <Price value={price} className={styles.priceColor} isItem={false}/>
-        <SellButton />
+        <SellButton onClick={() => sellItem(item.uniqueId)} />
     </div>
   )
 }
