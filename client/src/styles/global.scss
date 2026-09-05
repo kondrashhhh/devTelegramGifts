@@ -130,3 +130,8 @@ a {
         0 0 16px rgba(36, 161, 222, 0.4)!important;
     background-color: #24A1DE!important;    
 }
+
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}

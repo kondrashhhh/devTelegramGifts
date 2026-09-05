@@ -1,0 +1,21 @@
+.filterWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: calcVW(20, 1600);
+    margin-bottom: calcVW(20, 1600);
+
+    @include vp--1600 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+.filter {
+    display: flex;
+    gap: calcVW(10, 1600);
+
+    @include vp--1600 {
+        gap: 10px;
+    }
+}

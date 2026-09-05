@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import styles from './Inventory.module.scss'
 import { Items } from './Items/Items'
 import { Empty } from './Empty/Empty'
+import { Filter } from './Filter/Filter'
 import { useGetInventory } from '@/stores/useUserStore'
 import tabs from './tabs'
 
@@ -20,6 +21,9 @@ export const Inventory = () => {
                 <span>{tab.label}</span>
             </div>
         ))}
+        </div>
+        <div className={styles.filter}>
+            <Filter />
         </div>
         <div className={styles.inventory}>
             {userInventory.length ? (<Items items={userInventory}/>) : (<Empty />)}

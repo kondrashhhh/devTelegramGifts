@@ -1,0 +1,21 @@
+.button {
+    padding: calcVW(6, 1600) calcVW(40, 1600);
+    background-color: #131722;
+    border: none;
+    border-radius: calcVW(8, 1600);
+    display: flex;
+    align-items: center;
+    color: #828aa4;
+    font-weight: bold;
+    font-size: calcVW(13, 1600);
+
+    @include vp--1600 {
+        font-size: 14px;
+    }
+
+    @include vp--1600 {
+        padding: 10px 50px;
+        border: 1px solid #1F2330;
+        border-radius: 8px;
+    }
+}
