@@ -7,6 +7,36 @@ export const useUserStore = create(
       isAuthorized: false,
       userData: {},
       userInventory: [],
+      balance: 0,
+
+      setUser: (user) => {
+        const normalizedUser = typeof user === 'string' ? JSON.parse(user) : (user || {});
+
+        set({
+          isAuthorized: true,
+          userData: normalizedUser,
+          userInventory: Array.isArray(normalizedUser.inventory) ? normalizedUser.inventory : get().userInventory,
+          balance: Number(normalizedUser.balance ?? get().balance ?? 0),
+        });
+      },
+
+      clearUser: () => {
+        set({
+          isAuthorized: false,
+          userData: {},
+          userInventory: [],
+          balance: 0,
+        });
+      },
+
+      setUserState: ({ balance, inventory, userData }) => {
+        set({
+          balance: Number(balance ?? get().balance ?? 0),
+          userInventory: Array.isArray(inventory) ? inventory : get().userInventory,
+          userData: userData || get().userData || {},
+          isAuthorized: true,
+        });
+      },
 
       AddInventoryItem: (value) => {
         set({ userInventory: [...get().userInventory, value] });
@@ -19,7 +49,7 @@ export const useUserStore = create(
         );
 
         set({ userInventory: updatedInventory });
-        
+
         return true;
       },
     }),
@@ -39,3 +69,12 @@ export const useSellInventoryItem = () =>
 export const useGetInventory = () => {
   return useUserStore((state) => state.userInventory);
 };
+
+export const useUserAuth = () => useUserStore((state) => ({
+  isAuthorized: state.isAuthorized,
+  userData: state.userData,
+  balance: state.balance,
+  setUser: state.setUser,
+  clearUser: state.clearUser,
+  setUserState: state.setUserState,
+}));

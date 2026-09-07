@@ -6,7 +6,7 @@ export default function LogBtn() {
   const { isAuthenticated, userData, login } = useContext(AuthContext);
   const BOT_NAME = 'devtelegramgiftsbot';
   const SERVER_URL = 'https://waffenstars.ru';
-  const AUTH_ENDPOINT = `${SERVER_URL}/api/telegram-auth`;
+  const AUTH_ENDPOINT = `${SERVER_URL}/api/auth`;
 
   const handleWidgetLoad = useCallback(() => {
     const widgetBtn = document.querySelector('.tgme_widget_login_button');

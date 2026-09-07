@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import styles from './Empty.module.scss'
 
 export const Empty = () => {
@@ -9,7 +10,11 @@ export const Empty = () => {
       </div>
       <span className={styles.text}>У вас еще нет предметов</span>
       <span className={styles.darkText}>Откройте свой первый кейс, чтобы получить <br /> новые предметы</span>
-      <button>Перейти к кейсам</button>
+      <Link to={'/'}>
+        <button className={styles.button} >
+          Перейти к кейсам
+        </button>
+      </Link>
     </div>
   )
 }

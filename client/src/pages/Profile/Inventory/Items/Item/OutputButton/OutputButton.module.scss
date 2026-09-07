@@ -5,20 +5,20 @@
     gap: calcVW(5, 1600);
     background: linear-gradient(
         180deg,
-        #0A2345 0%,
-        #071A32 100%
+        #12A8FF 0%,
+        #008DF5 100%
     );
-    border: 2px solid #009EFF;
-    color: #A8D9FF;
+    border: 2px solid #00C8FF;
+    color: #FFFFFF;
     width: 100%;
     font-weight: bold;
     padding: calcVW(5, 1600);
     border-radius: calcVW(8, 1600);
     margin-top: calcVW(5, 1600);
     box-shadow:
-    0 0 8px rgba(0, 174, 255, .65),
-    0 0 20px rgba(0, 145, 255, .3),
-    inset 0 0 15px rgba(0, 160, 255, .08);
+    0 0 10px rgba(0, 190, 255, .7),
+    0 0 25px rgba(0, 145, 255, .35),
+    inset 0 0 20px rgba(255, 255, 255, .08);
 
     @include vp--1600 {
         margin-top: 10px;
@@ -33,11 +33,10 @@
         display: flex;
         width: calcVW(15, 1600);
         height: calcVW(15, 1600);
-        mask-image: url(/sell.svg);
-        transform: rotate(90deg);
+        mask-image: url(/output.svg);
         mask-repeat: no-repeat;
         mask-size: 95%;
-        background-color: #A8D9FF;
+        background-color: #FFFFFF;
 
         @include vp--1600 {
             width: 15px;
