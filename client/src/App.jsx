@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useGetCurrency } from "./stores/useCurrencyStore";
+import { useUserStore } from "./stores/useUserStore";
 import { FilterProvider } from "./context/FilterContext";
 import MainLayout from './layouts/MainLayout/MainLayout'
 import { Home } from "./pages/Home/Home";
@@ -19,12 +20,38 @@ const loadTgsPlayer = async () => {
 
 function App() {
     const { updateTonRate } = useGetCurrency();
+  const isAuthorized = useUserStore((state) => state.isAuthorized);
+  const telegramId = useUserStore((state) => state.userData?.telegram_id);
 
   useEffect(() => {
     updateTonRate(); 
     const interval = setInterval(updateTonRate, 60000);
     return () => clearInterval(interval);
   }, [updateTonRate]);
+
+  useEffect(() => {
+    if (!isAuthorized || !telegramId) return undefined;
+
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const socket = new WebSocket(`${protocol}//${window.location.host}/ws`);
+
+    socket.addEventListener('message', (event) => {
+      try {
+        const message = JSON.parse(event.data);
+        if (message.type === 'user.updated' && message.user) {
+          useUserStore.getState().setUser(message.user);
+        }
+      } catch (error) {
+        console.error('Failed to parse WebSocket user update:', error);
+      }
+    });
+
+    socket.addEventListener('error', (error) => {
+      console.error('User WebSocket error:', error);
+    });
+
+    return () => socket.close();
+  }, [isAuthorized, telegramId]);
 
   useEffect(() => {
     loadTgsPlayer();

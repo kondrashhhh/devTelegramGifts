@@ -6,6 +6,7 @@ const sessionConfig = require("./config/session.js")
 const authRouter = require("./routes/authRouter.js")
 const casesRouter = require("./routes/casesRouter.js")
 const { PORT, BOT_TOKEN } = require("./config/env.js")
+const { setupUserSockets } = require('./realtime/userSocket.js')
 
 if (!BOT_TOKEN) {
   console.error('TELEGRAM_BOT_TOKEN is not set!');
@@ -13,10 +14,11 @@ if (!BOT_TOKEN) {
 }
 
 const app = express();
+const sessionMiddleware = session(sessionConfig);
 
 app.use(express.json());
 app.use(cors(corsOptions));
-app.use(session(sessionConfig));
+app.use(sessionMiddleware);
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRouter);
@@ -35,3 +37,5 @@ process.on('SIGTERM', () => {
     process.exit(0);
   });
 });
+
+setupUserSockets(server, sessionMiddleware);

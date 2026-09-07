@@ -4,6 +4,7 @@ const authController = require("../controllers/authController.js");
 const authRouter = express.Router();
 
 authRouter.get('/me', authController.getCurrentUser);
+authRouter.get('/profile', authController.getCurrentUser);
 authRouter.post('/profile', authController.saveUserState);
 authRouter.post('/', 
   validateTelegramAuth(process.env.TELEGRAM_BOT_TOKEN),

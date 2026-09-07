@@ -1,4 +1,5 @@
 const db = require('../db');
+const { notifyUser } = require('../realtime/userSocket');
 
 exports.authorization = async (req, res) => {
   try {
@@ -61,6 +62,7 @@ exports.saveUserState = async (req, res) => {
     });
 
     req.session.telegramUser = user;
+    notifyUser(user);
 
     return res.json({
       success: true,

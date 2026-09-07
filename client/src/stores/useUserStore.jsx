@@ -78,3 +78,20 @@ export const useUserAuth = () => useUserStore((state) => ({
   clearUser: state.clearUser,
   setUserState: state.setUserState,
 }));
+
+export const refreshUserFromServer = async () => {
+  try {
+    const response = await fetch(`${window.location.origin}/api/auth/me`, { credentials: 'include' });
+    const result = await response.json();
+
+    if (!response.ok || !result?.user) {
+      return null;
+    }
+
+    useUserStore.getState().setUser(result.user);
+    return result.user;
+  } catch (error) {
+    console.error('Failed to refresh user from server:', error);
+    return null;
+  }
+};
