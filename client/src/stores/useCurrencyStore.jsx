@@ -1,9 +1,14 @@
 import { create } from 'zustand';
+import { useUserStore } from './useUserStore';
 
 export const useCurrencyStore = create((set, get) => ({
   currency: "STR",
-  balanceRub: 1000,
+  balanceRub: Number(useUserStore.getState().balance ?? 0),
   currentTonRate: 1000,
+
+  setBalance: (value) => {
+    set({ balanceRub: Number(value ?? 0) });
+  },
 
   updateTonRate: async () => {
     try {
@@ -33,11 +38,17 @@ export const useCurrencyStore = create((set, get) => ({
   },
 }));
 
+useUserStore.subscribe((state) => {
+  const nextBalance = Number(state.balance ?? 0);
+  useCurrencyStore.getState().setBalance(nextBalance);
+});
+
 export const useGetCurrency = () => {
   return {
     currency: useCurrencyStore((state) => state.currency),
     calculate: useCurrencyStore((state) => state.calculate),
-    updateTonRate: useCurrencyStore((state) => state.updateTonRate)
+    updateTonRate: useCurrencyStore((state) => state.updateTonRate),
+    balanceRub: useCurrencyStore((state) => state.balanceRub),
   };
 };
 
