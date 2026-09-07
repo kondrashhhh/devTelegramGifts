@@ -20,6 +20,7 @@ app.use(session(sessionConfig));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRouter);
+app.use("/api/telegram-auth", authRouter);
 app.use("/api/cases", casesRouter);
 
 const server = app.listen(PORT, '0.0.0.0', () => {
