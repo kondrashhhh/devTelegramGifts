@@ -1,6 +1,7 @@
 const categoryData = require("../cases/cases.json");
 const caseData = require("../cases/casesData.json");
 const { findCase } = require("../utils/findCase");
+const db = require("../db");
 
 exports.getCases = (req, res) => {
   try {
@@ -24,18 +25,51 @@ exports.getCase = (req, res) => {
   return res.json(result.case);
 };
 
-exports.caseOpen = (req, res) => {
+exports.caseOpen = async (req, res) => {
   const box = findCase(caseData, req);
-  const count = req.body.count;
+  const count = Number(req.body.count || 1);
+  const cost = Number(req.body.cost || 0);
+  const telegramId = Number(
+    req.session?.telegramUser?.telegram_id || req.session?.telegramUser?.id
+  );
 
-  if (count > 1) {
-    const resultArray = [];
-    for (i = 0; i < count; i++) {
-      resultArray.push(box.case.open());
-    }
-    return res.json(resultArray);
+  if (box.error) {
+    return res.status(box.status || 404).json({ error: box.error });
   }
 
-  const result = box.case.open()
-  return res.json({ ...result, "win": true });
+  if (!telegramId) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const balanceRow = await db.get(
+      'SELECT balance FROM user_profiles WHERE telegram_id = ?',
+      [telegramId]
+    );
+    const balance = Number(balanceRow?.balance ?? 0);
+
+    if (balance < cost) {
+      return res.status(400).json({ error: 'Insufficient balance' });
+    }
+
+    const updatedBalance = balance - cost;
+    await db.run(
+      'UPDATE user_profiles SET balance = ?, updated_at = CURRENT_TIMESTAMP WHERE telegram_id = ?',
+      [updatedBalance, telegramId]
+    );
+
+    if (count > 1) {
+      const resultArray = [];
+      for (let i = 0; i < count; i++) {
+        resultArray.push(box.case.open());
+      }
+      return res.json({ items: resultArray, balance: updatedBalance });
+    }
+
+    const result = box.case.open();
+    return res.json({ items: { ...result, win: true }, balance: updatedBalance });
+  } catch (error) {
+    console.error('Case opening error:', error);
+    return res.status(500).json({ error: 'Failed to open case' });
+  }
 };

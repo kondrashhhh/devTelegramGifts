@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { useUserStore } from './useUserStore';
 
 export const useCaseStore = create((set, get) => ({
   isOpening: false,
@@ -36,8 +37,11 @@ export const useCaseStore = create((set, get) => ({
   openCase: async (category, translit_name, isDisabled, count, isSkipButton = false) => {
     if (isDisabled) return;
 
+    const price = Number(get().caseData?.price ?? 0);
+
     const fetchBody = JSON.stringify({
-      "count": count
+      "count": count,
+      "cost": price * Number(count || 1),
     })
 
     try {
@@ -53,7 +57,12 @@ export const useCaseStore = create((set, get) => ({
         }
       );
 
-      const itemData = await response.json();
+      const responseData = await response.json();
+      if (!response.ok) throw new Error(responseData?.error || 'Ошибка открытия кейса');
+
+      const itemData = responseData.items;
+      useUserStore.getState().setBalance(responseData.balance);
+
       Array.isArray(itemData) || isSkipButton
         ? set({ itemData, showWinScreen: true, isDisabled: true })
         : set({ itemData, isOpening: true, isDisabled: true })

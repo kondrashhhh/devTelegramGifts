@@ -38,6 +38,10 @@ export const useUserStore = create(
         });
       },
 
+      setBalance: (balance) => {
+        set({ balance: Number(balance ?? 0) });
+      },
+
       AddInventoryItem: (value) => {
         set({ userInventory: [...get().userInventory, value] });
       },
@@ -78,6 +82,8 @@ export const useUserAuth = () => useUserStore((state) => ({
   clearUser: state.clearUser,
   setUserState: state.setUserState,
 }));
+
+export const useSetBalance = () => useUserStore((state) => state.setBalance);
 
 export const refreshUserFromServer = async () => {
   try {
