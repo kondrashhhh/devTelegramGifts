@@ -56,9 +56,16 @@ exports.saveUserState = async (req, res) => {
       });
     }
 
+    const currentUser = await db.getUserByTelegramId(telegramId);
+    const inventory = Array.isArray(currentUser?.inventory) ? currentUser.inventory : [];
+
+    if (req.body?.inventoryItem) {
+      inventory.push(req.body.inventoryItem);
+    }
+
     const user = await db.upsertUserState(telegramId, {
-      balance: req.body?.balance ?? 0,
-      inventory: Array.isArray(req.body?.inventory) ? req.body.inventory : [],
+      balance: req.body?.balance ?? currentUser?.balance ?? 0,
+      inventory: Array.isArray(req.body?.inventory) ? req.body.inventory : inventory,
     });
 
     req.session.telegramUser = user;

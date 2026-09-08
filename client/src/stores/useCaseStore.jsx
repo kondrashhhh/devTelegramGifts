@@ -66,6 +66,27 @@ export const useCaseStore = create((set, get) => ({
       const itemData = responseData.items;
       useUserStore.getState().setBalance(responseData.balance);
 
+      const items = Array.isArray(itemData) ? itemData : [itemData];
+      for (const item of items) {
+        const inventoryResponse = await fetch('/api/auth/profile', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            telegram_id: telegramId,
+            inventoryItem: item,
+          }),
+        });
+
+        if (!inventoryResponse.ok) {
+          throw new Error('Не удалось сохранить предмет в инвентарь');
+        }
+
+        useUserStore.getState().AddInventoryItem(item);
+      }
+
       Array.isArray(itemData) || isSkipButton
         ? set({ itemData, showWinScreen: true, isDisabled: true })
         : set({ itemData, isOpening: true, isDisabled: true })
