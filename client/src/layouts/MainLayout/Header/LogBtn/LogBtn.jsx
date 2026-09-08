@@ -67,7 +67,7 @@ export default function LogBtn() {
     };
   }, [AUTH_ENDPOINT, login, userData]);
 
-  const initWebAppAuth = useCallback(() => {
+  const initWebAppAuth = useCallback(async () => {
     if (!window.Telegram?.WebApp) return;
 
     window.Telegram.WebApp.allowWriteAccess();
@@ -76,13 +76,27 @@ export default function LogBtn() {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
       const userData = {
         ...user,
+        hash: window.Telegram.WebApp.initDataHash || '',
         auth_date: Math.floor(Date.now() / 1000)
       };
-      
-      login(userData);
-      console.log('WebApp auth success', userData);
+
+      try {
+        const response = await axios.post(AUTH_ENDPOINT, userData, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.data?.success) {
+          login(response.data.user);
+          console.log('WebApp auth success', response.data.user);
+        }
+      } catch (error) {
+        console.error('WebApp auth error:', error);
+      }
     }
-  }, [login]);
+  }, [AUTH_ENDPOINT, login]);
 
   useEffect(() => {
     if (!userData) {
