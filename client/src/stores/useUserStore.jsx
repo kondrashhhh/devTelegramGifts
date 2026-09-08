@@ -39,7 +39,25 @@ export const useUserStore = create(
       },
 
       setBalance: (balance) => {
-        set({ balance: Number(balance ?? 0) });
+        const nextBalance = Number(balance ?? 0);
+        const nextUserData = {
+          ...get().userData,
+          balance: nextBalance,
+        };
+
+        set({
+          balance: nextBalance,
+          userData: nextUserData,
+        });
+
+        const storedAuth = localStorage.getItem('telegram_auth');
+        if (storedAuth) {
+          const authState = JSON.parse(storedAuth);
+          localStorage.setItem('telegram_auth', JSON.stringify({
+            ...authState,
+            userData: nextUserData,
+          }));
+        }
       },
 
       AddInventoryItem: (value) => {
