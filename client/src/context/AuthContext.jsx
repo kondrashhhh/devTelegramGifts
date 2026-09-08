@@ -16,6 +16,17 @@ const AuthProvider = ({ children }) => {
         const { isAuthenticated, userData } = JSON.parse(storedAuth);
         setAuthState({ isAuthenticated, userData });
         useUserStore.getState().setUser(userData);
+
+        fetch('/api/auth', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        }).catch((error) => {
+          console.error('Failed to restore server session:', error);
+        });
       } catch (error) {
         console.error('Failed to parse auth data', error);
         logout();
