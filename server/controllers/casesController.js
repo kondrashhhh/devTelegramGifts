@@ -29,16 +29,10 @@ exports.caseOpen = async (req, res) => {
   const box = findCase(caseData, req);
   const count = Number(req.body.count || 1);
   const cost = Number(req.body.cost || 0);
-  const telegramId = Number(
-    req.session?.telegramUser?.telegram_id || req.session?.telegramUser?.id
-  );
+  const telegramId = Number(req.body.telegram_id);
 
   if (box.error) {
     return res.status(box.status || 404).json({ error: box.error });
-  }
-
-  if (!telegramId) {
-    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   try {

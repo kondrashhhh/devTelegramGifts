@@ -38,10 +38,13 @@ export const useCaseStore = create((set, get) => ({
     if (isDisabled) return;
 
     const price = Number(get().caseData?.price ?? 0);
+    const telegramId = useUserStore.getState().userData?.telegram_id
+      || useUserStore.getState().userData?.id;
 
     const fetchBody = JSON.stringify({
       "count": count,
       "cost": price * Number(count || 1),
+      "telegram_id": telegramId,
     })
 
     try {
