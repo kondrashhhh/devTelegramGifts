@@ -10,17 +10,38 @@ const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const storedAuth = localStorage.getItem('telegram_auth');
-    if (storedAuth) {
+    const restoreUser = async () => {
+      const storedAuth = localStorage.getItem('telegram_auth');
+      if (!storedAuth) return;
+
       try {
         const { isAuthenticated, userData } = JSON.parse(storedAuth);
         setAuthState({ isAuthenticated, userData });
         useUserStore.getState().setUser(userData);
+
+        const telegramId = userData?.telegram_id || userData?.id;
+        const response = await fetch(`/api/auth/me?telegram_id=${telegramId}`, {
+          credentials: 'include',
+        });
+        const result = await response.json();
+
+        if (response.ok && result?.user) {
+          const refreshedAuth = {
+            isAuthenticated: true,
+            userData: result.user,
+          };
+
+          setAuthState(refreshedAuth);
+          localStorage.setItem('telegram_auth', JSON.stringify(refreshedAuth));
+          useUserStore.getState().setUser(result.user);
+        }
       } catch (error) {
         console.error('Failed to parse auth data', error);
         logout();
       }
-    }
+    };
+
+    restoreUser();
   }, []);
 
   const login = (userData) => {
