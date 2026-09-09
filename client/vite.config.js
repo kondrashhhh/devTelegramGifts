@@ -31,7 +31,5 @@ export default defineConfig({
     },
   },
 
-  build: {
-    sourcemap: 'hidden',
-  },
+
 });
