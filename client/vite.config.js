@@ -13,11 +13,13 @@ export default defineConfig({
       include: '**/*.svg',
     })
   ],
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
+
   css: {
     preprocessorOptions: {
       scss: {
@@ -27,5 +29,9 @@ export default defineConfig({
         `,
       },
     },
+  },
+
+  build: {
+    sourcemap: 'hidden',
   },
 });
