@@ -11,7 +11,7 @@ export default function MainLayout({ children }) {
         <div className={styles.topShadow}></div>
         <div className={styles.bottomShadow}></div>
         <Slider />
-        {/* <Header /> */}
+        <Header />
         <ContainerFluid>
           { children }
         </ContainerFluid>

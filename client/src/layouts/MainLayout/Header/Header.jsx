@@ -23,51 +23,49 @@ export default function Header() {
     console.log("Данные пользователя:", userData);
   }, [isAuthenticated, userData]);
 
+  // Общая часть для desktop/tablet (навигация, лого, онлайн)
+  const DesktopContent = (
+    <>
+      <Logo />
+      <Online />
+      {!isCollapse ? (
+        <Navigation isOpen={isOpen} />
+      ) : (
+        <Burger onClick={() => setIsOpen(prev => !prev)} />
+      )}
+      <div className={styles.end}>
+        {userData ? <AccountInfo /> : <LogBtn />}
+      </div>
+    </>
+  );
+
+  // Контент для маленького экрана (mobile)
+  const MobileContent = (
+    <>
+      <ContainerFluid className={`log-parent ${styles.flex}`}>
+        {/* Проверка: если юзер авторизован, показываем AccountInfo, иначе LogBtn */}
+        {userData ? <AccountInfo /> : <LogBtn />}
+      </ContainerFluid>
+      <ContainerFluid className={`${styles.bottomFlex} ${styles.flex}`}>
+        <Flex>
+          <Burger onClick={() => setIsOpen(prev => !prev)} />
+          <Online />
+        </Flex>
+        <Messangers />
+      </ContainerFluid>
+    </>
+  );
+
   return (
     <header>
       <div className={styles.wrapper}>
         {!isSmallScreen ? (
-          userData ? (
-            <ContainerFluid className={`log-parent ${styles.flex}`}>
-              <Logo />
-              <Online />
-              {!isCollapse ? (
-                <Navigation isOpen={isOpen} />
-              ) : (
-                <Burger onClick={() => setIsOpen(prev => !prev)} />
-              )}
-              <div className={styles.end}>
-                <AccountInfo />
-              </div>
-            </ContainerFluid>
-          ) : (
-            <ContainerFluid className={`log-parent ${styles.flex}`}>
-              <Logo />
-              <Online />
-              {!isCollapse ? (
-                <Navigation isOpen={isOpen} />
-              ) : (
-                <Burger onClick={() => setIsOpen(prev => !prev)} />
-              )}
-              <div className={styles.end}>
-                <LogBtn />
-              </div>
-            </ContainerFluid>
-          ))  :  (
-            <>
-              <ContainerFluid className={`log-parent ${styles.flex}`}>
-                  <AccountInfo />
-              </ContainerFluid>
-              <ContainerFluid className={`${styles.bottomFlex} ${styles.flex}`}>
-                <Flex>
-                  <Burger onClick={() => setIsOpen(prev => !prev)} />
-                  <Online />
-                </Flex>
-                <Messangers />
-              </ContainerFluid>
-            </>
-          )
-        }
+          <ContainerFluid className={`log-parent ${styles.flex}`}>
+            {DesktopContent}
+          </ContainerFluid>
+        ) : (
+          MobileContent
+        )}
       </div>
     </header>
   );
