@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import ErrorBoundary from './ErrorBoundary.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import './styles/global.scss'
 import App from './App.jsx'
@@ -22,8 +23,10 @@ ${e.reason?.stack || e.reason}
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </ErrorBoundary>
   </StrictMode>,
 )
