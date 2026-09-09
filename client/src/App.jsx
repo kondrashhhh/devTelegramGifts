@@ -20,8 +20,6 @@ const loadTgsPlayer = async () => {
 
 function App() {
     const { updateTonRate } = useGetCurrency();
-  const isAuthorized = useUserStore((state) => state.isAuthorized);
-  const telegramId = useUserStore((state) => state.userData?.telegram_id);
 
   useEffect(() => {
     updateTonRate(); 
@@ -29,29 +27,6 @@ function App() {
     return () => clearInterval(interval);
   }, [updateTonRate]);
 
-  useEffect(() => {
-    if (!isAuthorized || !telegramId) return undefined;
-
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const socket = new WebSocket(`${protocol}//${window.location.host}/ws`);
-
-    socket.addEventListener('message', (event) => {
-      try {
-        const message = JSON.parse(event.data);
-        if (message.type === 'user.updated' && message.user) {
-          useUserStore.getState().setUser(message.user);
-        }
-      } catch (error) {
-        console.error('Failed to parse WebSocket user update:', error);
-      }
-    });
-
-    socket.addEventListener('error', (error) => {
-      console.error('User WebSocket error:', error);
-    });
-
-    return () => socket.close();
-  }, [isAuthorized, telegramId]);
 
   useEffect(() => {
     loadTgsPlayer();
