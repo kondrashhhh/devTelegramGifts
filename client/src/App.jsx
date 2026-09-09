@@ -11,15 +11,9 @@ import { Profile } from "./pages/Profile/Profile";
 
 const loadTgsPlayer = async () => {
   if (typeof window !== 'undefined') {
-    try {
-      const module = await import('@lottiefiles/lottie-player');
-      const LottiePlayer = module.default || module; 
-      
-      if (LottiePlayer && !customElements.get('tgs-player')) {
-        LottiePlayer.defineElement();
-      }
-    } catch (error) {
-      console.error('Ошибка загрузки Lottie Player:', error); 
+    const { default: LottiePlayer } = await import('@lottiefiles/lottie-player');
+    if (!customElements.get('tgs-player')) {
+      LottiePlayer.defineElement();
     }
   }
 };

@@ -23,10 +23,10 @@ ${e.reason?.stack || e.reason}
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ErrorBoundary>
+    {/* <ErrorBoundary> */}
       <AuthProvider>
         <App />
       </AuthProvider>
-    </ErrorBoundary>
+    {/* </ErrorBoundary> */}
   </StrictMode>,
 )
