@@ -81,13 +81,54 @@ export const useUserStore = create(
         set({ userInventory: [...get().userInventory, value] });
       },
 
-      SellInventoryItem: (uniqueId) => {
+      SellInventoryItem: async (uniqueId) => {
         const currentInventory = get().userInventory;
+        const item = currentInventory.find((inventoryItem) => inventoryItem.uniqueId === uniqueId);
         const updatedInventory = currentInventory.filter(
           (item) => item.uniqueId !== uniqueId
         );
+        const telegramId = get().userData?.telegram_id || get().userData?.id;
+        const balance = Number(get().balance ?? 0) + Number(item?.price ?? 0);
 
-        set({ userInventory: updatedInventory });
+        const response = await fetch('/api/auth/profile', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            telegram_id: telegramId,
+            balance,
+            inventory: updatedInventory,
+          }),
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result?.error || 'Не удалось продать предмет');
+        }
+
+        const nextBalance = Number(result.user?.balance ?? balance);
+        const nextUserData = {
+          ...get().userData,
+          balance: nextBalance,
+          inventory: updatedInventory,
+        };
+
+        set({
+          userInventory: updatedInventory,
+          balance: nextBalance,
+          userData: nextUserData,
+        });
+
+        const storedAuth = localStorage.getItem('telegram_auth');
+        if (storedAuth) {
+          const authState = JSON.parse(storedAuth);
+          localStorage.setItem('telegram_auth', JSON.stringify({
+            ...authState,
+            userData: nextUserData,
+          }));
+        }
 
         return true;
       },

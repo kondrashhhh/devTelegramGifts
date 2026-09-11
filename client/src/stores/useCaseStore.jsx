@@ -76,8 +76,32 @@ export const useCaseStore = create((set, get) => ({
     }
   },
 
-  sellItem: (itemIndex) => {
+  sellItem: async (itemIndex) => {
     const { itemData, setWinScreen } = get();
+    const item = Array.isArray(itemData) ? itemData[itemIndex] : itemData;
+    const userState = useUserStore.getState();
+    const telegramId = userState.userData?.telegram_id || userState.userData?.id;
+    const balance = Number(userState.balance ?? 0) + Number(item?.price ?? 0);
+
+    const response = await fetch('/api/auth/profile', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        telegram_id: telegramId,
+        balance,
+        inventory: userState.userInventory,
+      }),
+    });
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result?.error || 'Не удалось продать предмет');
+    }
+
+    useUserStore.getState().setBalance(result.user.balance);
     
     if (Array.isArray(itemData) && itemData.length > 1) {
       const newItemData = [...itemData];
