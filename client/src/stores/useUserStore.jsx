@@ -62,7 +62,7 @@ export const useUserStore = create(
 
       AddInventoryItem: async (value) => {
         const telegramId = get().userData?.telegram_id || get().userData?.id;
-        const response = await fetch('http://localhost:3000/api/auth/profile', {
+        const response = await fetch('/api/auth/profile', {
           method: 'POST',
           credentials: 'include',
           headers: {
@@ -90,7 +90,7 @@ export const useUserStore = create(
         const telegramId = get().userData?.telegram_id || get().userData?.id;
         const balance = Number(get().balance ?? 0) + Number(item?.price ?? 0);
 
-        const response = await fetch('http://localhost:3000/api/auth/profile', {
+        const response = await fetch('/api/auth/profile', {
           method: 'POST',
           credentials: 'include',
           headers: {

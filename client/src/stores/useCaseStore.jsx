@@ -15,7 +15,7 @@ export const useCaseStore = create((set, get) => ({
     set({ loading: true });
     try {
       const response = await fetch(
-        `http://localhost:3000/api/cases/${category}/${translit_name}`, // http://localhost:3000/api/cases/${category}/${translit_name
+        `/api/cases/${category}/${translit_name}`, // http://localhost:3000/api/cases/${category}/${translit_name
         {
           credentials: 'include',
           headers: {
@@ -49,7 +49,7 @@ export const useCaseStore = create((set, get) => ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/cases/${category}/${translit_name}/open`, // http://localhost:3000/api/cases/${category}/${translit_name}/open
+        `/api/cases/${category}/${translit_name}/open`, // http://localhost:3000/api/cases/${category}/${translit_name}/open
         {
           method: "POST",
           credentials: 'include',
@@ -83,7 +83,7 @@ export const useCaseStore = create((set, get) => ({
     const telegramId = userState.userData?.telegram_id || userState.userData?.id;
     const balance = Number(userState.balance ?? 0) + Number(item?.price ?? 0);
 
-    const response = await fetch('http://localhost:3000/api/auth/profile', {
+    const response = await fetch('/api/auth/profile', {
       method: 'POST',
       credentials: 'include',
       headers: {

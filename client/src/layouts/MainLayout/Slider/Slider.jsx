@@ -10,7 +10,7 @@ export default function Slider() {
 
     const fetchGift = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/cases/live-gift');
+        const response = await fetch('/api/cases/live-gift');
         if (!response.ok) throw new Error('Не удалось получить подарок');
 
         const gift = await response.json();
