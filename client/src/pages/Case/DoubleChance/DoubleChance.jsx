@@ -8,12 +8,14 @@ import { Switch } from './Switch/Switch'
 import { Typography } from '@/components/Typography/Typography'
 import { Instruction } from './Instruction/Instruction'
 import styles from "./DoubleChance.module.scss"
+import { useGetBalance } from '@/stores/useUserStore'
 
 export const DoubleChance = () => {
   const price = useCasePrice();
+  const balance = useGetBalance()
   const isDisabled = useCaseDisabled();
   return (
-    <Flex className={cn(styles.gap, isDisabled ? styles.disabled : "")}>
+    <Flex className={cn(styles.gap, isDisabled ? styles.disabled : "", !balance && styles.disabled)}>
         <Boost />
         <Typography tag="span" className={styles.text}>X2 шанс</Typography>
         <Price value={price * 1.2}/>

@@ -1,80 +1,81 @@
+.balanceContent {
+    width: 100%;
+    height: 100%;
+
+}
+
 .balance {
     position: absolute;
     right: calcVW(275, 1440);
-    width: calcVW(196.19, 1440);
+    // width: calcVW(210, 1440);
     max-height: calcVW(50, 1440);
-    max-width: calcVW(196.19, 1440);
-    font-size: calcVW(16, 1440);
+    // max-width: calcVW(210, 1440);
+    font-size: calcVW(14, 1440);
     font-weight: 500;
     line-height: calcVW(28, 1440);
     overflow: hidden;
     z-index: 100;
-
+    background: #08090B;
+    border: calcVW(1.5, 1600) solid rgba(0, 152, 234, .85);
+    box-shadow:
+        inset 0 0 18px rgba(0, 152, 234, .28),
+        inset 0 0 45px rgba(0, 152, 234, .12),
+        0 6px 20px rgba(0, 0, 0, .45);
+    padding-right: calcVW(5, 1600);
     @include vp--1600 {
         right: 285px;
-        width: 196.19px;
+        // width: 210px;
         max-height: 56px;
-        max-width: 196.19px;
-        font-size: 16px;
+        // max-width: 210px;
+        font-size: 14px;
         line-height: 28px;
+        padding-top: 7px;
+        padding-right: 5px;
     }
-
     @include vp--1024 {
         right: 200px;
     }
-
     @include vp--680 {
         right: 16px;
     }
-
     @media screen and (max-width: 460px) {
         width: 160px;
-    }   
+    }
 }
-
 .icon {
     width: calcVW(16, 1440);
-
     @include vp--1600 {
         width: 16px;
     }
 }
-
 .icon img {
-    width: calcVW(16, 1440);
-
+    width: calcVW(15, 1440);
     @include vp--1600 {
         width: 16px;
     }
 }
-
 .dropdown {
     position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: calcVW(20, 1440);
-
     @include vp--1600 {
         gap: 10px;
     }
 }
-
 .balance .dropItem {
     display: flex;
     align-items: center;
     gap: calcVW(20, 1440);
-
     @include vp--1600 {
         gap: 20px;
     }
 }
-
 .dropItem:hover span,
 .dropItem:hover .icon {
-    color: rgba($color: #FFFFFF, $alpha: 0.4);
+    // color: rgba(0, 152, 234, .7);
 }
-
 .dropdownIcon {
     position: absolute;
     right: 0;
@@ -84,45 +85,111 @@
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: 60%;
-    background-color: #FFFFFF;
+    background-color: #8edfff;
     transition: all 0.3s ease;
     cursor: pointer;
-
     @include vp--1600 {
         width: 20px;
         height: 20px;
     }
 }
-
 .open {
     max-height: calcVW(200, 1440);
     top: calcVW(13, 1440);
-    background-color: #0B090D;
+    // background: linear-gradient(180deg, rgba(10, 27, 36, .98), rgba(5, 15, 21, .98));
+    border-color: rgba(0, 152, 234, .5);
+    // box-shadow: 0 10px 35px rgba(0, 0, 0, .5), 0 0 20px rgba(0, 152, 234, .12), inset 0 1px 0 rgba(255, 255, 255, .07);
     transition: all .2s;
-
     @include vp--1600 {
         max-height: 200px;
         top: 17px;
     }
-
     @include vp--1280 {
         top: 20px;
     }
-
     @include vp--680 {
         top: 17px;
     }
 }
-
 .open .dropdownIcon {
     transform: rotate(180deg);
-    background-color: rgba($color: #FFFFFF, $alpha: 0.4);
+    background-color: rgba(32, 201, 255, .7);
 }
-
 .balance .dropItem img {
     margin-bottom: calcVW(3, 1440);
-
     @include vp--1600 {
         margin-bottom: 3px;
+    }
+}
+
+.priceColor {
+    &::before {
+         background-color: #FFFFFF !important; 
+    }
+}
+
+.depositButton {
+    flex: 0 0 auto;
+
+    width: calcVW(60, 1440);
+    height: calcVW(29, 1440);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    border-radius: calcVW(25, 1440);
+
+    color: #fff;
+
+    background: #08b5ee;
+
+    box-shadow:
+        inset 0 2px 5px rgba(255, 255, 255, 0.28),
+        inset 0 -3px 7px rgba(0, 91, 145, 0.28),
+        inset 0 0 12px rgba(0, 198, 255, 0.35),
+        0 0 10px rgba(0, 190, 255, 0.28);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease,
+        box-shadow 0.15s ease;
+
+    @include vp--1600 {
+        width: 60px;
+        height: 40px;
+        border-radius: 25px;
+
+        box-shadow:
+            0 0 15px rgba(0, 183, 255, 0.45),
+            inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    }
+
+    &:hover {
+        filter: brightness(1.08);
+
+        box-shadow:
+            0 0 20px rgba(0, 183, 255, 0.65),
+            inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    &:active {
+        transform: scale(0.97);
+    }
+
+    svg {
+        width: calcVW(24, 1440);
+        height: calcVW(24, 1440);
+
+        @include vp--1600 {
+            width: 24px;
+            height: 24px;
+        }
     }
 }

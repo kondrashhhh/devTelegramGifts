@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router'
 import { useGetCurrency, useSetCurrency } from '@/stores/useCurrencyStore';
 import { useMediaQuery } from 'react-responsive';
 import { values } from './values';
@@ -27,34 +28,79 @@ export default function BalanceButton() {
     setGlobalCurrency(currency);
   };
 
-  return (
-    <button className={`${styles.balance} button ${isOpen ? styles.open : ''}`}>
+return (
+  <div
+    className={`${styles.balance} button ${
+      isOpen ? styles.open : ''
+    }`}
+  >
+    <div className={styles.balanceContent}>
       <div className={styles.dropdown}>
         {currencies.map((item, index) => (
           <div
             className={styles.dropItem}
             key={index}
-            onClick={() => handleClickChange(item, item.title, index)}
+            // onClick={() =>
+            //   handleClickChange(item, item.title, index)
+            // }
           >
             <div className={styles.icon}>
-              <img 
+              <img
                 src={item.icon}
                 alt={item.title}
               />
             </div>
-            <span>{calculate(item.title, true)} {!isCollapse && item.title}</span>
-            {item.active && (
-              <div 
-                className={styles.dropdownIcon}
+
+            <span>
+              {calculate(item.title, true)}{' '}
+              {!isCollapse && item.title}
+            </span>
+            <Link to="/up">
+              <button
+                type="button"
+                className={styles.depositButton}
                 onClick={(e) => {
-                  e.preventDefault();
-                  setIsOpen(!isOpen);
+                  e.stopPropagation();
                 }}
-              />
-            )}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 7.5C5 6.67 5.67 6 6.5 6H17.5C18.33 6 19 6.67 19 7.5V16.5C19 17.33 18.33 18 17.5 18H6.5C5.67 18 5 17.33 5 16.5V7.5Z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                  />
+
+                  <path
+                    d="M5 9H17.5"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+
+                  <path
+                    d="M15 13V16"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+
+                  <path
+                    d="M13.5 14.5H16.5"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            </Link>
           </div>
         ))}
       </div>
-    </button>
-  );
+    </div>
+  </div>
+);
 }

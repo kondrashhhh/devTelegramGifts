@@ -3,11 +3,13 @@ import cn from 'classnames';
 import { useCaseCount, useCaseDisabled, useCaseSetCount } from '@/stores/useCaseStore';
 import { CountButton } from './CountButton/CountButton';
 import styles from "./Counter.module.scss";
+import { useGetBalance } from '@/stores/useUserStore';
 
 export const Counter = () => {
   const count = useCaseCount();
   const isDisabled = useCaseDisabled();
   const setCount = useCaseSetCount();
+  const balance = useGetBalance();
   const numbers = [1, 2, 3, 4, 5];
   const indicatorRef = useRef(null);
   const buttonsRef = useRef([]);
@@ -24,7 +26,7 @@ export const Counter = () => {
   }, [count]);
 
   return (
-    <div className={cn(styles.counter, isDisabled && styles.disabled)}>
+    <div className={cn(styles.counter, isDisabled && styles.disabled, !balance && styles.disabled)}>
       <div className={styles['active-indicator']} ref={indicatorRef} />
       {numbers.map((number, index) => (
         <div 

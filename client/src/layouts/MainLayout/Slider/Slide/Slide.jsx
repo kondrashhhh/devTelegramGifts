@@ -7,7 +7,20 @@ export default function Slide({ src, name, rarity }) {
     <a href="/user/5433520" className={`${styles.box} ${styles[rarityClass]}`}>
         <div className={styles.inner}>
             <div className={styles.wrapperImg}>
-                <img src={src} alt={name} className={styles.img} loading="lazy" width={69} height={69}/>
+              <div className={styles.image}>
+            { src.slice(-3) === "tgs" ? (
+                <tgs-player
+                    mode="normal"
+                    src={`${src}`}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                    }}
+                />
+            )                                : (
+                <img src={`${src}`} alt={name} />
+            )}
+            </div>
             </div>
             <div className={styles.name}>{name}</div>
         </div>

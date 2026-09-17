@@ -1,80 +1,63 @@
-import React, {  } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Slider.module.scss'
 import Slide from './Slide/Slide';
 
 export default function Slider() {
-  // const [slidesData, setSlidesData] = useState([]);
-  // const [loading, setLoading] = useState(true)
+  const [items, setItems] = useState([]);
 
-  // useEffect(() => {
-  //   async function fetchAssets() {
-  //     try {
-  //       const response = await fetch('/api/get-assets', {
-  //         credentials: 'include',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         }
-  //       })
-  
-  //       if (!response.ok) {
-  //         throw new Error(`Сетевая ошибка: ${response.status}`);
-  //       }
-  
-  //       const reader = response.body.getReader();
-  //       const decoder = new TextDecoder('utf-8');
-  //       let done = false;
-  
-  //       while (!done) {
-  //         const { value, done: doneReading } = await reader.read();
-  //         done = doneReading;
-  //         if (value) {
-  //           const chunk = decoder.decode(value, { stream: true });
-  //           const resJSON = JSON.parse(chunk)
-  //           console.log('Получен кусок:', resJSON);
-  //           setSlidesData(prev => {
-  //             const newSlidesData = [resJSON, ...prev];
-              
-  //             if (newSlidesData.length > 21) {
-  //               newSlidesData.pop();
-  //               setLoading(false);
-  //             }
-            
-  //             return newSlidesData;
-  //           });
-  
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error('Ошибка при получении данных:', error);
-  //     } finally {
-  //       console.log(slidesData);
-  //     }
-  //   }
-  
-  //   fetchAssets();
-  // }, []);
+  useEffect(() => {
+    let isMounted = true;
 
-  const items = [
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-    {name: "Diamond Ring", image: '/test.png'},
-  ]
+    const fetchGift = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/cases/live-gift');
+        if (!response.ok) throw new Error('Не удалось получить подарок');
+
+        const gift = await response.json();
+        return { ...gift, liveId: `${gift.item_id}-${Date.now()}-${Math.random()}` };
+      } catch (error) {
+        console.error('Ошибка live-ленты:', error);
+        return null;
+      }
+    };
+
+    const loadInitialGifts = async () => {
+      const initialItems = await Promise.all(
+        Array.from({ length: 11 }, () => fetchGift())
+      );
+
+      if (!isMounted) return;
+      setItems(initialItems.filter(Boolean));
+
+      const interval = setInterval(async () => {
+        const gift = await fetchGift();
+        if (!isMounted || !gift) return;
+
+        setItems((currentItems) => [gift, ...currentItems].slice(0, 11));
+      }, 500);
+
+      return () => clearInterval(interval);
+    };
+
+    let stopInterval;
+    loadInitialGifts().then((cleanup) => {
+      stopInterval = cleanup;
+    });
+
+    return () => {
+      isMounted = false;
+      stopInterval?.();
+    };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
       {items.map((slideData, index) => (
           <Slide
-           key={index}
+           key={slideData.liveId}
            src={slideData.image} 
            name={slideData.name} 
+           rarity={slideData.rarity_category?.name}
           />
       ))}
     </div>

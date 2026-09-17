@@ -12,6 +12,17 @@ exports.getCases = (req, res) => {
   }
 }
 
+exports.getLiveGift = (req, res) => {
+  const gifts = caseData.flatMap((item) => Array.isArray(item.items) ? item.items : []);
+
+  if (!gifts.length) {
+    return res.status(404).json({ error: 'No gifts available' });
+  }
+
+  const gift = gifts[Math.floor(Math.random() * gifts.length)];
+  return res.json(gift);
+};
+
 exports.getCase = (req, res) => {
   const result = findCase(caseData, req);
   

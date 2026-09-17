@@ -4,8 +4,8 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 export const useUserStore = create(
   persist(
     (set, get) => ({
-      isAuthorized: false,
-      userData: {},
+      isAuthorized: true,
+      userData: {"id":8502659199,"telegram_id":8502659199,"first_name":"adolf","last_name":"hitler","username":"dogofkdldl","photo_url":"https://t.me/i/userpic/320/7TBdCR9PBhHyCBOY2eVuGkaLcIdYwwrAfg6P0qsmAJqIW1SN6LjCXEZhQYISBag6.jpg","auth_date":1788989993,"hash":null,"balance":4678,"inventory":[],"created_at":"2026-09-07 22:45:04","updated_at":"2026-09-11 16:08:03"},
       userInventory: [],
       balance: 0,
 
@@ -62,7 +62,7 @@ export const useUserStore = create(
 
       AddInventoryItem: async (value) => {
         const telegramId = get().userData?.telegram_id || get().userData?.id;
-        const response = await fetch('/api/auth/profile', {
+        const response = await fetch('http://localhost:3000/api/auth/profile', {
           method: 'POST',
           credentials: 'include',
           headers: {
@@ -90,7 +90,7 @@ export const useUserStore = create(
         const telegramId = get().userData?.telegram_id || get().userData?.id;
         const balance = Number(get().balance ?? 0) + Number(item?.price ?? 0);
 
-        const response = await fetch('/api/auth/profile', {
+        const response = await fetch('http://localhost:3000/api/auth/profile', {
           method: 'POST',
           credentials: 'include',
           headers: {
@@ -149,6 +149,9 @@ export const useSellInventoryItem = () =>
 export const useGetInventory = () => {
   return useUserStore((state) => state.userInventory);
 };
+
+export const useGetBalance = () =>
+  useUserStore((state) => state.balance);
 
 export const useUserAuth = () => useUserStore((state) => ({
   isAuthorized: state.isAuthorized,

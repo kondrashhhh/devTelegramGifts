@@ -1,0 +1,36 @@
+.wrapper {
+    width: 30%;
+    min-height: 200px;
+    background-color: rebeccapurple;
+}
+
+.walletIcon {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.walletIcon::before {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 55px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    background: radial-gradient(
+        ellipse,
+        rgba(0, 195, 255, 0.42) 0%,
+        rgba(0, 175, 255, 0.22) 35%,
+        rgba(0, 150, 255, 0.08) 60%,
+        transparent 78%
+    );
+
+    filter: blur(10px);
+    z-index: -1;
+    pointer-events: none;
+}

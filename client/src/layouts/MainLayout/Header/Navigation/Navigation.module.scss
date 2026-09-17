@@ -7,11 +7,11 @@
     align-items: center;
     justify-content: end;
     padding: 0 calcVW(40, 1440);
-    margin-right: calcVW(217, 1440);
+    margin-right: calcVW(270, 1440);
     gap: calcVW(30, 1440);
 
     @include vp--1600 {
-        margin-right: 217px;
+        margin-right: 230px;
         padding: 0 40px;
         gap: 30px;
     }
