@@ -9,6 +9,7 @@ import { Typography } from '@/components/Typography/Typography';
 import { Parallax } from './Parallax/Parallax';
 import { Buttons } from './Buttons/Buttons';
 import { Counter } from './Counter/Counter';
+import { useGetBalance } from '@/stores/useUserStore';
 import { DoubleChance } from './DoubleChance/DoubleChance';
 import { useCaseStore } from '@/stores/useCaseStore';
 import { ItemList } from './ItemList/ItemList';
@@ -17,6 +18,7 @@ import styles from './Case.module.scss';
 export const Case = () => {
   const { userData } = useContext(AuthContext);
   const { category, translit_name } = useParams();
+  const balance = useGetBalance();
   const parallaxRef = useRef(null);
   
   const {
@@ -65,7 +67,7 @@ export const Case = () => {
         )}
         
         <Flex className={styles.count}>
-          { userData && (
+          { userData && balance && (
             <>
               <Typography tag="span" variant="standart">
                 Сколько кейсов открыть?
