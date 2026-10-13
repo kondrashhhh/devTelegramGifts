@@ -3,7 +3,11 @@
 }
 
 .login {
-    margin-right: 218px;
+    margin-right: 260px;
+
+    @include vp--1024 {
+        margin-right: 230px;
+    }
 
     @include vp--680 {
         margin: 0;

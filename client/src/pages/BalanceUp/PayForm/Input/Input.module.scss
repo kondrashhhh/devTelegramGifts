@@ -1,0 +1,77 @@
+.inputWrapper {
+    width: 50%;
+    margin-top: calcVW(10, 1600);
+    padding: calcVW(7, 1600) calcVW(10, 1600);
+    background:
+        radial-gradient(circle at 50% 28%,
+        rgba(11,28,55,.95) 0%,
+        #07101C 100%);
+    border: 2px solid rgba(48, 75, 97, 0.75);
+    border-radius: calcVW(8, 1600);
+    display: flex;
+    align-items: center;
+
+    input {
+        padding-left: calcVW(10, 1600);
+        border: none;
+        background-color: transparent;
+        margin-right: 10px;
+        font-weight: bold;
+        width: 100%;
+        font-size: calcVW(12, 1600);
+        color: #FFF;
+
+        &::placeholder {
+            color: #828aa4;
+        }
+
+        @include vp--1600 {
+            padding-left: 10px;
+            font-size: 14px;
+        }
+
+        @include vp--680 {
+            width: 100%;
+        }
+    }
+
+    &::before {
+        content: "";
+        display: flex;
+        width: calcVW(12, 1600);
+        height: calcVW(12, 1600);
+        mask-repeat: no-repeat;
+        mask-image: url(/sell.svg);
+        mask-size: 100%;
+        background-color: #828aa4;
+
+        @include vp--1600 {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    
+    &.deposit::before {
+        mask-image: url(/deposit.svg);
+        width: calcVW(17, 1600);
+        height: calcVW(17, 1600);
+
+        @include vp--1600 {
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    @include vp--1600 {
+        margin-top: 10px;
+        padding: 7px 13px;
+        border: 1px solid #1F2330;
+        border-radius: 8px;
+    }
+
+    @include vp--680 {
+        width: 100%;
+        padding: 15px 15px;
+    }
+}

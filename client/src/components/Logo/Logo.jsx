@@ -10,7 +10,7 @@ export default function Logo({ type = 'small' }) {
           <Link to="/">
               <img
                 className={styles.smallImage}
-                src="/header/logo.svg"
+                src="/header/logo.png"
                 alt=""
               />
           </Link>
@@ -19,10 +19,9 @@ export default function Logo({ type = 'small' }) {
         <div>
           <Link to="/">
               <img
-                src="/header/logo.svg"
+                src="/header/logo.png"
                 alt=""
                 width={200}
-                height={60}
               />
           </Link>
         </div>

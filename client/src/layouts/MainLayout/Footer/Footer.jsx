@@ -21,7 +21,7 @@ export default function Footer() {
                     Кыргызская Республика, г. Бишкек, Ленинский район, ул. Калык Акиева, 66
               </span>
             </div>
-            <Messangers type="big" />
+            {/* <Messangers type="big" /> */}
           </div>
           <div className={styles.links}>
             {

@@ -71,6 +71,10 @@
     @include vp--1600 {
         gap: 20px;
     }
+
+    @include vp--1024 {
+        gap: 8px;
+    }
 }
 .dropItem:hover span,
 .dropItem:hover .icon {

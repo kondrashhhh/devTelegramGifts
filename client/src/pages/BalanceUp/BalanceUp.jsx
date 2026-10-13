@@ -2,6 +2,7 @@ import React from 'react'
 import { Typography } from '@/components/Typography/Typography'
 import { Info } from './Info/Info'
 import { PaymentMethods } from './PaymentMethods/PaymentMethods'
+import { PayForm } from './PayForm/PayForm'
 import styles from './BalanceUp.module.scss'
 
 export const BalanceUp = () => {
@@ -11,7 +12,10 @@ export const BalanceUp = () => {
 
         <div className={styles.container}>
             <Info />
-            <PaymentMethods />
+            <div className={styles.rightColumn}>
+              <PaymentMethods />
+              <PayForm />
+            </div>
         </div>
     </div>
   )

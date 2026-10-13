@@ -1,7 +1,7 @@
 import React from 'react'
 import Avatar from '@/layouts/MainLayout/Header/AccountInfo/Avatar/Avatar'
 import { BonusButton } from '@/components/BonusButton/BonusButton'
-import { Flex } from '@/components/Flex/Flex'
+import { Link } from 'react-router'
 import { useMediaQuery } from 'react-responsive'
 import styles from './AccountInfo.module.scss'
 
@@ -15,7 +15,9 @@ export const AccountInfo = () => {
         { isTab && !isMobile && <Avatar className={styles.avatar}/>}
         <div className={styles.infoItem}>
             <span>ЕЖЕДНЕВНЫЙ <br />БОНУС</span>
-            <BonusButton content="Получить"/>
+            <Link to='/up'>
+              <BonusButton content="Получить"/>
+            </Link>
         </div>
         { !isTab && <Avatar className={styles.avatar}/>}
         <div className={`${styles.infoItem} ${styles.infoItemDark}`}>

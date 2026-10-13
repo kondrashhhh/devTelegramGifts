@@ -1,5 +1,37 @@
 .wrapper {
-    width: 70%;
+    position: relative;
+    width: 100%;
     min-height: 200px;
-    background-color: aquamarine;
+    padding: calcVW(20, 1600);
+    background-color: #07101C;
+    background:
+        radial-gradient(circle at 50% 28%,
+        rgba(30,168,255,.30) 0%,
+        rgba(11,28,55,.95) 45%,
+        #07101C 100%);
+    border:1.5px solid rgba(33,155,255,.95);
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    border-radius: calcVW(10, 1920);
+    gap: calcVW(3, 1920);
+
+    @include vp--1600 {
+        padding: 20px;
+        border-radius: 10px;
+        gap: 5px;
+    }
+
+    @include vp--1024 {
+        width: 100%;
+    }
+
+    .top > span {
+        font-weight: bold;
+        font-size: calcVW(18, 1600);
+
+        @include vp--1600 {
+            font-size: 18px;
+        }
+    }
 }

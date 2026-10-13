@@ -1,0 +1,11 @@
+.wrapper {
+    display: flex;
+    gap: calcVW(15, 1600);
+    padding: calcVW(15, 1600) 0;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @include vp--1600 {
+        padding: 15px 0;
+    }
+}

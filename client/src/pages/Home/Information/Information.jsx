@@ -2,6 +2,7 @@ import React from 'react'
 import { useMediaQuery } from 'react-responsive';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Flex } from '@/components/Flex/Flex'
+import { Link } from 'react-router';
 import styles from './Information.module.scss'
 import 'swiper/css'
 
@@ -43,9 +44,11 @@ export const Information = () => {
       <div className={styles.info}>
         <div className={styles.infoItem}>
           <span>БОНУС 20% <br /> НА ПОПОЛНЕНИЕ</span>
-          <button className={styles.bonus}>
-            Применить
-          </button>
+          <Link to='/up'>
+            <button className={styles.bonus}>
+              Применить
+            </button>
+          </Link>
         </div>
         <div className={styles.infoItem}>
           <Flex className={styles.flexText}>

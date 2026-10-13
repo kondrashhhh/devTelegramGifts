@@ -30,10 +30,10 @@
 
 .smallImage {
     width: calcVW(130, 1440);
-    height: calcVW(28, 1440);
+    // height: calcVW(28, 1440);
 
     @include vp--1600 {
         width: 130px;
-        height: 28px;
+        // height: 28px;
     }
 }

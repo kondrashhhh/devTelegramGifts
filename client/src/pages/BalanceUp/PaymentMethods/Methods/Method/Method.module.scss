@@ -1,0 +1,35 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    border: 2px solid rgba(48, 75, 97, 0.75);
+    border-radius: calcVW(10, 1600);
+    max-height: calcVW(100, 1600);
+    max-width: calcVW(150, 1600);
+    background: linear-gradient(180deg, #0a2345, #071a32);
+    padding: 0 calcVW(15, 1600);
+    transition: .15s;
+
+    @include vp--1600 {
+        max-height: 100px;
+        padding: 0 15px;
+        border-radius: 10px;
+        min-width: 150px;
+    }
+
+    &:hover {
+        border: 2px solid #1e9ae7;
+    }
+
+    &.active {
+        box-shadow: 0 0 8px #00aeffa6, 0 0 20px #0091ff4d, inset 0 0 15px #00a0ff14;
+        border: 2px solid #009EFF;
+    }
+}
+
+.wrapper > img {
+    width: calcVW(100, 1600);
+
+    @include vp--1600 {
+        width: 100px;
+    }
+}
