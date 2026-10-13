@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
+import { AuthContext } from '@/context/AuthContext';
 import { useParams } from 'react-router-dom';
 import { WinScreen } from './WinScreen/WinScreen';
 import { Loading } from '@/components/Loading/Loading';
@@ -14,6 +15,7 @@ import { ItemList } from './ItemList/ItemList';
 import styles from './Case.module.scss';
 
 export const Case = () => {
+  const { userData } = useContext(AuthContext);
   const { category, translit_name } = useParams();
   const parallaxRef = useRef(null);
   
@@ -63,11 +65,15 @@ export const Case = () => {
         )}
         
         <Flex className={styles.count}>
-          <Typography tag="span" variant="standart">
-            Сколько кейсов открыть?
-          </Typography>
-          <Counter />
-          <DoubleChance />
+          { userData && (
+            <>
+              <Typography tag="span" variant="standart">
+                Сколько кейсов открыть?
+              </Typography>
+              <Counter />
+              <DoubleChance />
+            </>
+          )}
           <MemoButtons
             info={caseInfo}
           />
