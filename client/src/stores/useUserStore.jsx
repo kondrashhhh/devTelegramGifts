@@ -5,7 +5,7 @@ export const useUserStore = create(
   persist(
     (set, get) => ({
       isAuthorized: true,
-      userData: {"id":8502659199,"telegram_id":8502659199,"first_name":"adolf","last_name":"hitler","username":"dogofkdldl","photo_url":"https://t.me/i/userpic/320/7TBdCR9PBhHyCBOY2eVuGkaLcIdYwwrAfg6P0qsmAJqIW1SN6LjCXEZhQYISBag6.jpg","auth_date":1788989993,"hash":null,"balance":4678,"inventory":[],"created_at":"2026-09-07 22:45:04","updated_at":"2026-09-11 16:08:03"},
+      userData: {},
       userInventory: [],
       balance: 0,
 
