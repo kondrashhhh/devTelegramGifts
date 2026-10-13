@@ -67,7 +67,7 @@ export const Case = () => {
         )}
         
         <Flex className={styles.count}>
-          { userData && balance && (
+          {userData && balance > 0 && (
             <>
               <Typography tag="span" variant="standart">
                 Сколько кейсов открыть?

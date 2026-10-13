@@ -36,7 +36,7 @@ export const Buttons = ({ info }) => {
          className={cn(styles.button)}
         />
       )}
-      { userData && (
+      { userData && balance > 0 && (
        <SkipButton
         info={info}
         className={cn(styles.button, isDisabled && styles.disable, !balance && styles.disabled)}
