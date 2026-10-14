@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { AuthContext } from '@/context/AuthContext'
 import { Typography } from '@/components/Typography/Typography'
 import { AccountInfo } from './AccountInfo/AccountInfo'
