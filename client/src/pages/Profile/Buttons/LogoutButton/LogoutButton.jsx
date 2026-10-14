@@ -14,7 +14,7 @@ export const LogoutButton = ({ className }) => {
   return (
     <button
      className={cn(styles.logout, className)}
-     onClick={handleClick()}
+     onClick={handleClick}
     >
         Выйти из профиля
     </button>
