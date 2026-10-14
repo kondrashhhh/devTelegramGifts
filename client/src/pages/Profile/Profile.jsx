@@ -9,10 +9,9 @@ import styles from './Profile.module.scss'
 export const Profile = () => {
   const { userData } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (!userData)
-      return <h1>Не авторизован</h1>
-  }, [])
+  if (!userData) {
+    return <h1>Не авторизован</h1>
+  }
 
   return (
     <div className={styles.page}>
