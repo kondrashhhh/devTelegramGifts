@@ -14,7 +14,7 @@ export const Animation = () => {
   
   
   const scrollItems = React.useMemo(() => {
-    const baseItems = [...items, ...items, ...items, ...items, winItem].sort(() => Math.random() - 0.5);
+    const baseItems = [...items, ...items, ...items, winItem].sort(() => Math.random() - 0.5);
           (baseItems.length - 1) % 2 !== 0 && baseItems.pop();
           baseItems[(baseItems.length - 1) / 2] = winItem;
     return baseItems
@@ -37,7 +37,7 @@ export const Animation = () => {
         <motion.div
           initial={{ x: "49.35%" }}
           animate={isReady ? { x: "0%" } : { x: "49.35%" }}
-          transition={{ duration: 11, ease: [0.12, 0, 0, 0.99] }}
+          transition={{ duration: 12, ease: [0.12, 0, 0, 0.99] }}
           style={{ display: 'flex', willChange: 'transform' }}
           onAnimationComplete={() => isReady &&
             setTimeout(() => {
