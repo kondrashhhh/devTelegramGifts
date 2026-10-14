@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: calcVW(15, 1600);
+    margin-top: calcVW(20, 1600);
+
+    @include vp--1600 {
+        gap: 15px;
+        margin-top: 20px;
+    }
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calcVW(8, 1600);
+
+  height: calcVW(40, 1600);
+  padding: 0 calcVW(16, 1600);
+
+  border: calcVW(1, 1600) solid #263447;
+  border-radius: calcVW(10, 1600);
+
+  background: #111722;
+  color: #dce5f2;
+
+  font-size: calcVW(14, 1600);
+  font-weight: 500;
+  font-family: inherit;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+   @include vp--1600 {
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid #263447;
+    border-radius: 10px;
+    font-size: 14px;
+   }
+}
