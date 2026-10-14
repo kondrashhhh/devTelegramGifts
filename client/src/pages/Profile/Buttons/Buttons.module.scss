@@ -1,5 +1,7 @@
 .container {
+    width: 100%;
     display: flex;
+    justify-content: end;
     align-items: center;
     gap: calcVW(15, 1600);
     margin-top: calcVW(20, 1600);
