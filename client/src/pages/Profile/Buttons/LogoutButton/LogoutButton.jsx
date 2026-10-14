@@ -9,6 +9,7 @@ export const LogoutButton = ({ className }) => {
   const handleClick = async () => {
     localStorage.clear();
     navigate("/");
+    window.location.reload();
   }
 
   return (
