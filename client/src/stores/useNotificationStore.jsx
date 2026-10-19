@@ -17,7 +17,7 @@ export const useNotificationStore = create((set, get) => ({
     hideTimer = setTimeout(() => {
       set({ isShow: false });
       hideTimer = null;
-    }, 10000);
+    }, 4000);
   },
 
   getParams: () => get().notificationId,
