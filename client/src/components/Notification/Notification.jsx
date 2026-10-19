@@ -4,8 +4,6 @@ import { useGetParams } from '@/stores/useNotificationStore'
 import { useGetContent } from '@/stores/useNotificationStore'
 import styles from './Notification.module.scss'
 
-import Logo from './notification.svg?react'
-
 export const Notification = () => {
   const { notificationId, isShow } = useGetParams();
   const { type, message, title } = useGetContent();
