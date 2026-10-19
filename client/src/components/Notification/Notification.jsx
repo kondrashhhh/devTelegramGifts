@@ -4,6 +4,8 @@ import { useGetParams } from '@/stores/useNotificationStore'
 import { useGetContent } from '@/stores/useNotificationStore'
 import styles from './Notification.module.scss'
 
+import Logo from './notification.svg?react'
+
 export const Notification = () => {
   const { notificationId, isShow } = useGetParams();
   const { type, message, title } = useGetContent();
@@ -19,7 +21,7 @@ export const Notification = () => {
           notificationId && styles[notificationId],
         )}>
           <div className={styles.icon}>
-            <img src='/notification.svg' />
+            <Logo />
           </div>
 
           <div className={styles.content}>
