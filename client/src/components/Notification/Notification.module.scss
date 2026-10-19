@@ -2,16 +2,14 @@
     position: fixed;
     right: calcVW(25, 1600);
     bottom: calcVW(25, 1600);
-    // width: calcVW(500, 1600); 
-    // height: calcVW(50, 1600);
 
     display: flex;
     flex-direction: column;
     gap: calcVW(10, 1600);
 
+    pointer-events: none;
+
     @include vp--1600 {
-        // width: 500px;
-        // height: 50px;
         right: 25px;
         bottom: 25px;
         gap: 10px;
@@ -36,6 +34,8 @@
     overflow: hidden;
     border-radius: calcVW(14, 1600);
     color: #fff;
+
+    pointer-events: auto;
 
     &.good {
         background-color: #00A94F;

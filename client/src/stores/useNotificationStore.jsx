@@ -1,40 +1,59 @@
+
 import { create } from 'zustand';
 
-let hideTimer = null;
+let nextId = 0;
+const timers = new Map();
 
 export const useNotificationStore = create((set, get) => ({
-  isShow: false,
-  notificationId: '',
-  type: "",
-  message: "",
-  title: "",
+  notifications: [],
 
-  updateParams: (id) => {
-    if (hideTimer) clearTimeout(hideTimer);
+  addNotification: (id, content = {}) => {
+    const notificationId = ++nextId;
 
-    set({ notificationId: id, isShow: true });
+    const notification = {
+      id: notificationId,
+      type: content.type || id,
+      title: content.title || (
+        id === 'good' ? 'Успешно' : 'Ошибка'
+      ),
+      message: content.message || '',
+      duration: content.duration || 4000,
+    };
 
-    hideTimer = setTimeout(() => {
-      set({ isShow: false });
-      hideTimer = null;
-    }, 4000);
+    set((state) => ({
+      notifications: [...state.notifications, notification],
+    }));
+
+    const timer = setTimeout(() => {
+      get().removeNotification(notificationId);
+    }, content.duration || 4000);
+
+    timers.set(notificationId, timer);
+
+    return notificationId;
   },
 
-  getParams: () => get().notificationId,
+  removeNotification: (id) => {
+    const timer = timers.get(id);
+
+    if (timer) {
+      clearTimeout(timer);
+      timers.delete(id);
+    }
+
+    set((state) => ({
+      notifications: state.notifications.filter(
+        (notification) => notification.id !== id
+      ),
+    }));
+  },
 }));
 
-export const useSetParams = () => 
-    useNotificationStore((state) => state.updateParams)
+export const useSetParams = () =>
+  useNotificationStore((state) => state.addNotification);
 
-export const useGetParams = () => {
-  const notificationId = useNotificationStore((s) => s.notificationId);
-  const isShow = useNotificationStore((s) => s.isShow);
-  return { notificationId, isShow };
-};
+export const useGetNotifications = () =>
+  useNotificationStore((state) => state.notifications);
 
-export const useGetContent = () => {
-  const type = useNotificationStore((s) => s.type);
-  const message = useNotificationStore((s) => s.message);
-  const title = useNotificationStore((s) => s.title);
-  return { type, message, title };
-};
+export const useRemoveNotification = () =>
+  useNotificationStore((state) => state.removeNotification);

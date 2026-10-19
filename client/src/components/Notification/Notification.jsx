@@ -1,7 +1,11 @@
+
 import React from 'react';
 import cn from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useGetParams, useGetContent } from '@/stores/useNotificationStore';
+import {
+  useGetNotifications,
+  useRemoveNotification,
+} from '@/stores/useNotificationStore';
 import styles from './Notification.module.scss';
 
 const DURATION = 4;
@@ -9,7 +13,7 @@ const DURATION = 4;
 const toastVariants = {
   hidden: {
     opacity: 0,
-    x: 35,
+    x: 30,
     scale: 0.97,
   },
   visible: {
@@ -20,12 +24,11 @@ const toastVariants = {
       type: 'spring',
       stiffness: 380,
       damping: 30,
-      mass: 0.8,
     },
   },
   exit: {
     opacity: 0,
-    x: 25,
+    x: 20,
     scale: 0.98,
     transition: {
       duration: 0.2,
@@ -35,19 +38,20 @@ const toastVariants = {
 };
 
 export const Notification = () => {
-  const { notificationId, isShow } = useGetParams();
-  const { type, message, title } = useGetContent();
+  const notifications = useGetNotifications();
+  const removeNotification = useRemoveNotification();
 
   return (
     <div className={styles.wrapper}>
-      <AnimatePresence mode="wait">
-        {isShow && (
+      <AnimatePresence initial={false}>
+        {notifications.map((notification) => (
           <motion.div
-            key={notificationId}
+            key={notification.id}
+            layout
             className={cn(
               styles.toast,
-              type && styles[type],
-              notificationId && styles[notificationId],
+              notification.type && styles[notification.type],
+              notification.id && styles[notification.id],
             )}
             variants={toastVariants}
             initial="hidden"
@@ -64,9 +68,22 @@ export const Notification = () => {
             </div>
 
             <div className={styles.content}>
-              <div className={styles.title}>{title}</div>
-              <div className={styles.message}>{message}</div>
+              <div className={styles.title}>
+                {notification.title}
+              </div>
+              <div className={styles.message}>
+                {notification.message}
+              </div>
             </div>
+
+            <button
+              type="button"
+              className={styles.close}
+              aria-label="Закрыть уведомление"
+              onClick={() => removeNotification(notification.id)}
+            >
+              ×
+            </button>
 
             <div className={styles.progress}>
               <motion.div
@@ -74,13 +91,13 @@ export const Notification = () => {
                 initial={{ scaleX: 1 }}
                 animate={{ scaleX: 0 }}
                 transition={{
-                  duration: DURATION,
+                  duration: (notification.duration || 4000) / 1000,
                   ease: 'linear',
                 }}
               />
             </div>
           </motion.div>
-        )}
+        ))}
       </AnimatePresence>
     </div>
   );
