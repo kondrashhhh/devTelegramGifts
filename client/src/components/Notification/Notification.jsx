@@ -9,8 +9,8 @@ export const Notification = () => {
   return (
     <div className={cn(
         styles.wrapper,
-        styles[notificationId],
-        styles[isShow]
+        notificationId && styles[notificationId],
+        isShow && styles.show,
     )}>
         Notification
     </div>
