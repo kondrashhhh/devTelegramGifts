@@ -31,3 +31,10 @@ export const useGetParams = () => {
   const isShow = useNotificationStore((s) => s.isShow);
   return { notificationId, isShow };
 };
+
+export const useGetContent = () => {
+  const type = useNotificationStore((s) => s.type);
+  const message = useNotificationStore((s) => s.message);
+  const title = useNotificationStore((s) => s.title);
+  return { type, message, title };
+};
