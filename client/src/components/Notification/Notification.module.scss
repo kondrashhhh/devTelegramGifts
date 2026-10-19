@@ -71,6 +71,15 @@
   color: #fff;
   font-size: calcVW(26, 1600);
 
+  svg {
+    width: calcVW(30, 1600);
+    height: calcVW(30, 1600);
+
+    @include vp--1600 {
+        height: 30px;
+    }
+  }
+
   @include vp--1600 {
       width: 28px;
       height: 28px;
