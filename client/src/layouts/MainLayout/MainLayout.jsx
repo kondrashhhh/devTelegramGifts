@@ -1,5 +1,7 @@
 import React from 'react'
 import { ContainerFluid } from '@/components/ContainerFluid/ContainerFluid';
+import { Notification } from '@/components/Notification/Notification';
+import { useSetParams } from '@/stores/useNotificationStore';
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import Slider from './Slider/Slider'
@@ -16,6 +18,13 @@ export default function MainLayout({ children }) {
           { children }
         </ContainerFluid>
         <Footer />
+
+        <Notification />
+
+        <div className={styles.testNotif}>
+          <button onClick={useSetParams("good")}>Good</button>
+          <button onClick={useSetParams("bad")}>Bad</button>
+        </div>
     </div>
   )
 }

@@ -1,0 +1,27 @@
+.wrapper {
+    position: absolute;
+    right: calcVW(25, 1600);
+    bottom: calcVW(25, 1600);
+    width: calcVW(500, 1600);
+    height: calcVW(50, 1600);
+    opacity: 0;
+
+    @include vp--1600 {
+        width: 500px;
+        height: 50px;
+        right: 25px;
+        bottom: 25px;
+    }
+
+    &.isShow {
+        opacity: 1;
+    }
+
+    &.good {
+        background-color: #82ee50;
+    }
+
+    &.bad {
+        background-color: #ee5050;
+    }
+}
