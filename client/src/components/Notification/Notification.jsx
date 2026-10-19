@@ -39,7 +39,6 @@ const toastVariants = {
 
 export const Notification = () => {
   const notifications = useGetNotifications();
-  const removeNotification = useRemoveNotification();
 
   return (
     <div className={styles.wrapper}>
@@ -75,15 +74,6 @@ export const Notification = () => {
                 {notification.message}
               </div>
             </div>
-
-            <button
-              type="button"
-              className={styles.close}
-              aria-label="Закрыть уведомление"
-              onClick={() => removeNotification(notification.id)}
-            >
-              ×
-            </button>
 
             <div className={styles.progress}>
               <motion.div
