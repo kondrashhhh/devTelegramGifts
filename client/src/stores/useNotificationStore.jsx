@@ -5,6 +5,9 @@ let hideTimer = null;
 export const useNotificationStore = create((set, get) => ({
   isShow: false,
   notificationId: '',
+  type: "",
+  message: "",
+  title: "",
 
   updateParams: (id) => {
     if (hideTimer) clearTimeout(hideTimer);

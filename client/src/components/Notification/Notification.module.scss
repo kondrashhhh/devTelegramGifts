@@ -1,16 +1,22 @@
 .wrapper {
-    position: absolute;
+    position: fixed;
     right: calcVW(25, 1600);
     bottom: calcVW(25, 1600);
-    width: calcVW(500, 1600);
-    height: calcVW(50, 1600);
+    // width: calcVW(500, 1600);
+    // height: calcVW(50, 1600);
+
     opacity: 0;
 
+    display: flex;
+    flex-direction: column;
+    gap: calcVW(10, 1600);
+
     @include vp--1600 {
-        width: 500px;
-        height: 50px;
+        // width: 500px;
+        // height: 50px;
         right: 25px;
         bottom: 25px;
+        gap: 10px;
     }
 
     &.show {
@@ -24,4 +30,115 @@
     &.bad {
         background-color: #ee5050;
     }
+}
+
+.toast {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: calcVW(14, 1600);
+
+  width: calcVW(360, 1600);
+  min-height: calcVW(82, 1600);
+  padding: calcVW(16, 1600) calcVW(42, 1600) calcVW(20, 1600) calcVW(18, 1600);
+  box-sizing: border-box;
+
+  overflow: hidden;
+  border-radius: calcVW(14, 1600);
+  background: #0ab356;
+  color: #fff;
+
+  font-family: inherit;
+
+  animation: toast-in 0.25s ease-out forwards;
+
+    @include vp--1600 {
+        width: 360px;
+        min-height: 82px;
+        padding: 16px 42px 20px 18px;
+        border-radius: 14px;
+    }
+}
+
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: calcVW(28, 1600);
+  height: calcVW(28, 1600);
+
+  color: #fff;
+  font-size: calcVW(26, 1600);
+
+  @include vp--1600 {
+      width: 28px;
+      height: 28px;
+      font-size: 26px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: calcVW(5, 1600);
+  min-width: 0;
+
+  @include vp--1600 {
+    gap: 5px;
+  }
+}
+
+.title {
+  color: #fff;
+  font-size: calcVW(16, 1600);
+  font-weight: 700;
+  line-height: 1.2;
+
+  @include vp--1600 {
+    font-size: 16px;
+  }
+}
+
+.message {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: calcVW(13, 1600);
+  font-weight: 400;
+  line-height: 1.35;
+
+    @include vp--1600 {
+        font-size: 13px;
+    }
+}
+
+.progress {
+  position: absolute;
+  left: calcVW(18, 1600);
+  right: calcVW(18, 1600);
+  bottom: calcVW(12, 1600);
+
+  height: calcVW(4, 1600);
+  overflow: hidden;
+  border-radius: calcVW(2, 1600);
+
+  background: rgba(255, 255, 255, 0.25);
+
+  @include vp--1600 {
+      left: 18px;
+      right: 18px;
+      bottom: 12px;
+      height: 4px;
+      border-radius: 2px;
+  }
+}
+
+.progressBar {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: #fff;
+
+  transform-origin: left;
+  animation: toast-progress 4s linear forwards;
 }
