@@ -8,6 +8,7 @@ import Slider from './Slider/Slider'
 import styles from './MainLayout.module.scss'
 
 export default function MainLayout({ children }) {
+  const setParams = useSetParams();
   return (
     <div className={styles.layout}>
         <div className={styles.topShadow}></div>
@@ -22,8 +23,8 @@ export default function MainLayout({ children }) {
         <Notification />
 
         <div className={styles.testNotif}>
-          <button onClick={useSetParams("good")}>Good</button>
-          <button onClick={useSetParams("bad")}>Bad</button>
+          <button onClick={() => setParams('good')}>Good</button>
+          <button onClick={() => setParams('bad')}>Bad</button>
         </div>
     </div>
   )

@@ -1,8 +1,10 @@
 import { create } from 'zustand';
 
+let hideTimer = null;
+
 export const useNotificationStore = create((set, get) => ({
   isShow: false,
-  notificationId: "",
+  notificationId: '',
 
   updateParams: (id) => {
     if (hideTimer) clearTimeout(hideTimer);
