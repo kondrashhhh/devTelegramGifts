@@ -1,5 +1,6 @@
 .wrapper {
     position: fixed;
+    z-index: 9999999;
     right: calcVW(25, 1600);
     bottom: calcVW(25, 1600);
 
@@ -22,6 +23,7 @@
 
 .toast {
     position: relative;
+    z-index: 9999999;
     display: flex;
     align-items: center;
     gap: calcVW(14, 1600);
