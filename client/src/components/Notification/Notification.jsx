@@ -11,12 +11,16 @@ export const Notification = () => {
   return (
     <div className={cn(
         styles.wrapper,
-        type && styles[type],
         isShow && styles.show,
-        notificationId && styles[notificationId],
     )}>
-        <div className={styles.toast}>
-          <div className={styles.icon}>✓</div>
+        <div className={cn(
+          styles.toast,
+          type && styles[type],
+          notificationId && styles[notificationId],
+        )}>
+          <div className={styles.icon}>
+            <img src='/notification.svg' />
+          </div>
 
           <div className={styles.content}>
             <div className={styles.title}>{title}</div>

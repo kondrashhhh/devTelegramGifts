@@ -22,14 +22,6 @@
     &.show {
         opacity: 1;
     }
-
-    &.good {
-        background-color: #82ee50;
-    }
-
-    &.bad {
-        background-color: #ee5050;
-    }
 }
 
 .toast {
@@ -39,14 +31,21 @@
   gap: calcVW(14, 1600);
 
   width: calcVW(360, 1600);
-  min-height: calcVW(82, 1600);
+  min-height: calcVW(65, 1600);
   padding: calcVW(16, 1600) calcVW(42, 1600) calcVW(20, 1600) calcVW(18, 1600);
   box-sizing: border-box;
 
   overflow: hidden;
   border-radius: calcVW(14, 1600);
-  background: #0ab356;
   color: #fff;
+
+    &.good {
+        background-color: #00A94F;
+    }
+
+    &.bad {
+        background-color: #ee5050;
+    }
 
   font-family: inherit;
 
@@ -54,7 +53,7 @@
 
     @include vp--1600 {
         width: 360px;
-        min-height: 82px;
+        min-height: 65px;
         padding: 16px 42px 20px 18px;
         border-radius: 14px;
     }
