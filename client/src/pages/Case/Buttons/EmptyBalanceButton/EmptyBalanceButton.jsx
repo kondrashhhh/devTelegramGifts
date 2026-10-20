@@ -2,11 +2,13 @@ import React from 'react'
 import cn from 'classnames'
 import { useCaseCount, useCaseDisabled, useCaseDoubleChance, useCaseOpen, useCasePrice } from '@/stores/useCaseStore'
 import { Price } from '@/components/Price/Price'
+import { useGetBalance } from '@/stores/useUserStore'
 import styles from "./EmptyBalanceButton.module.scss"
 
 export const EmptyBalanceButton = ({ info, className }) => {
   const doubleChance = useCaseDoubleChance();
   const isDisabled = useCaseDisabled();
+  const balance = useGetBalance();
   const count = useCaseCount();
   const price = useCasePrice();
   const open = useCaseOpen();
@@ -22,7 +24,7 @@ export const EmptyBalanceButton = ({ info, className }) => {
      className={cn(styles.open, className)}
     >
         пополнить на
-        <Price value={doubleChance ? price * 1.2 : price}/>
+        <Price value={doubleChance ? price * 1.2 - balance  : price - balance}/>
     </button>
   )
 }
