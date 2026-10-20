@@ -21,13 +21,11 @@ export const OpenButton = ({ info, className }) => {
       isDisabled,
       count
     )
-
-    if (isDisabled) {
-      setParams('good', {
-        title: `Кейс «${info.rus_name}» успешно открыт`,
-        message: `за ${price}`,
-      })
-    }
+    
+    setParams('good', {
+      title: `Кейс «${info.rus_name}» успешно открыт`,
+      message: `за ${price}`,
+    })
   }
 
   return (

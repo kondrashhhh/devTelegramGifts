@@ -6,7 +6,7 @@ import { EmptyBalanceButton } from './EmptyBalanceButton/EmptyBalanceButton'
 import { useGetBalance } from '@/stores/useUserStore'
 import { SkipButton } from './SkipButton/SkipButton'
 import styles from "./Buttons.module.scss"
-import { useCaseDisabled } from '@/stores/useCaseStore'
+import { useCaseDisabled, useCasePrice } from '@/stores/useCaseStore'
 import { AuthContext } from '@/context/AuthContext'
 import { AuthorizeButton } from './AuthorizeButton/AuthorizeButton'
 
@@ -14,11 +14,12 @@ export const Buttons = ({ info }) => {
   const { userData } = useContext(AuthContext);
   const isDisabled = useCaseDisabled();
   const balance = useGetBalance();
+  const price = useCasePrice();
 
   return (
     <Flex className={styles.gap}>
     {userData
-      ? (balance ? (
+      ? (balance > price ? (
           <OpenButton
             info={info}
             className={cn(styles.button, isDisabled && styles.disabled)}
@@ -36,7 +37,7 @@ export const Buttons = ({ info }) => {
          className={cn(styles.button)}
         />
       )}
-      { userData && balance > 0 && (
+      { userData && balance > price && (
        <SkipButton
         info={info}
         className={cn(styles.button, isDisabled && styles.disable, !balance && styles.disabled)}
