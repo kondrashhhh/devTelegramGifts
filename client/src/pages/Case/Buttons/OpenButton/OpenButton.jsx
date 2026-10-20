@@ -23,7 +23,7 @@ export const OpenButton = ({ info, className }) => {
     )
 
     setParams('good', {
-      title: `Кейс «${info.name}» успешно открыт`,
+      title: `Кейс «${info.rus_name}» успешно открыт`,
       message: `за ${price}`,
     })
   }

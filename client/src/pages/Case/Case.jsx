@@ -39,7 +39,7 @@ export const Case = () => {
   }, [category, translit_name, fetchCase]);
 
   const parallaxItems = caseData?.items?.slice(0, 6);
-  const caseInfo = { "category": category, "name": translit_name };
+  const caseInfo = { "category": category, "name": translit_name, "rus_name": caseData.name };
 
   if (loading) {
     return (
