@@ -99,23 +99,23 @@
 
 .title {
     color: #fff;
-    font-size: calcVW(16, 1600);
+    font-size: calcVW(14, 1600);
     font-weight: 700;
     line-height: 1.2;
 
     @include vp--1600 {
-        font-size: 16px;
+        font-size: 14px;
     }
 }
 
 .message {
     color: rgba(255, 255, 255, 0.85);
-    font-size: calcVW(13, 1600);
+    font-size: calcVW(12, 1600);
     font-weight: 400;
     line-height: 1.35;
 
     @include vp--1600 {
-        font-size: 13px;
+        font-size: 12px;
     }
 }
 
