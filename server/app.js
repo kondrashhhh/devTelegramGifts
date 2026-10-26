@@ -7,11 +7,14 @@ const authRouter = require("./routes/authRouter.js")
 const casesRouter = require("./routes/casesRouter.js")
 const { PORT, BOT_TOKEN } = require("./config/env.js")
 const { setupUserSockets } = require('./realtime/userSocket.js')
+const { startTelegramBot } = require('./bot/telegramBot');
 
 if (!BOT_TOKEN) {
   console.error('TELEGRAM_BOT_TOKEN is not set!');
   process.exit(1);
 }
+
+startTelegramBot(BOT_TOKEN);
 
 const app = express();
 const sessionMiddleware = session(sessionConfig);

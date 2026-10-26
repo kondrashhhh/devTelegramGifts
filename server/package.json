@@ -21,6 +21,7 @@
     "passport": "^0.7.0",
     "passport-steam": "^1.0.18",
     "sqlite3": "^6.0.1",
+    "telegraf": "^4.16.3",
     "ws": "^8.21.3"
   }
 }

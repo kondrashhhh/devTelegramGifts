@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const sqlite3 = require('sqlite3').verbose();
 
 const databaseDir = path.join(__dirname, 'db');
@@ -77,6 +78,22 @@ async function initDatabase() {
       FOREIGN KEY (telegram_id) REFERENCES users(telegram_id) ON DELETE CASCADE
     )
   `);
+
+  await run(`
+  CREATE TABLE IF NOT EXISTS telegram_login_tokens (
+    token_hash TEXT PRIMARY KEY,
+    status TEXT NOT NULL DEFAULT 'pending',
+    telegram_id INTEGER,
+    first_name TEXT,
+    last_name TEXT,
+    username TEXT,
+    photo_url TEXT,
+    auth_date INTEGER,
+    created_at INTEGER NOT NULL,
+    expires_at INTEGER NOT NULL,
+    consumed_at INTEGER
+  )
+`);
 }
 
 async function ensureUserProfile(telegramId) {
@@ -218,6 +235,80 @@ async function upsertUserState(telegramId, state = {}) {
   }
 })();
 
+function hashLoginToken(token) {
+  return crypto.createHash('sha256').update(token).digest('hex');
+}
+
+async function createTelegramLoginToken(token) {
+  const now = Math.floor(Date.now() / 1000);
+
+  await run(
+    `INSERT INTO telegram_login_tokens
+      (token_hash, status, created_at, expires_at)
+     VALUES (?, 'pending', ?, ?)`,
+    [hashLoginToken(token), now, now + 600]
+  );
+}
+
+async function confirmTelegramLoginToken(token, user) {
+  const now = Math.floor(Date.now() / 1000);
+
+  const result = await run(
+    `UPDATE telegram_login_tokens
+     SET status = 'confirmed',
+         telegram_id = ?,
+         first_name = ?,
+         last_name = ?,
+         username = ?,
+         photo_url = ?,
+         auth_date = ?
+     WHERE token_hash = ?
+       AND status = 'pending'
+       AND consumed_at IS NULL
+       AND expires_at > ?`,
+    [
+      user.id,
+      user.first_name || '',
+      user.last_name || '',
+      user.username || '',
+      user.photo_url || '',
+      now,
+      hashLoginToken(token),
+      now
+    ]
+  );
+
+  return result.changes === 1;
+}
+
+async function consumeTelegramLoginToken(token) {
+  const tokenHash = hashLoginToken(token);
+  const now = Math.floor(Date.now() / 1000);
+
+  // Атомарно помечаем токен использованным.
+  const result = await run(
+    `UPDATE telegram_login_tokens
+     SET consumed_at = ?
+     WHERE token_hash = ?
+       AND status = 'confirmed'
+       AND consumed_at IS NULL
+       AND expires_at > ?`,
+    [now, tokenHash, now]
+  );
+
+  if (result.changes !== 1) {
+    return null;
+  }
+
+  return get(
+    `SELECT telegram_id, first_name, last_name,
+            username, photo_url, auth_date
+     FROM telegram_login_tokens
+     WHERE token_hash = ?`,
+    [tokenHash]
+  );
+}
+
 module.exports = {
   db,
   all,
@@ -227,4 +318,7 @@ module.exports = {
   getUserByTelegramId,
   upsertUser,
   upsertUserState,
+  createTelegramLoginToken,
+  confirmTelegramLoginToken,
+  consumeTelegramLoginToken,
 };
