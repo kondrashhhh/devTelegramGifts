@@ -8,6 +8,7 @@ import { Home } from "./pages/Home/Home";
 import { Case } from "./pages/Case/Case";
 import { Profile } from "./pages/Profile/Profile";
 import { BalanceUp } from "./pages/BalanceUp/BalanceUp";
+import { Dev } from "./pages/Dev/Dev";
 
 
 const loadTgsPlayer = async () => {
@@ -77,6 +78,11 @@ function App() {
           <Route path='/up' element=
            {
             <BalanceUp />
+           } 
+          />
+          <Route path='/dev' element=
+           {
+            <Dev />
            } 
           />
           <Route path="/cases/:category/:translit_name" element={<Case />} />
