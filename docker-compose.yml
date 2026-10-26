@@ -1,14 +1,15 @@
-version: '3.8'
-
 services:
   server:
-    build: 
+    build:
       context: ./server
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+      - BOT_TOKEN=${BOT_TOKEN}
+      - APP_URL=${APP_URL}
+      - TELEGRAM_PROXY_URL=${TELEGRAM_PROXY_URL}
     restart: unless-stopped
     volumes:
       - ./server:/app
@@ -23,17 +24,16 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    volumes: 
+    volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
-      # - ./client/dist:/usr/share/nginx/html  # Только для разработки!
     depends_on:
       - server
     restart: unless-stopped
     networks:
       - app-network
 
-  proxy: 
-    build: 
+  proxy:
+    build:
       context: ./proxy
       dockerfile: Dockerfile
     ports:
