@@ -1,4 +1,5 @@
 const { Telegraf, Markup } = require('telegraf');
+const { HttpsProxyAgent } = require('https-proxy-agent');
 const db = require('../db');
 
 function startTelegramBot(botToken) {
