@@ -3,7 +3,7 @@ import styles from './LogBtn.module.scss';
 
 export default function LogBtn() {
   const handleTelegramLogin = () => {
-    window.location.href = `/api/auth/telegram/start`;
+    window.open('/api/auth/telegram/start', '_blank');
   };
   return (
     <button
