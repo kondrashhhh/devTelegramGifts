@@ -154,6 +154,11 @@ exports.completeTelegramLogin = async (req, res) => {
       });
     });
 
+    console.log('SESSION SAVED:', {
+      sessionID: req.sessionID,
+      telegramUser: req.session.telegramUser?.telegram_id,
+    });
+
     return res.json({ success: true, user });
   } catch (error) {
     console.error('Telegram login completion error:', error);
