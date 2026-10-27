@@ -74,7 +74,6 @@ export const useUserStore = create(
       },
 
       AddInventoryItem: async (value) => {
-        const telegramId = get().userData?.telegram_id || get().userData?.id;
         const response = await fetch('/api/auth/profile', {
           method: 'POST',
           credentials: 'include',
@@ -82,16 +81,28 @@ export const useUserStore = create(
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            telegram_id: telegramId,
             inventoryItem: value,
           }),
         });
 
-        if (!response.ok) {
-          throw new Error('Не удалось сохранить предмет в инвентарь');
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(
+            result.error || 'Не удалось сохранить предмет в инвентарь'
+          );
         }
 
-        set({ userInventory: [...get().userInventory, value] });
+        if (Array.isArray(result.user?.inventory)) {
+          set({
+            userInventory: result.user.inventory,
+            userData: result.user,
+          });
+        } else {
+          set((state) => ({
+            userInventory: [...state.userInventory, value],
+          }));
+        }
       },
 
       SellInventoryItem: async (uniqueId) => {
