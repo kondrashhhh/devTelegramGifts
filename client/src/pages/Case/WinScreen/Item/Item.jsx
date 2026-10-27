@@ -10,7 +10,7 @@ export const Item = ({ item, index }) => {
 
   const handleSave = async () => {
     try {
-      await save(index);
+      await save(index ?? 0);
     } catch (error) {
       console.error('Ошибка сохранения предмета:', error);
     }
