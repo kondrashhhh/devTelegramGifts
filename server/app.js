@@ -1,34 +1,36 @@
-const cors = require('cors')
-const express = require('express')
-const session = require('express-session')
-const corsOptions = require("./config/cors.js")
-const sessionConfig = require("./config/session.js")
-const authRouter = require("./routes/authRouter.js")
-const casesRouter = require("./routes/casesRouter.js")
-const { PORT, BOT_TOKEN } = require("./config/env.js")
-const { setupUserSockets } = require('./realtime/userSocket.js')
-const { startTelegramBot } = require('./bot/telegramBot');
 
-app.set('trust proxy', 1);
+const cors = require('cors');
+const express = require('express');
+const session = require('express-session');
+const corsOptions = require('./config/cors.js');
+const sessionConfig = require('./config/session.js');
+const authRouter = require('./routes/authRouter.js');
+const casesRouter = require('./routes/casesRouter.js');
+const { PORT, BOT_TOKEN } = require('./config/env.js');
+const { setupUserSockets } = require('./realtime/userSocket.js');
+const { startTelegramBot } = require('./bot/telegramBot');
 
 if (!BOT_TOKEN) {
   console.error('TELEGRAM_BOT_TOKEN is not set!');
   process.exit(1);
 }
 
-startTelegramBot(BOT_TOKEN);
-
 const app = express();
+
+app.set('trust proxy', 1);
+
 const sessionMiddleware = session(sessionConfig);
+
+startTelegramBot(BOT_TOKEN);
 
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(sessionMiddleware);
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/auth", authRouter);
-app.use("/api/telegram-auth", authRouter);
-app.use("/api/cases", casesRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/telegram-auth', authRouter);
+app.use('/api/cases', casesRouter);
 
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://0.0.0.0:${PORT}`);
