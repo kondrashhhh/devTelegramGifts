@@ -76,63 +76,141 @@ export const useCaseStore = create((set, get) => ({
     }
   },
 
-  sellItem: async (itemIndex) => {
-    const { itemData, setWinScreen } = get();
-    const item = Array.isArray(itemData) ? itemData[itemIndex] : itemData;
-    const userState = useUserStore.getState();
-    const telegramId = userState.userData?.telegram_id || userState.userData?.id;
-    const balance = Number(userState.balance ?? 0) + Number(item?.price ?? 0);
 
-    const response = await fetch('/api/auth/profile', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        telegram_id: telegramId,
-        balance,
-        inventory: userState.userInventory,
-      }),
-    });
+    sellItem: async (itemIndex) => {
+      const state = get();
+      const items = Array.isArray(state.itemData)
+        ? state.itemData
+        : [state.itemData];
 
-    const result = await response.json();
-    if (!response.ok) {
-      throw new Error(result?.error || 'Не удалось продать предмет');
-    }
+      const item = items[itemIndex];
+      if (!item) throw new Error('Предмет не найден');
 
-    useUserStore.getState().setBalance(result.user.balance);
-    
-    if (Array.isArray(itemData) && itemData.length > 1) {
-      const newItemData = [...itemData];
-      newItemData.splice(itemIndex, 1);
-      set({ itemData: newItemData });
-    } else {
-      setWinScreen(false);
-    }
-  },
+      const userState = useUserStore.getState();
+      const inventory = userState.userInventory || [];
 
-  saveItem: (itemIndex) => {
-    const { itemData, setWinScreen } = get();
-    
-    if (Array.isArray(itemData) && itemData.length > 1) {
-      const newItemData = [...itemData];
-      newItemData.splice(itemIndex, 1);
-      set({ itemData: newItemData });
-    } else {
-      setWinScreen(false);
-    }
-  },
+      const updatedInventory = inventory.filter(
+        (inventoryItem) => inventoryItem.uniqueId !== item.uniqueId
+      );
 
-  saveAllItems: () => {
-    const { itemData } = get();
-    if (Array.isArray(itemData)) {
-      itemData.forEach((_, index) => {
-        get().saveItem(index); 
+      const balance =
+        Number(userState.balance ?? 0) + Number(item.price ?? 0);
+
+      const response = await fetch('/api/auth/profile', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          balance,
+          inventory: updatedInventory,
+        }),
       });
-    }
-    set({ itemData: {} });
-  },
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result?.error || 'Не удалось продать предмет');
+      }
+
+      const savedUser = result.user;
+
+      userState.setUserState({
+        balance: savedUser.balance,
+        inventory: savedUser.inventory,
+        userData: savedUser,
+      });
+
+      const remainingItems = items.filter((_, index) => index !== itemIndex);
+
+      if (remainingItems.length > 0) {
+        set({ itemData: remainingItems });
+      } else {
+        set({ itemData: {} });
+        get().setWinScreen(false);
+      }
+    },
+
+    saveItem: async (itemIndex) => {
+      const state = get();
+      const items = Array.isArray(state.itemData)
+        ? state.itemData
+        : [state.itemData];
+
+      const item = items[itemIndex];
+      if (!item) throw new Error('Предмет не найден');
+
+      const response = await fetch('/api/auth/profile', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          inventoryItem: item,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result?.error || 'Не удалось сохранить предмет');
+      }
+
+      const savedUser = result.user;
+
+      useUserStore.getState().setUserState({
+        balance: savedUser.balance,
+        inventory: savedUser.inventory,
+        userData: savedUser,
+      });
+
+      const remainingItems = items.filter((_, index) => index !== itemIndex);
+
+      if (remainingItems.length > 0) {
+        set({ itemData: remainingItems });
+      } else {
+        set({ itemData: {} });
+        get().setWinScreen(false);
+      }
+    },
+
+    saveAllItems: async () => {
+      const items = Array.isArray(get().itemData)
+        ? [...get().itemData]
+        : get().itemData && Object.keys(get().itemData).length > 0
+          ? [get().itemData]
+          : [];
+
+      for (const item of items) {
+        const response = await fetch('/api/auth/profile', {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            inventoryItem: item,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result?.error || 'Не удалось сохранить все предметы');
+        }
+
+        const savedUser = result.user;
+
+        useUserStore.getState().setUserState({
+          balance: savedUser.balance,
+          inventory: savedUser.inventory,
+          userData: savedUser,
+        });
+      }
+
+      set({
+        itemData: {},
+        showWinScreen: false,
+        isDisabled: false,
+      });
+    },
+
 
   setDoubleChance: (value) => set({ doubleChance: value }),
   setOpening: (value) => set({ isOpening: value }),
