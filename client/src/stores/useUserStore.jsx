@@ -4,19 +4,32 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 export const useUserStore = create(
   persist(
     (set, get) => ({
-      isAuthorized: true,
-      userData: {},
+      isAuthorized: false,
+      userData: null,
       userInventory: [],
       balance: 0,
 
       setUser: (user) => {
-        const normalizedUser = typeof user === 'string' ? JSON.parse(user) : (user || {});
+        const normalizedUser =
+          typeof user === 'string' ? JSON.parse(user) : user;
+
+        if (!normalizedUser) {
+          set({
+            isAuthorized: false,
+            userData: null,
+            userInventory: [],
+            balance: 0,
+          });
+          return;
+        }
 
         set({
           isAuthorized: true,
           userData: normalizedUser,
-          userInventory: Array.isArray(normalizedUser.inventory) ? normalizedUser.inventory : get().userInventory,
-          balance: Number(normalizedUser.balance ?? get().balance ?? 0),
+          userInventory: Array.isArray(normalizedUser.inventory)
+            ? normalizedUser.inventory
+            : [],
+          balance: Number(normalizedUser.balance ?? 0),
         });
       },
 
