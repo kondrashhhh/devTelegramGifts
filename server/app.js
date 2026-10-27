@@ -9,6 +9,8 @@ const { PORT, BOT_TOKEN } = require("./config/env.js")
 const { setupUserSockets } = require('./realtime/userSocket.js')
 const { startTelegramBot } = require('./bot/telegramBot');
 
+app.set('trust proxy', 1);
+
 if (!BOT_TOKEN) {
   console.error('TELEGRAM_BOT_TOKEN is not set!');
   process.exit(1);
