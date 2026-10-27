@@ -5,9 +5,10 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
-    isAuthenticated: true, // false
-    userData: localStorage.getItem("telegram_auth") || null, 
+    isAuthenticated: false,
+    userData: null,
   });
+
 
 
 useEffect(() => {
@@ -17,55 +18,36 @@ useEffect(() => {
         credentials: 'include',
       });
 
-      if (response.ok) {
-        const result = await response.json();
-
-        if (result?.user) {
-          const refreshedAuth = {
-            isAuthenticated: true,
-            userData: result.user,
-          };
-
-          setAuthState(refreshedAuth);
-          localStorage.setItem(
-            'telegram_auth',
-            JSON.stringify(refreshedAuth)
-          );
-          useUserStore.getState().setUser(result.user);
-          return;
-        }
+      if (!response.ok) {
+        setAuthState({ isAuthenticated: false, userData: null });
+        localStorage.removeItem('telegram_auth');
+        useUserStore.getState().clearUser();
+        return;
       }
 
-      // Если серверной сессии нет, используем сохранённые данные.
-      const storedAuth = localStorage.getItem('telegram_auth');
+      const result = await response.json();
 
-      if (storedAuth) {
-        const parsed = JSON.parse(storedAuth);
-
-        if (parsed?.isAuthenticated && parsed?.userData) {
-          setAuthState(parsed);
-          useUserStore.getState().setUser(parsed.userData);
-          return;
-        }
+      if (!result?.user) {
+        throw new Error('User not found in response');
       }
 
-      setAuthState({
-        isAuthenticated: false,
-        userData: null,
-      });
-      useUserStore.getState().clearUser();
+      const refreshedAuth = {
+        isAuthenticated: true,
+        userData: result.user,
+      };
+
+      setAuthState(refreshedAuth);
+      localStorage.setItem('telegram_auth', JSON.stringify(refreshedAuth));
+      useUserStore.getState().setUser(result.user);
     } catch (error) {
-      console.error('Failed to restore authentication:', error);
-
-      setAuthState({
-        isAuthenticated: false,
-        userData: null,
-      });
+      console.error('Failed to restore user session:', error);
+      setAuthState({ isAuthenticated: false, userData: null });
     }
   };
 
   restoreUser();
 }, []);
+
 
 
   const login = (userData) => {

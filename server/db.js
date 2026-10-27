@@ -309,6 +309,23 @@ async function consumeTelegramLoginToken(token) {
   );
 }
 
+async function getTelegramLoginStatus(token) {
+  const now = Math.floor(Date.now() / 1000);
+
+  return get(
+    `SELECT status, expires_at, consumed_at
+     FROM telegram_login_tokens
+     WHERE token_hash = ?`,
+    [hashLoginToken(token)]
+  ).then((login) => {
+    if (!login || login.expires_at <= now || login.consumed_at !== null) {
+      return { status: 'expired' };
+    }
+
+    return { status: login.status };
+  });
+}
+
 module.exports = {
   db,
   all,
@@ -321,4 +338,4 @@ module.exports = {
   createTelegramLoginToken,
   confirmTelegramLoginToken,
   consumeTelegramLoginToken,
-};
+  getTelegramLoginStatus};

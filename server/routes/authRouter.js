@@ -4,7 +4,8 @@ const authController = require("../controllers/authController.js");
 const authRouter = express.Router();
 
 authRouter.get('/telegram/start', authController.startTelegramLogin);
-authRouter.get('/telegram/complete', authController.completeTelegramLogin);
+authRouter.get('/telegram/status', authController.getTelegramLoginStatus);
+authRouter.post('/telegram/complete', authController.completeTelegramLogin);
 
 authRouter.get('/me', authController.getCurrentUser);
 authRouter.get('/profile', authController.getCurrentUser);

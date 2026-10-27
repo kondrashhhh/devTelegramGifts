@@ -22,7 +22,10 @@ exports.authorization = async (req, res) => {
 
 exports.getCurrentUser = async (req, res) => {
   try {
-    const telegramId = Number(req.session?.telegramUser?.telegram_id || req.session?.telegramUser?.id || req.body?.telegram_id || req.query?.telegram_id);
+    const telegramId = Number(
+      req.session?.telegramUser?.telegram_id ||
+      req.session?.telegramUser?.id
+    );
 
     if (!telegramId) {
       return res.status(401).json({
@@ -85,43 +88,47 @@ exports.saveUserState = async (req, res) => {
   }
 };
 
+
 exports.startTelegramLogin = async (req, res) => {
   try {
     const botUsername = process.env.TELEGRAM_BOT_USERNAME;
 
     if (!botUsername) {
-      return res.status(500).send('Telegram bot username is not configured');
+      return res.status(500).json({
+        error: 'Telegram bot username is not configured',
+      });
     }
 
     const token = crypto.randomBytes(32).toString('hex');
 
     await db.createTelegramLoginToken(token);
 
-    return res.redirect(
-      302,
-      `https://t.me/${botUsername}?start=${token}`
-    );
+    return res.json({
+      token,
+      botUrl: `https://t.me/${botUsername}?start=${token}`,
+    });
   } catch (error) {
     console.error('Telegram login start error:', error);
-
-    return res.status(500).send('Could not start Telegram login');
+    return res.status(500).json({
+      error: 'Could not start Telegram login',
+    });
   }
 };
 
 exports.completeTelegramLogin = async (req, res) => {
   try {
-    const token = String(req.query.token || '');
+    const token = String(req.body?.token || '');
 
     if (!/^[a-f0-9]{64}$/.test(token)) {
-      return res.status(400).send('Invalid login token');
+      return res.status(400).json({ error: 'Invalid login token' });
     }
 
     const login = await db.consumeTelegramLoginToken(token);
 
     if (!login) {
-      return res
-        .status(401)
-        .send('Login link expired or already used. Start again on Giftly.');
+      return res.status(401).json({
+        error: 'Login expired or already used. Start again.',
+      });
     }
 
     const user = await db.upsertUser({
@@ -131,15 +138,15 @@ exports.completeTelegramLogin = async (req, res) => {
       username: login.username,
       photo_url: login.photo_url,
       auth_date: login.auth_date,
-      hash: null
+      hash: null,
     });
 
-    // Обновляем сессию только после подтверждения ботом.
     await new Promise((resolve, reject) => {
       req.session.regenerate((error) => {
         if (error) return reject(error);
 
         req.session.telegramUser = user;
+
         req.session.save((saveError) => {
           if (saveError) return reject(saveError);
           resolve();
@@ -147,10 +154,31 @@ exports.completeTelegramLogin = async (req, res) => {
       });
     });
 
-    return res.redirect('/');
+    return res.json({ success: true, user });
   } catch (error) {
     console.error('Telegram login completion error:', error);
+    return res.status(500).json({
+      error: 'Could not complete Telegram login',
+    });
+  }
+};
 
-    return res.status(500).send('Could not complete Telegram login');
+
+exports.getTelegramLoginStatus = async (req, res) => {
+  try {
+    const token = String(req.query.token || '');
+
+    if (!/^[a-f0-9]{64}$/.test(token)) {
+      return res.status(400).json({ error: 'Invalid token' });
+    }
+
+    const result = await db.getTelegramLoginStatus(token);
+
+    return res.json({
+      status: result?.status || 'expired',
+    });
+  } catch (error) {
+    console.error('Telegram login status error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 };
