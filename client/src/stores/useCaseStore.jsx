@@ -132,44 +132,66 @@ export const useCaseStore = create((set, get) => ({
 
     saveItem: async (itemIndex) => {
       const state = get();
+
       const items = Array.isArray(state.itemData)
         ? state.itemData
-        : [state.itemData];
+        : state.itemData && Object.keys(state.itemData).length > 0
+          ? [state.itemData]
+          : [];
 
       const item = items[itemIndex];
-      if (!item) throw new Error('Предмет не найден');
+
+      if (!item) {
+        console.error('Предмет не найден', {
+          itemIndex,
+          itemData: state.itemData,
+        });
+        return;
+      }
+
+      const itemWithUniqueId = {
+        ...item,
+        uniqueId:
+          item.uniqueId ||
+          `${item.item_id}_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
+      };
 
       const response = await fetch('/api/auth/profile', {
         method: 'POST',
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
-          inventoryItem: item,
+          inventoryItem: itemWithUniqueId,
         }),
       });
 
       const result = await response.json();
 
-      if (!response.ok) {
-        throw new Error(result?.error || 'Не удалось сохранить предмет');
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.error || 'Не удалось сохранить предмет'
+        );
       }
 
-      const savedUser = result.user;
+      if (result.user) {
+        useUserStore.getState().setUserState({
+          balance: result.user.balance,
+          inventory: result.user.inventory,
+          userData: result.user,
+        });
+      }
 
-      useUserStore.getState().setUserState({
-        balance: savedUser.balance,
-        inventory: savedUser.inventory,
-        userData: savedUser,
+      const remainingItems = items.filter(
+        (_, index) => index !== itemIndex
+      );
+
+      set({
+        itemData: remainingItems.length > 0 ? remainingItems : {},
+        showWinScreen: remainingItems.length > 0,
+        isDisabled: remainingItems.length > 0,
       });
-
-      const remainingItems = items.filter((_, index) => index !== itemIndex);
-
-      if (remainingItems.length > 0) {
-        set({ itemData: remainingItems });
-      } else {
-        set({ itemData: {} });
-        get().setWinScreen(false);
-      }
     },
 
     saveAllItems: async () => {

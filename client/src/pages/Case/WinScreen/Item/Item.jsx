@@ -1,6 +1,5 @@
 import React from 'react';
 import { useItemSave, useItemSell } from '@/stores/useCaseStore';
-import { useAddInventoryItem } from '@/stores/useUserStore';
 import { SellButton } from '../../Buttons/SellButton/SellButton';
 import { InventoryButton } from '../../Buttons/InventoryButton/InventoryButton';
 import styles from './Item.module.scss';
@@ -8,17 +7,13 @@ import styles from './Item.module.scss';
 export const Item = ({ item, index }) => {
   const sell = useItemSell();
   const save = useItemSave();
-  const addInventoryItem = useAddInventoryItem();
 
-  const handleSave = () => {
-    save(index);
-
-    const itemWithUniqueId = {
-      ...item,
-      uniqueId: `${item.item_id}_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-    };
-
-    addInventoryItem(itemWithUniqueId);
+  const handleSave = async () => {
+    try {
+      await save(index);
+    } catch (error) {
+      console.error('Ошибка сохранения предмета:', error);
+    }
   };
 
   return (
