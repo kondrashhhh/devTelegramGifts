@@ -3,6 +3,8 @@ import cn from 'classnames'
 import styles from './AuthorizeButton.module.scss';
 
 export const AuthorizeButton = ({ className }) => {
+    const [loading, setLoading] = useState(false);
+  
     const handleTelegramLogin = async () => {
     if (loading) return;
 
