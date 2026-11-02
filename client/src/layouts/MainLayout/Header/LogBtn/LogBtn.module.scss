@@ -1,14 +1,24 @@
-.login {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    padding: 14px 32px;
-    height: auto;
-    background-color: #24A1DE;
-    gap: 10px;
+.button {
+    display: flex;
+    justify-content: center;
+    gap: calcVW(8, 1600);
+    background: #236CD9;
+    border: none;
+    padding: calcVW(8, 1600) calcVW(20, 1600);
+    color: #ffff;
+    width: calcVW(250, 1600);
+    border-radius: calcVW(10, 1600);
+    cursor: pointer;
+
+    @include vp--1600 {
+        gap: 8px;
+        padding: 8px 20px;
+        width: 250px;
+        border-radius: 10px;
+    }
 }
 
-.login:hover {
+.button:hover {
     box-shadow: 
         0 0 8px rgba(36, 161, 222, 0.6),
         0 0 16px rgba(36, 161, 222, 0.4);

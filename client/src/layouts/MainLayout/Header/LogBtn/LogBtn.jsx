@@ -83,6 +83,7 @@ export default function LogBtn() {
       onClick={handleTelegramLogin}
       disabled={loading}
     >
+      <img src="/telegram_icon.svg" alt="telegram icon" />
       {loading ? 'Ожидание подтверждения...' : 'Войти через Telegram'}
     </button>
   );
