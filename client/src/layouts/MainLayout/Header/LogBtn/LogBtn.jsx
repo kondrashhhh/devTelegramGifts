@@ -8,7 +8,6 @@ export default function LogBtn() {
   const handleTelegramLogin = async () => {
     if (loading) return;
 
-    // Открываем вкладку сразу, пока браузер не заблокировал popup.
     const telegramTab = window.open('about:blank', '_blank');
 
     if (!telegramTab) {
@@ -62,7 +61,6 @@ export default function LogBtn() {
             throw new Error('Не удалось завершить авторизацию');
           }
 
-          // Сессия создана именно в исходной вкладке.
           window.location.reload();
           return;
         }
