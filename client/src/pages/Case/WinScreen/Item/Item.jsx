@@ -1,11 +1,13 @@
 import React from 'react';
 import { useItemSave, useItemSell } from '@/stores/useCaseStore';
+import { useSellInventoryItem } from '@/stores/useUserStore';
 import { SellButton } from '../../Buttons/SellButton/SellButton';
 import { InventoryButton } from '../../Buttons/InventoryButton/InventoryButton';
 import styles from './Item.module.scss';
 
 export const Item = ({ item, index }) => {
   const save = useItemSave();
+  const sellItem = useSellInventoryItem();
 
   const handleSave = async () => {
     try {
