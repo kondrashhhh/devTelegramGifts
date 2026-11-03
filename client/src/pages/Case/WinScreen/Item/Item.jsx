@@ -5,7 +5,6 @@ import { InventoryButton } from '../../Buttons/InventoryButton/InventoryButton';
 import styles from './Item.module.scss';
 
 export const Item = ({ item, index }) => {
-  const sell = useItemSell();
   const save = useItemSave();
 
   const handleSave = async () => {
@@ -35,7 +34,7 @@ export const Item = ({ item, index }) => {
         <span>{item.name}</span>
       </div>
       <div className={styles.buttons}>
-        <SellButton price={item.price} onClick={() => sell(index)} />
+        <SellButton price={item.price} onClick={() => sellItem(item.uniqueId)} />
         <InventoryButton onClick={handleSave} />
       </div>
     </div>
